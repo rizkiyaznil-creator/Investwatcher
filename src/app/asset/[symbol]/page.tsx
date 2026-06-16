@@ -19,6 +19,7 @@ import PriceChart, { type Overlay } from "@/components/PriceChart";
 import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
 import AnalysisPanel from "@/components/AnalysisPanel";
+import AiReview from "@/components/AiReview";
 import NewsPanel from "@/components/NewsPanel";
 import InfoTip from "@/components/InfoTip";
 
@@ -245,6 +246,9 @@ export default function AssetDetailPage() {
 
       {/* Unified analysis: recommendation + performance/risk + seasonality */}
       <AnalysisPanel symbol={symbol} />
+
+      {/* AI narrative review (fundamental + technical + news) */}
+      <AiReview symbol={symbol} />
 
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
