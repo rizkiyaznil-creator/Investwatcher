@@ -6,6 +6,7 @@ import type { AssetMetrics } from "@/lib/analytics";
 import { useWatchlist } from "@/hooks/useWatchlist";
 import { useCatalog } from "@/components/CatalogContext";
 import InfoTip from "@/components/InfoTip";
+import CorrelationMatrix from "@/components/CorrelationMatrix";
 
 interface Row {
   symbol: string;
@@ -216,6 +217,8 @@ export default function AnalysisPage() {
           </p>
         </div>
       )}
+
+      {symbols.length >= 2 && <CorrelationMatrix symbols={symbols} />}
     </div>
   );
 }
