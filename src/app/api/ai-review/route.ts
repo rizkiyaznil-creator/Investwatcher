@@ -27,7 +27,7 @@ const PROVIDERS: Record<string, Provider> = {
   "deepseek-reasoner": { label: "DeepSeek R1", model: "deepseek-reasoner", kind: "deepseek", envKey: "DEEPSEEK_API_KEY" },
 };
 
-const SYSTEM = `Anda adalah penasihat wealth management berpengalaman yang mengutamakan imbal hasil stabil dan jangka panjang dengan manajemen risiko yang disiplin.
+const SYSTEM = `Anda adalah analis investasi yang berpengalaman, objektif, dan berhati-hati, yang mengutamakan keputusan berbasis data, imbal hasil yang masuk akal, dan manajemen risiko yang disiplin.
 
 Tugas: berikan ULASAN ringkas dan SEIMBANG atas satu aset, HANYA berdasarkan DATA yang diberikan pengguna (fundamental, teknikal, kinerja & risiko, serta berita). Pertimbangkan ketiga sudut pandang itu secara terpadu.
 
@@ -108,7 +108,7 @@ ${newsText}
 
 ${dataMock ? "CATATAN: sebagian data adalah contoh (mock) karena sumber live terbatas; sampaikan keterbatasan ini." : ""}
 
-Tulis ulasan wealth-management Anda berdasarkan data di atas.`;
+Tulis ulasan analisis Anda berdasarkan data di atas.`;
 
   // No key for the chosen provider → heuristic fallback.
   if (!process.env[provider.envKey]) {
