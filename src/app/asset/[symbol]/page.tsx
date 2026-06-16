@@ -18,7 +18,7 @@ import { useWatchlist } from "@/hooks/useWatchlist";
 import PriceChart, { type Overlay } from "@/components/PriceChart";
 import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
-import MetricsCard from "@/components/MetricsCard";
+import AnalysisPanel from "@/components/AnalysisPanel";
 import NewsPanel from "@/components/NewsPanel";
 import InfoTip from "@/components/InfoTip";
 
@@ -243,8 +243,8 @@ export default function AssetDetailPage() {
         )}
       </div>
 
-      {/* Performance & risk metrics */}
-      <MetricsCard symbol={symbol} />
+      {/* Unified analysis: recommendation + performance/risk + seasonality */}
+      <AnalysisPanel symbol={symbol} />
 
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
