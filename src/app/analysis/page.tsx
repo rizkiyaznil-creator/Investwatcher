@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { AssetMetrics } from "@/lib/analytics";
+import type { SignalSummary } from "@/lib/signals";
 import { useWatchlist } from "@/hooks/useWatchlist";
 import { useCatalog } from "@/components/CatalogContext";
 import InfoTip from "@/components/InfoTip";
@@ -11,6 +12,7 @@ import CorrelationMatrix from "@/components/CorrelationMatrix";
 interface Row {
   symbol: string;
   metrics: AssetMetrics;
+  signals?: SignalSummary;
   mock: boolean;
 }
 
@@ -23,7 +25,8 @@ type SortKey =
   | "vol"
   | "mdd"
   | "cagr"
-  | "rr";
+  | "rr"
+  | "signal";
 
 function ret(m: AssetMetrics, label: string): number | null {
   return m.returns.find((r) => r.label === label)?.value ?? null;
@@ -40,9 +43,18 @@ function val(row: Row, key: SortKey): number | null {
     case "mdd": return m.maxDrawdown;
     case "cagr": return m.cagr;
     case "rr": return m.riskReward;
+    case "signal": return row.signals?.score ?? null;
     default: return null;
   }
 }
+
+const VERDICT_CHIP: Record<string, string> = {
+  "Beli Kuat": "bg-up/15 text-up",
+  Beli: "bg-up/15 text-up",
+  Tahan: "bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300",
+  Jual: "bg-down/15 text-down",
+  "Jual Kuat": "bg-down/15 text-down",
+};
 
 function pct(v: number | null, sign = true): string {
   if (v == null) return "—";
@@ -66,6 +78,7 @@ const COLUMNS: { key: SortKey; label: string; tip?: string }[] = [
   { key: "mdd", label: "Max DD", tip: "Penurunan terdalam dari puncak (max drawdown)." },
   { key: "cagr", label: "CAGR", tip: "Pertumbuhan rata-rata per tahun (majemuk)." },
   { key: "rr", label: "Imbal/Risiko", tip: "CAGR ÷ volatilitas (mirip Sharpe). Makin tinggi makin sepadan." },
+  { key: "signal", label: "Sinyal", tip: "Ringkasan sinyal teknikal (Beli/Tahan/Jual). Edukatif, bukan saran investasi." },
 ];
 
 export default function AnalysisPage() {
@@ -204,6 +217,18 @@ export default function AnalysisPage() {
                         <td className={`px-4 py-3 text-right tabular-nums ${color(m.cagr)}`}>{pct(m.cagr)}</td>
                         <td className="px-4 py-3 text-right tabular-nums text-slate-700 dark:text-slate-200">
                           {m.riskReward == null ? "—" : m.riskReward.toFixed(2)}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          {row.signals && row.signals.verdict !== "—" ? (
+                            <span
+                              className={`inline-block whitespace-nowrap rounded px-1.5 py-0.5 text-xs font-medium ${VERDICT_CHIP[row.signals.verdict] ?? ""}`}
+                              title={`Beli ${row.signals.buyPct}% · Tahan ${row.signals.holdPct}% · Jual ${row.signals.sellPct}%`}
+                            >
+                              {row.signals.verdict}
+                            </span>
+                          ) : (
+                            <span className="text-slate-400 dark:text-slate-500">—</span>
+                          )}
                         </td>
                       </tr>
                     );

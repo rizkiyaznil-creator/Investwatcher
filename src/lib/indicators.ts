@@ -75,3 +75,68 @@ export function latestRsi(candles: Candle[], period = 14): number | null {
   const series = rsi(candles, period);
   return series.length ? series[series.length - 1].value : null;
 }
+
+/** Full-length EMA over a numeric series (seeded with the first value). */
+function emaSeries(values: number[], period: number): number[] {
+  if (values.length === 0) return [];
+  const k = 2 / (period + 1);
+  const out: number[] = [values[0]];
+  for (let i = 1; i < values.length; i++) {
+    out.push(values[i] * k + out[i - 1] * (1 - k));
+  }
+  return out;
+}
+
+export interface MacdNow {
+  macd: number;
+  signal: number;
+  hist: number;
+}
+
+/** Latest MACD (12,26,9) values, or null if not enough data. */
+export function latestMacd(
+  candles: Candle[],
+  fast = 12,
+  slow = 26,
+  sig = 9,
+): MacdNow | null {
+  if (candles.length < slow + sig) return null;
+  const closes = candles.map((c) => c.close);
+  const emaFast = emaSeries(closes, fast);
+  const emaSlow = emaSeries(closes, slow);
+  const macdLine = closes.map((_, i) => emaFast[i] - emaSlow[i]);
+  const signalLine = emaSeries(macdLine, sig);
+  const i = closes.length - 1;
+  return {
+    macd: macdLine[i],
+    signal: signalLine[i],
+    hist: macdLine[i] - signalLine[i],
+  };
+}
+
+export interface BollingerNow {
+  mid: number;
+  upper: number;
+  lower: number;
+}
+
+/** Latest Bollinger Bands (period, k stdev), or null if not enough data. */
+export function latestBollinger(
+  candles: Candle[],
+  period = 20,
+  k = 2,
+): BollingerNow | null {
+  if (candles.length < period) return null;
+  const closes = candles.slice(-period).map((c) => c.close);
+  const mean = closes.reduce((s, v) => s + v, 0) / period;
+  const variance =
+    closes.reduce((s, v) => s + (v - mean) ** 2, 0) / period;
+  const sd = Math.sqrt(variance);
+  return { mid: mean, upper: mean + k * sd, lower: mean - k * sd };
+}
+
+/** Latest value of a simple moving average. */
+export function latestSma(candles: Candle[], period: number): number | null {
+  const s = sma(candles, period);
+  return s.length ? s[s.length - 1].value : null;
+}
