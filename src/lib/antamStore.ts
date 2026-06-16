@@ -16,6 +16,8 @@ export interface AntamPoint {
   date: string; // YYYY-MM-DD
   sell: number; // harga jual per gram (IDR)
   buyback: number; // harga buyback per gram (IDR)
+  /** "seed" = baseline generated data, "live" = real daily snapshot. */
+  source?: "seed" | "live";
 }
 
 export interface AntamStore {
@@ -94,9 +96,10 @@ export async function appendSnapshot(point: AntamPoint): Promise<void> {
     currency: "IDR",
     points: [],
   };
+  const withSource: AntamPoint = { ...point, source: point.source ?? "live" };
   const idx = store.points.findIndex((p) => p.date === point.date);
-  if (idx >= 0) store.points[idx] = point;
-  else store.points.push(point);
+  if (idx >= 0) store.points[idx] = withSource;
+  else store.points.push(withSource);
   store.points.sort((a, b) => (a.date < b.date ? -1 : 1));
   await fs.mkdir(path.dirname(STORE_PATH), { recursive: true });
   await fs.writeFile(STORE_PATH, JSON.stringify(store, null, 2) + "\n", "utf-8");

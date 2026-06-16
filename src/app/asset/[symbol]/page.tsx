@@ -218,6 +218,9 @@ export default function AssetDetailPage() {
             lingkungan ini.
           </p>
         )}
+        {!quote?.mock && quote?.estimated && quote?.note && (
+          <p className="mt-3 text-xs text-amber-400">ℹ️ {quote.note}</p>
+        )}
       </div>
 
       {/* Controls */}

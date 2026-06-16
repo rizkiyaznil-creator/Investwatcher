@@ -16,11 +16,17 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "symbol required" }, { status: 400 });
   }
 
-  const { candles, mock } =
+  const result =
     symbol === "ANTAM-GOLD"
       ? await getAntamHistory(range)
       : await getHistory(symbol, range);
 
-  const body: HistoryResponse = { symbol, range, candles, mock };
+  const body: HistoryResponse = {
+    symbol,
+    range,
+    candles: result.candles,
+    mock: result.mock,
+    estimated: (result as { estimated?: boolean }).estimated,
+  };
   return NextResponse.json(body);
 }

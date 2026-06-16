@@ -4,2103 +4,2523 @@
   "points": [
     {
       "date": "2025-04-23",
-      "sell": 1156500,
-      "buyback": 1064000
+      "sell": 1962000,
+      "buyback": 1805000,
+      "source": "seed"
     },
     {
       "date": "2025-04-24",
-      "sell": 1157000,
-      "buyback": 1064500
+      "sell": 1963000,
+      "buyback": 1806000,
+      "source": "seed"
     },
     {
       "date": "2025-04-25",
-      "sell": 1158500,
-      "buyback": 1066000
+      "sell": 1966000,
+      "buyback": 1808500,
+      "source": "seed"
     },
     {
       "date": "2025-04-26",
-      "sell": 1157000,
-      "buyback": 1064500
+      "sell": 1964500,
+      "buyback": 1807500,
+      "source": "seed"
     },
     {
       "date": "2025-04-27",
-      "sell": 1159000,
-      "buyback": 1066500
+      "sell": 1968500,
+      "buyback": 1811000,
+      "source": "seed"
     },
     {
       "date": "2025-04-28",
-      "sell": 1161000,
-      "buyback": 1068000
+      "sell": 1972500,
+      "buyback": 1814500,
+      "source": "seed"
     },
     {
       "date": "2025-04-29",
-      "sell": 1158000,
-      "buyback": 1065500
+      "sell": 1968500,
+      "buyback": 1811000,
+      "source": "seed"
     },
     {
       "date": "2025-04-30",
-      "sell": 1165500,
-      "buyback": 1072500
+      "sell": 1981000,
+      "buyback": 1822500,
+      "source": "seed"
     },
     {
       "date": "2025-05-01",
-      "sell": 1164500,
-      "buyback": 1071500
+      "sell": 1980000,
+      "buyback": 1821500,
+      "source": "seed"
     },
     {
       "date": "2025-05-02",
-      "sell": 1164000,
-      "buyback": 1071000
+      "sell": 1980000,
+      "buyback": 1821500,
+      "source": "seed"
     },
     {
       "date": "2025-05-03",
-      "sell": 1161500,
-      "buyback": 1068500
+      "sell": 1976500,
+      "buyback": 1818500,
+      "source": "seed"
     },
     {
       "date": "2025-05-04",
-      "sell": 1161500,
-      "buyback": 1068500
+      "sell": 1977000,
+      "buyback": 1819000,
+      "source": "seed"
     },
     {
       "date": "2025-05-05",
-      "sell": 1166000,
-      "buyback": 1072500
+      "sell": 1985500,
+      "buyback": 1826500,
+      "source": "seed"
     },
     {
       "date": "2025-05-06",
-      "sell": 1161500,
-      "buyback": 1068500
+      "sell": 1978500,
+      "buyback": 1820000,
+      "source": "seed"
     },
     {
       "date": "2025-05-07",
-      "sell": 1160000,
-      "buyback": 1067000
+      "sell": 1976500,
+      "buyback": 1818500,
+      "source": "seed"
     },
     {
       "date": "2025-05-08",
-      "sell": 1162000,
-      "buyback": 1069000
+      "sell": 1981000,
+      "buyback": 1822500,
+      "source": "seed"
     },
     {
       "date": "2025-05-09",
-      "sell": 1161500,
-      "buyback": 1068500
+      "sell": 1980000,
+      "buyback": 1821500,
+      "source": "seed"
     },
     {
       "date": "2025-05-10",
-      "sell": 1157500,
-      "buyback": 1065000
+      "sell": 1974500,
+      "buyback": 1816500,
+      "source": "seed"
     },
     {
       "date": "2025-05-11",
-      "sell": 1152000,
-      "buyback": 1060000
+      "sell": 1965500,
+      "buyback": 1808500,
+      "source": "seed"
     },
     {
       "date": "2025-05-12",
-      "sell": 1147500,
-      "buyback": 1055500
+      "sell": 1958000,
+      "buyback": 1801500,
+      "source": "seed"
     },
     {
       "date": "2025-05-13",
-      "sell": 1147500,
-      "buyback": 1055500
+      "sell": 1959500,
+      "buyback": 1802500,
+      "source": "seed"
     },
     {
       "date": "2025-05-14",
-      "sell": 1150000,
-      "buyback": 1058000
+      "sell": 1964500,
+      "buyback": 1807500,
+      "source": "seed"
     },
     {
       "date": "2025-05-15",
-      "sell": 1152500,
-      "buyback": 1060500
+      "sell": 1969000,
+      "buyback": 1811500,
+      "source": "seed"
     },
     {
       "date": "2025-05-16",
-      "sell": 1148500,
-      "buyback": 1056500
+      "sell": 1962500,
+      "buyback": 1805500,
+      "source": "seed"
     },
     {
       "date": "2025-05-17",
-      "sell": 1155000,
-      "buyback": 1062500
+      "sell": 1974500,
+      "buyback": 1816500,
+      "source": "seed"
     },
     {
       "date": "2025-05-18",
-      "sell": 1155500,
-      "buyback": 1063000
+      "sell": 1976000,
+      "buyback": 1818000,
+      "source": "seed"
     },
     {
       "date": "2025-05-19",
-      "sell": 1162000,
-      "buyback": 1069000
+      "sell": 1987500,
+      "buyback": 1828500,
+      "source": "seed"
     },
     {
       "date": "2025-05-20",
-      "sell": 1167000,
-      "buyback": 1073500
+      "sell": 1997000,
+      "buyback": 1837000,
+      "source": "seed"
     },
     {
       "date": "2025-05-21",
-      "sell": 1172500,
-      "buyback": 1078500
+      "sell": 2006500,
+      "buyback": 1846000,
+      "source": "seed"
     },
     {
       "date": "2025-05-22",
-      "sell": 1179500,
-      "buyback": 1085000
+      "sell": 2019000,
+      "buyback": 1857500,
+      "source": "seed"
     },
     {
       "date": "2025-05-23",
-      "sell": 1177000,
-      "buyback": 1083000
+      "sell": 2016000,
+      "buyback": 1854500,
+      "source": "seed"
     },
     {
       "date": "2025-05-24",
-      "sell": 1181500,
-      "buyback": 1087000
+      "sell": 2024500,
+      "buyback": 1862500,
+      "source": "seed"
     },
     {
       "date": "2025-05-25",
-      "sell": 1186500,
-      "buyback": 1091500
+      "sell": 2033500,
+      "buyback": 1871000,
+      "source": "seed"
     },
     {
       "date": "2025-05-26",
-      "sell": 1183000,
-      "buyback": 1088500
+      "sell": 2028000,
+      "buyback": 1866000,
+      "source": "seed"
     },
     {
       "date": "2025-05-27",
-      "sell": 1177500,
-      "buyback": 1083500
+      "sell": 2019500,
+      "buyback": 1858000,
+      "source": "seed"
     },
     {
       "date": "2025-05-28",
-      "sell": 1182000,
-      "buyback": 1087500
+      "sell": 2027000,
+      "buyback": 1865000,
+      "source": "seed"
     },
     {
       "date": "2025-05-29",
-      "sell": 1181000,
-      "buyback": 1086500
+      "sell": 2026500,
+      "buyback": 1864500,
+      "source": "seed"
     },
     {
       "date": "2025-05-30",
-      "sell": 1178000,
-      "buyback": 1084000
+      "sell": 2022000,
+      "buyback": 1860000,
+      "source": "seed"
     },
     {
       "date": "2025-05-31",
-      "sell": 1184500,
-      "buyback": 1089500
+      "sell": 2033500,
+      "buyback": 1871000,
+      "source": "seed"
     },
     {
       "date": "2025-06-01",
-      "sell": 1179000,
-      "buyback": 1084500
+      "sell": 2025000,
+      "buyback": 1863000,
+      "source": "seed"
     },
     {
       "date": "2025-06-02",
-      "sell": 1183000,
-      "buyback": 1088500
+      "sell": 2032500,
+      "buyback": 1870000,
+      "source": "seed"
     },
     {
       "date": "2025-06-03",
-      "sell": 1181500,
-      "buyback": 1087000
+      "sell": 2030500,
+      "buyback": 1868000,
+      "source": "seed"
     },
     {
       "date": "2025-06-04",
-      "sell": 1179500,
-      "buyback": 1085000
+      "sell": 2027500,
+      "buyback": 1865500,
+      "source": "seed"
     },
     {
       "date": "2025-06-05",
-      "sell": 1181000,
-      "buyback": 1086500
+      "sell": 2030500,
+      "buyback": 1868000,
+      "source": "seed"
     },
     {
       "date": "2025-06-06",
-      "sell": 1179500,
-      "buyback": 1085000
+      "sell": 2029500,
+      "buyback": 1867000,
+      "source": "seed"
     },
     {
       "date": "2025-06-07",
-      "sell": 1182000,
-      "buyback": 1087500
+      "sell": 2034000,
+      "buyback": 1871500,
+      "source": "seed"
     },
     {
       "date": "2025-06-08",
-      "sell": 1181000,
-      "buyback": 1086500
+      "sell": 2032500,
+      "buyback": 1870000,
+      "source": "seed"
     },
     {
       "date": "2025-06-09",
-      "sell": 1176000,
-      "buyback": 1082000
+      "sell": 2025000,
+      "buyback": 1863000,
+      "source": "seed"
     },
     {
       "date": "2025-06-10",
-      "sell": 1171000,
-      "buyback": 1077500
+      "sell": 2017000,
+      "buyback": 1855500,
+      "source": "seed"
     },
     {
       "date": "2025-06-11",
-      "sell": 1175500,
-      "buyback": 1081500
+      "sell": 2025000,
+      "buyback": 1863000,
+      "source": "seed"
     },
     {
       "date": "2025-06-12",
-      "sell": 1175000,
-      "buyback": 1081000
+      "sell": 2024500,
+      "buyback": 1862500,
+      "source": "seed"
     },
     {
       "date": "2025-06-13",
-      "sell": 1181000,
-      "buyback": 1086500
+      "sell": 2036000,
+      "buyback": 1873000,
+      "source": "seed"
     },
     {
       "date": "2025-06-14",
-      "sell": 1183000,
-      "buyback": 1088500
+      "sell": 2040500,
+      "buyback": 1877500,
+      "source": "seed"
     },
     {
       "date": "2025-06-15",
-      "sell": 1187500,
-      "buyback": 1092500
+      "sell": 2048000,
+      "buyback": 1884000,
+      "source": "seed"
     },
     {
       "date": "2025-06-16",
-      "sell": 1189500,
-      "buyback": 1094500
+      "sell": 2052500,
+      "buyback": 1888500,
+      "source": "seed"
     },
     {
       "date": "2025-06-17",
-      "sell": 1193000,
-      "buyback": 1097500
+      "sell": 2059500,
+      "buyback": 1894500,
+      "source": "seed"
     },
     {
       "date": "2025-06-18",
-      "sell": 1191000,
-      "buyback": 1095500
+      "sell": 2056000,
+      "buyback": 1891500,
+      "source": "seed"
     },
     {
       "date": "2025-06-19",
-      "sell": 1196500,
-      "buyback": 1101000
+      "sell": 2066500,
+      "buyback": 1901000,
+      "source": "seed"
     },
     {
       "date": "2025-06-20",
-      "sell": 1190000,
-      "buyback": 1095000
+      "sell": 2055500,
+      "buyback": 1891000,
+      "source": "seed"
     },
     {
       "date": "2025-06-21",
-      "sell": 1184000,
-      "buyback": 1089500
+      "sell": 2046500,
+      "buyback": 1883000,
+      "source": "seed"
     },
     {
       "date": "2025-06-22",
-      "sell": 1183500,
-      "buyback": 1089000
+      "sell": 2046000,
+      "buyback": 1882500,
+      "source": "seed"
     },
     {
       "date": "2025-06-23",
-      "sell": 1189000,
-      "buyback": 1094000
+      "sell": 2056500,
+      "buyback": 1892000,
+      "source": "seed"
     },
     {
       "date": "2025-06-24",
-      "sell": 1183500,
-      "buyback": 1089000
+      "sell": 2047500,
+      "buyback": 1883500,
+      "source": "seed"
     },
     {
       "date": "2025-06-25",
-      "sell": 1190000,
-      "buyback": 1095000
+      "sell": 2059000,
+      "buyback": 1894500,
+      "source": "seed"
     },
     {
       "date": "2025-06-26",
-      "sell": 1187000,
-      "buyback": 1092000
+      "sell": 2054500,
+      "buyback": 1890000,
+      "source": "seed"
     },
     {
       "date": "2025-06-27",
-      "sell": 1192000,
-      "buyback": 1096500
+      "sell": 2063500,
+      "buyback": 1898500,
+      "source": "seed"
     },
     {
       "date": "2025-06-28",
-      "sell": 1197000,
-      "buyback": 1101000
+      "sell": 2073000,
+      "buyback": 1907000,
+      "source": "seed"
     },
     {
       "date": "2025-06-29",
-      "sell": 1199000,
-      "buyback": 1103000
+      "sell": 2077000,
+      "buyback": 1911000,
+      "source": "seed"
     },
     {
       "date": "2025-06-30",
-      "sell": 1205000,
-      "buyback": 1108500
+      "sell": 2088500,
+      "buyback": 1921500,
+      "source": "seed"
     },
     {
       "date": "2025-07-01",
-      "sell": 1200000,
-      "buyback": 1104000
+      "sell": 2080000,
+      "buyback": 1913500,
+      "source": "seed"
     },
     {
       "date": "2025-07-02",
-      "sell": 1201500,
-      "buyback": 1105500
+      "sell": 2083500,
+      "buyback": 1917000,
+      "source": "seed"
     },
     {
       "date": "2025-07-03",
-      "sell": 1207000,
-      "buyback": 1110500
+      "sell": 2093500,
+      "buyback": 1926000,
+      "source": "seed"
     },
     {
       "date": "2025-07-04",
-      "sell": 1201500,
-      "buyback": 1105500
+      "sell": 2084000,
+      "buyback": 1917500,
+      "source": "seed"
     },
     {
       "date": "2025-07-05",
-      "sell": 1208500,
-      "buyback": 1112000
+      "sell": 2097500,
+      "buyback": 1929500,
+      "source": "seed"
     },
     {
       "date": "2025-07-06",
-      "sell": 1210000,
-      "buyback": 1113000
+      "sell": 2101000,
+      "buyback": 1933000,
+      "source": "seed"
     },
     {
       "date": "2025-07-07",
-      "sell": 1210500,
-      "buyback": 1113500
+      "sell": 2102000,
+      "buyback": 1934000,
+      "source": "seed"
     },
     {
       "date": "2025-07-08",
-      "sell": 1204500,
-      "buyback": 1108000
+      "sell": 2092000,
+      "buyback": 1924500,
+      "source": "seed"
     },
     {
       "date": "2025-07-09",
-      "sell": 1201500,
-      "buyback": 1105500
+      "sell": 2088000,
+      "buyback": 1921000,
+      "source": "seed"
     },
     {
       "date": "2025-07-10",
-      "sell": 1205500,
-      "buyback": 1109000
+      "sell": 2095000,
+      "buyback": 1927500,
+      "source": "seed"
     },
     {
       "date": "2025-07-11",
-      "sell": 1201500,
-      "buyback": 1105500
+      "sell": 2089000,
+      "buyback": 1922000,
+      "source": "seed"
     },
     {
       "date": "2025-07-12",
-      "sell": 1203000,
-      "buyback": 1107000
+      "sell": 2092500,
+      "buyback": 1925000,
+      "source": "seed"
     },
     {
       "date": "2025-07-13",
-      "sell": 1210000,
-      "buyback": 1113000
+      "sell": 2105500,
+      "buyback": 1937000,
+      "source": "seed"
     },
     {
       "date": "2025-07-14",
-      "sell": 1217500,
-      "buyback": 1120000
+      "sell": 2119000,
+      "buyback": 1949500,
+      "source": "seed"
     },
     {
       "date": "2025-07-15",
-      "sell": 1218000,
-      "buyback": 1120500
+      "sell": 2120500,
+      "buyback": 1951000,
+      "source": "seed"
     },
     {
       "date": "2025-07-16",
-      "sell": 1223000,
-      "buyback": 1125000
+      "sell": 2129500,
+      "buyback": 1959000,
+      "source": "seed"
     },
     {
       "date": "2025-07-17",
-      "sell": 1230000,
-      "buyback": 1131500
+      "sell": 2142000,
+      "buyback": 1970500,
+      "source": "seed"
     },
     {
       "date": "2025-07-18",
-      "sell": 1226000,
-      "buyback": 1128000
+      "sell": 2135500,
+      "buyback": 1964500,
+      "source": "seed"
     },
     {
       "date": "2025-07-19",
-      "sell": 1228000,
-      "buyback": 1130000
+      "sell": 2139500,
+      "buyback": 1968500,
+      "source": "seed"
     },
     {
       "date": "2025-07-20",
-      "sell": 1225500,
-      "buyback": 1127500
+      "sell": 2136500,
+      "buyback": 1965500,
+      "source": "seed"
     },
     {
       "date": "2025-07-21",
-      "sell": 1228000,
-      "buyback": 1130000
+      "sell": 2141000,
+      "buyback": 1969500,
+      "source": "seed"
     },
     {
       "date": "2025-07-22",
-      "sell": 1224500,
-      "buyback": 1126500
+      "sell": 2135500,
+      "buyback": 1964500,
+      "source": "seed"
     },
     {
       "date": "2025-07-23",
-      "sell": 1231000,
-      "buyback": 1132500
+      "sell": 2148000,
+      "buyback": 1976000,
+      "source": "seed"
     },
     {
       "date": "2025-07-24",
-      "sell": 1238500,
-      "buyback": 1139500
+      "sell": 2162000,
+      "buyback": 1989000,
+      "source": "seed"
     },
     {
       "date": "2025-07-25",
-      "sell": 1236500,
-      "buyback": 1137500
+      "sell": 2159000,
+      "buyback": 1986500,
+      "source": "seed"
     },
     {
       "date": "2025-07-26",
-      "sell": 1235000,
-      "buyback": 1136000
+      "sell": 2156500,
+      "buyback": 1984000,
+      "source": "seed"
     },
     {
       "date": "2025-07-27",
-      "sell": 1231500,
-      "buyback": 1133000
+      "sell": 2151500,
+      "buyback": 1979500,
+      "source": "seed"
     },
     {
       "date": "2025-07-28",
-      "sell": 1230000,
-      "buyback": 1131500
+      "sell": 2149500,
+      "buyback": 1977500,
+      "source": "seed"
     },
     {
       "date": "2025-07-29",
-      "sell": 1236000,
-      "buyback": 1137000
+      "sell": 2160500,
+      "buyback": 1987500,
+      "source": "seed"
     },
     {
       "date": "2025-07-30",
-      "sell": 1242500,
-      "buyback": 1143000
+      "sell": 2171500,
+      "buyback": 1998000,
+      "source": "seed"
     },
     {
       "date": "2025-07-31",
-      "sell": 1245000,
-      "buyback": 1145500
+      "sell": 2177500,
+      "buyback": 2003500,
+      "source": "seed"
     },
     {
       "date": "2025-08-01",
-      "sell": 1247500,
-      "buyback": 1147500
+      "sell": 2182000,
+      "buyback": 2007500,
+      "source": "seed"
     },
     {
       "date": "2025-08-02",
-      "sell": 1244000,
-      "buyback": 1144500
+      "sell": 2176500,
+      "buyback": 2002500,
+      "source": "seed"
     },
     {
       "date": "2025-08-03",
-      "sell": 1238500,
-      "buyback": 1139500
+      "sell": 2167500,
+      "buyback": 1994000,
+      "source": "seed"
     },
     {
       "date": "2025-08-04",
-      "sell": 1236500,
-      "buyback": 1137500
+      "sell": 2165000,
+      "buyback": 1992000,
+      "source": "seed"
     },
     {
       "date": "2025-08-05",
-      "sell": 1239000,
-      "buyback": 1140000
+      "sell": 2169500,
+      "buyback": 1996000,
+      "source": "seed"
     },
     {
       "date": "2025-08-06",
-      "sell": 1242000,
-      "buyback": 1142500
+      "sell": 2175500,
+      "buyback": 2001500,
+      "source": "seed"
     },
     {
       "date": "2025-08-07",
-      "sell": 1248000,
-      "buyback": 1148000
+      "sell": 2187000,
+      "buyback": 2012000,
+      "source": "seed"
     },
     {
       "date": "2025-08-08",
-      "sell": 1252500,
-      "buyback": 1152500
+      "sell": 2195000,
+      "buyback": 2019500,
+      "source": "seed"
     },
     {
       "date": "2025-08-09",
-      "sell": 1252500,
-      "buyback": 1152500
+      "sell": 2196000,
+      "buyback": 2020500,
+      "source": "seed"
     },
     {
       "date": "2025-08-10",
-      "sell": 1248500,
-      "buyback": 1148500
+      "sell": 2189500,
+      "buyback": 2014500,
+      "source": "seed"
     },
     {
       "date": "2025-08-11",
-      "sell": 1246500,
-      "buyback": 1147000
+      "sell": 2186000,
+      "buyback": 2011000,
+      "source": "seed"
     },
     {
       "date": "2025-08-12",
-      "sell": 1242000,
-      "buyback": 1142500
+      "sell": 2179000,
+      "buyback": 2004500,
+      "source": "seed"
     },
     {
       "date": "2025-08-13",
-      "sell": 1242500,
-      "buyback": 1143000
+      "sell": 2180500,
+      "buyback": 2006000,
+      "source": "seed"
     },
     {
       "date": "2025-08-14",
-      "sell": 1239500,
-      "buyback": 1140500
+      "sell": 2176500,
+      "buyback": 2002500,
+      "source": "seed"
     },
     {
       "date": "2025-08-15",
-      "sell": 1235500,
-      "buyback": 1136500
+      "sell": 2170000,
+      "buyback": 1996500,
+      "source": "seed"
     },
     {
       "date": "2025-08-16",
-      "sell": 1231500,
-      "buyback": 1133000
+      "sell": 2163000,
+      "buyback": 1990000,
+      "source": "seed"
     },
     {
       "date": "2025-08-17",
-      "sell": 1234000,
-      "buyback": 1135500
+      "sell": 2168500,
+      "buyback": 1995000,
+      "source": "seed"
     },
     {
       "date": "2025-08-18",
-      "sell": 1237500,
-      "buyback": 1138500
+      "sell": 2175000,
+      "buyback": 2001000,
+      "source": "seed"
     },
     {
       "date": "2025-08-19",
-      "sell": 1233500,
-      "buyback": 1135000
+      "sell": 2169000,
+      "buyback": 1995500,
+      "source": "seed"
     },
     {
       "date": "2025-08-20",
-      "sell": 1240000,
-      "buyback": 1141000
+      "sell": 2181000,
+      "buyback": 2006500,
+      "source": "seed"
     },
     {
       "date": "2025-08-21",
-      "sell": 1245000,
-      "buyback": 1145500
+      "sell": 2190000,
+      "buyback": 2015000,
+      "source": "seed"
     },
     {
       "date": "2025-08-22",
-      "sell": 1250500,
-      "buyback": 1150500
+      "sell": 2200500,
+      "buyback": 2024500,
+      "source": "seed"
     },
     {
       "date": "2025-08-23",
-      "sell": 1255000,
-      "buyback": 1154500
+      "sell": 2208500,
+      "buyback": 2032000,
+      "source": "seed"
     },
     {
       "date": "2025-08-24",
-      "sell": 1257500,
-      "buyback": 1157000
+      "sell": 2214000,
+      "buyback": 2037000,
+      "source": "seed"
     },
     {
       "date": "2025-08-25",
-      "sell": 1255000,
-      "buyback": 1154500
+      "sell": 2210500,
+      "buyback": 2033500,
+      "source": "seed"
     },
     {
       "date": "2025-08-26",
-      "sell": 1250000,
-      "buyback": 1150000
+      "sell": 2202000,
+      "buyback": 2026000,
+      "source": "seed"
     },
     {
       "date": "2025-08-27",
-      "sell": 1247500,
-      "buyback": 1147500
+      "sell": 2198500,
+      "buyback": 2022500,
+      "source": "seed"
     },
     {
       "date": "2025-08-28",
-      "sell": 1246500,
-      "buyback": 1147000
+      "sell": 2197000,
+      "buyback": 2021000,
+      "source": "seed"
     },
     {
       "date": "2025-08-29",
-      "sell": 1245000,
-      "buyback": 1145500
+      "sell": 2195500,
+      "buyback": 2020000,
+      "source": "seed"
     },
     {
       "date": "2025-08-30",
-      "sell": 1250500,
-      "buyback": 1150500
+      "sell": 2205000,
+      "buyback": 2028500,
+      "source": "seed"
     },
     {
       "date": "2025-08-31",
-      "sell": 1249000,
-      "buyback": 1149000
+      "sell": 2203000,
+      "buyback": 2027000,
+      "source": "seed"
     },
     {
       "date": "2025-09-01",
-      "sell": 1256500,
-      "buyback": 1156000
+      "sell": 2217000,
+      "buyback": 2039500,
+      "source": "seed"
     },
     {
       "date": "2025-09-02",
-      "sell": 1253000,
-      "buyback": 1153000
+      "sell": 2211500,
+      "buyback": 2034500,
+      "source": "seed"
     },
     {
       "date": "2025-09-03",
-      "sell": 1248500,
-      "buyback": 1148500
+      "sell": 2204500,
+      "buyback": 2028000,
+      "source": "seed"
     },
     {
       "date": "2025-09-04",
-      "sell": 1247500,
-      "buyback": 1147500
+      "sell": 2203500,
+      "buyback": 2027000,
+      "source": "seed"
     },
     {
       "date": "2025-09-05",
-      "sell": 1255500,
-      "buyback": 1155000
+      "sell": 2217500,
+      "buyback": 2040000,
+      "source": "seed"
     },
     {
       "date": "2025-09-06",
-      "sell": 1261000,
-      "buyback": 1160000
+      "sell": 2228500,
+      "buyback": 2050000,
+      "source": "seed"
     },
     {
       "date": "2025-09-07",
-      "sell": 1261500,
-      "buyback": 1160500
+      "sell": 2230000,
+      "buyback": 2051500,
+      "source": "seed"
     },
     {
       "date": "2025-09-08",
-      "sell": 1268000,
-      "buyback": 1166500
+      "sell": 2242000,
+      "buyback": 2062500,
+      "source": "seed"
     },
     {
       "date": "2025-09-09",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2247500,
+      "buyback": 2067500,
+      "source": "seed"
     },
     {
       "date": "2025-09-10",
-      "sell": 1264000,
-      "buyback": 1163000
+      "sell": 2235500,
+      "buyback": 2056500,
+      "source": "seed"
     },
     {
       "date": "2025-09-11",
-      "sell": 1267000,
-      "buyback": 1165500
+      "sell": 2242000,
+      "buyback": 2062500,
+      "source": "seed"
     },
     {
       "date": "2025-09-12",
-      "sell": 1264500,
-      "buyback": 1163500
+      "sell": 2238000,
+      "buyback": 2059000,
+      "source": "seed"
     },
     {
       "date": "2025-09-13",
-      "sell": 1269500,
-      "buyback": 1168000
+      "sell": 2247000,
+      "buyback": 2067000,
+      "source": "seed"
     },
     {
       "date": "2025-09-14",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2240000,
+      "buyback": 2061000,
+      "source": "seed"
     },
     {
       "date": "2025-09-15",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2241000,
+      "buyback": 2061500,
+      "source": "seed"
     },
     {
       "date": "2025-09-16",
-      "sell": 1261000,
-      "buyback": 1160000
+      "sell": 2234000,
+      "buyback": 2055500,
+      "source": "seed"
     },
     {
       "date": "2025-09-17",
-      "sell": 1267500,
-      "buyback": 1166000
+      "sell": 2246000,
+      "buyback": 2066500,
+      "source": "seed"
     },
     {
       "date": "2025-09-18",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2242500,
+      "buyback": 2063000,
+      "source": "seed"
     },
     {
       "date": "2025-09-19",
-      "sell": 1262000,
-      "buyback": 1161000
+      "sell": 2238000,
+      "buyback": 2059000,
+      "source": "seed"
     },
     {
       "date": "2025-09-20",
-      "sell": 1262500,
-      "buyback": 1161500
+      "sell": 2239500,
+      "buyback": 2060500,
+      "source": "seed"
     },
     {
       "date": "2025-09-21",
-      "sell": 1268500,
-      "buyback": 1167000
+      "sell": 2251000,
+      "buyback": 2071000,
+      "source": "seed"
     },
     {
       "date": "2025-09-22",
-      "sell": 1266500,
-      "buyback": 1165000
+      "sell": 2247000,
+      "buyback": 2067000,
+      "source": "seed"
     },
     {
       "date": "2025-09-23",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2254500,
+      "buyback": 2074000,
+      "source": "seed"
     },
     {
       "date": "2025-09-24",
-      "sell": 1271500,
-      "buyback": 1170000
+      "sell": 2258000,
+      "buyback": 2077500,
+      "source": "seed"
     },
     {
       "date": "2025-09-25",
-      "sell": 1273000,
-      "buyback": 1171000
+      "sell": 2261500,
+      "buyback": 2080500,
+      "source": "seed"
     },
     {
       "date": "2025-09-26",
-      "sell": 1279000,
-      "buyback": 1176500
+      "sell": 2272500,
+      "buyback": 2090500,
+      "source": "seed"
     },
     {
       "date": "2025-09-27",
-      "sell": 1284000,
-      "buyback": 1181500
+      "sell": 2281500,
+      "buyback": 2099000,
+      "source": "seed"
     },
     {
       "date": "2025-09-28",
-      "sell": 1282500,
-      "buyback": 1180000
+      "sell": 2279500,
+      "buyback": 2097000,
+      "source": "seed"
     },
     {
       "date": "2025-09-29",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2283500,
+      "buyback": 2101000,
+      "source": "seed"
     },
     {
       "date": "2025-09-30",
-      "sell": 1287000,
-      "buyback": 1184000
+      "sell": 2289500,
+      "buyback": 2106500,
+      "source": "seed"
     },
     {
       "date": "2025-10-01",
-      "sell": 1285500,
-      "buyback": 1182500
+      "sell": 2286500,
+      "buyback": 2103500,
+      "source": "seed"
     },
     {
       "date": "2025-10-02",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2299500,
+      "buyback": 2115500,
+      "source": "seed"
     },
     {
       "date": "2025-10-03",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2300000,
+      "buyback": 2116000,
+      "source": "seed"
     },
     {
       "date": "2025-10-04",
-      "sell": 1285500,
-      "buyback": 1182500
+      "sell": 2288500,
+      "buyback": 2105500,
+      "source": "seed"
     },
     {
       "date": "2025-10-05",
-      "sell": 1289500,
-      "buyback": 1186500
+      "sell": 2296000,
+      "buyback": 2112500,
+      "source": "seed"
     },
     {
       "date": "2025-10-06",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2288000,
+      "buyback": 2105000,
+      "source": "seed"
     },
     {
       "date": "2025-10-07",
-      "sell": 1283500,
-      "buyback": 1181000
+      "sell": 2287000,
+      "buyback": 2104000,
+      "source": "seed"
     },
     {
       "date": "2025-10-08",
-      "sell": 1284000,
-      "buyback": 1181500
+      "sell": 2288500,
+      "buyback": 2105500,
+      "source": "seed"
     },
     {
       "date": "2025-10-09",
-      "sell": 1285500,
-      "buyback": 1182500
+      "sell": 2292000,
+      "buyback": 2108500,
+      "source": "seed"
     },
     {
       "date": "2025-10-10",
-      "sell": 1292500,
-      "buyback": 1189000
+      "sell": 2304500,
+      "buyback": 2120000,
+      "source": "seed"
     },
     {
       "date": "2025-10-11",
-      "sell": 1298000,
-      "buyback": 1194000
+      "sell": 2315500,
+      "buyback": 2130500,
+      "source": "seed"
     },
     {
       "date": "2025-10-12",
-      "sell": 1304000,
-      "buyback": 1199500
+      "sell": 2327000,
+      "buyback": 2141000,
+      "source": "seed"
     },
     {
       "date": "2025-10-13",
-      "sell": 1299000,
-      "buyback": 1195000
+      "sell": 2318500,
+      "buyback": 2133000,
+      "source": "seed"
     },
     {
       "date": "2025-10-14",
-      "sell": 1302000,
-      "buyback": 1198000
+      "sell": 2324000,
+      "buyback": 2138000,
+      "source": "seed"
     },
     {
       "date": "2025-10-15",
-      "sell": 1308000,
-      "buyback": 1203500
+      "sell": 2335000,
+      "buyback": 2148000,
+      "source": "seed"
     },
     {
       "date": "2025-10-16",
-      "sell": 1302000,
-      "buyback": 1198000
+      "sell": 2325500,
+      "buyback": 2139500,
+      "source": "seed"
     },
     {
       "date": "2025-10-17",
-      "sell": 1294500,
-      "buyback": 1191000
+      "sell": 2312500,
+      "buyback": 2127500,
+      "source": "seed"
     },
     {
       "date": "2025-10-18",
-      "sell": 1288000,
-      "buyback": 1185000
+      "sell": 2301500,
+      "buyback": 2117500,
+      "source": "seed"
     },
     {
       "date": "2025-10-19",
-      "sell": 1294000,
-      "buyback": 1190500
+      "sell": 2313500,
+      "buyback": 2128500,
+      "source": "seed"
     },
     {
       "date": "2025-10-20",
-      "sell": 1294000,
-      "buyback": 1190500
+      "sell": 2313500,
+      "buyback": 2128500,
+      "source": "seed"
     },
     {
       "date": "2025-10-21",
-      "sell": 1299000,
-      "buyback": 1195000
+      "sell": 2322500,
+      "buyback": 2136500,
+      "source": "seed"
     },
     {
       "date": "2025-10-22",
-      "sell": 1295000,
-      "buyback": 1191500
+      "sell": 2317000,
+      "buyback": 2131500,
+      "source": "seed"
     },
     {
       "date": "2025-10-23",
-      "sell": 1290000,
-      "buyback": 1187000
+      "sell": 2308500,
+      "buyback": 2124000,
+      "source": "seed"
     },
     {
       "date": "2025-10-24",
-      "sell": 1286000,
-      "buyback": 1183000
+      "sell": 2302000,
+      "buyback": 2118000,
+      "source": "seed"
     },
     {
       "date": "2025-10-25",
-      "sell": 1287000,
-      "buyback": 1184000
+      "sell": 2304000,
+      "buyback": 2119500,
+      "source": "seed"
     },
     {
       "date": "2025-10-26",
-      "sell": 1295000,
-      "buyback": 1191500
+      "sell": 2319000,
+      "buyback": 2133500,
+      "source": "seed"
     },
     {
       "date": "2025-10-27",
-      "sell": 1297500,
-      "buyback": 1193500
+      "sell": 2324000,
+      "buyback": 2138000,
+      "source": "seed"
     },
     {
       "date": "2025-10-28",
-      "sell": 1295500,
-      "buyback": 1192000
+      "sell": 2321000,
+      "buyback": 2135500,
+      "source": "seed"
     },
     {
       "date": "2025-10-29",
-      "sell": 1297000,
-      "buyback": 1193000
+      "sell": 2324500,
+      "buyback": 2138500,
+      "source": "seed"
     },
     {
       "date": "2025-10-30",
-      "sell": 1293000,
-      "buyback": 1189500
+      "sell": 2318000,
+      "buyback": 2132500,
+      "source": "seed"
     },
     {
       "date": "2025-10-31",
-      "sell": 1299000,
-      "buyback": 1195000
+      "sell": 2329500,
+      "buyback": 2143000,
+      "source": "seed"
     },
     {
       "date": "2025-11-01",
-      "sell": 1299500,
-      "buyback": 1195500
+      "sell": 2331000,
+      "buyback": 2144500,
+      "source": "seed"
     },
     {
       "date": "2025-11-02",
-      "sell": 1300000,
-      "buyback": 1196000
+      "sell": 2332000,
+      "buyback": 2145500,
+      "source": "seed"
     },
     {
       "date": "2025-11-03",
-      "sell": 1304000,
-      "buyback": 1199500
+      "sell": 2340000,
+      "buyback": 2153000,
+      "source": "seed"
     },
     {
       "date": "2025-11-04",
-      "sell": 1309000,
-      "buyback": 1204500
+      "sell": 2349500,
+      "buyback": 2161500,
+      "source": "seed"
     },
     {
       "date": "2025-11-05",
-      "sell": 1303500,
-      "buyback": 1199000
+      "sell": 2340000,
+      "buyback": 2153000,
+      "source": "seed"
     },
     {
       "date": "2025-11-06",
-      "sell": 1307500,
-      "buyback": 1203000
+      "sell": 2348500,
+      "buyback": 2160500,
+      "source": "seed"
     },
     {
       "date": "2025-11-07",
-      "sell": 1303000,
-      "buyback": 1199000
+      "sell": 2340500,
+      "buyback": 2153500,
+      "source": "seed"
     },
     {
       "date": "2025-11-08",
-      "sell": 1300500,
-      "buyback": 1196500
+      "sell": 2337000,
+      "buyback": 2150000,
+      "source": "seed"
     },
     {
       "date": "2025-11-09",
-      "sell": 1296500,
-      "buyback": 1193000
+      "sell": 2330500,
+      "buyback": 2144000,
+      "source": "seed"
     },
     {
       "date": "2025-11-10",
-      "sell": 1291500,
-      "buyback": 1188000
+      "sell": 2322000,
+      "buyback": 2136000,
+      "source": "seed"
     },
     {
       "date": "2025-11-11",
-      "sell": 1295000,
-      "buyback": 1191500
+      "sell": 2328500,
+      "buyback": 2142000,
+      "source": "seed"
     },
     {
       "date": "2025-11-12",
-      "sell": 1291000,
-      "buyback": 1187500
+      "sell": 2322500,
+      "buyback": 2136500,
+      "source": "seed"
     },
     {
       "date": "2025-11-13",
-      "sell": 1289500,
-      "buyback": 1186500
+      "sell": 2320000,
+      "buyback": 2134500,
+      "source": "seed"
     },
     {
       "date": "2025-11-14",
-      "sell": 1282500,
-      "buyback": 1180000
+      "sell": 2308000,
+      "buyback": 2123500,
+      "source": "seed"
     },
     {
       "date": "2025-11-15",
-      "sell": 1275500,
-      "buyback": 1173500
+      "sell": 2296000,
+      "buyback": 2112500,
+      "source": "seed"
     },
     {
       "date": "2025-11-16",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2286500,
+      "buyback": 2103500,
+      "source": "seed"
     },
     {
       "date": "2025-11-17",
-      "sell": 1274500,
-      "buyback": 1172500
+      "sell": 2295000,
+      "buyback": 2111500,
+      "source": "seed"
     },
     {
       "date": "2025-11-18",
-      "sell": 1282000,
-      "buyback": 1179500
+      "sell": 2309000,
+      "buyback": 2124500,
+      "source": "seed"
     },
     {
       "date": "2025-11-19",
-      "sell": 1287500,
-      "buyback": 1184500
+      "sell": 2319500,
+      "buyback": 2134000,
+      "source": "seed"
     },
     {
       "date": "2025-11-20",
-      "sell": 1289000,
-      "buyback": 1186000
+      "sell": 2323500,
+      "buyback": 2137500,
+      "source": "seed"
     },
     {
       "date": "2025-11-21",
-      "sell": 1287500,
-      "buyback": 1184500
+      "sell": 2321500,
+      "buyback": 2136000,
+      "source": "seed"
     },
     {
       "date": "2025-11-22",
-      "sell": 1291000,
-      "buyback": 1187500
+      "sell": 2328000,
+      "buyback": 2142000,
+      "source": "seed"
     },
     {
       "date": "2025-11-23",
-      "sell": 1289000,
-      "buyback": 1186000
+      "sell": 2325500,
+      "buyback": 2139500,
+      "source": "seed"
     },
     {
       "date": "2025-11-24",
-      "sell": 1283000,
-      "buyback": 1180500
+      "sell": 2315000,
+      "buyback": 2130000,
+      "source": "seed"
     },
     {
       "date": "2025-11-25",
-      "sell": 1280000,
-      "buyback": 1177500
+      "sell": 2310000,
+      "buyback": 2125000,
+      "source": "seed"
     },
     {
       "date": "2025-11-26",
-      "sell": 1282000,
-      "buyback": 1179500
+      "sell": 2314500,
+      "buyback": 2129500,
+      "source": "seed"
     },
     {
       "date": "2025-11-27",
-      "sell": 1278000,
-      "buyback": 1176000
+      "sell": 2308000,
+      "buyback": 2123500,
+      "source": "seed"
     },
     {
       "date": "2025-11-28",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2295500,
+      "buyback": 2112000,
+      "source": "seed"
     },
     {
       "date": "2025-11-29",
-      "sell": 1266500,
-      "buyback": 1165000
+      "sell": 2288000,
+      "buyback": 2105000,
+      "source": "seed"
     },
     {
       "date": "2025-11-30",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2296500,
+      "buyback": 2113000,
+      "source": "seed"
     },
     {
       "date": "2025-12-01",
-      "sell": 1269500,
-      "buyback": 1168000
+      "sell": 2294500,
+      "buyback": 2111000,
+      "source": "seed"
     },
     {
       "date": "2025-12-02",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2296500,
+      "buyback": 2113000,
+      "source": "seed"
     },
     {
       "date": "2025-12-03",
-      "sell": 1268500,
-      "buyback": 1167000
+      "sell": 2294500,
+      "buyback": 2111000,
+      "source": "seed"
     },
     {
       "date": "2025-12-04",
-      "sell": 1265500,
-      "buyback": 1164500
+      "sell": 2289500,
+      "buyback": 2106500,
+      "source": "seed"
     },
     {
       "date": "2025-12-05",
-      "sell": 1269000,
-      "buyback": 1167500
+      "sell": 2296000,
+      "buyback": 2112500,
+      "source": "seed"
     },
     {
       "date": "2025-12-06",
-      "sell": 1268000,
-      "buyback": 1166500
+      "sell": 2295000,
+      "buyback": 2111500,
+      "source": "seed"
     },
     {
       "date": "2025-12-07",
-      "sell": 1263500,
-      "buyback": 1162500
+      "sell": 2287000,
+      "buyback": 2104000,
+      "source": "seed"
     },
     {
       "date": "2025-12-08",
-      "sell": 1262000,
-      "buyback": 1161000
+      "sell": 2285500,
+      "buyback": 2102500,
+      "source": "seed"
     },
     {
       "date": "2025-12-09",
-      "sell": 1255500,
-      "buyback": 1155000
+      "sell": 2274000,
+      "buyback": 2092000,
+      "source": "seed"
     },
     {
       "date": "2025-12-10",
-      "sell": 1258000,
-      "buyback": 1157500
+      "sell": 2279500,
+      "buyback": 2097000,
+      "source": "seed"
     },
     {
       "date": "2025-12-11",
-      "sell": 1261500,
-      "buyback": 1160500
+      "sell": 2286500,
+      "buyback": 2103500,
+      "source": "seed"
     },
     {
       "date": "2025-12-12",
-      "sell": 1257000,
-      "buyback": 1156500
+      "sell": 2278500,
+      "buyback": 2096000,
+      "source": "seed"
     },
     {
       "date": "2025-12-13",
-      "sell": 1253000,
-      "buyback": 1153000
+      "sell": 2272000,
+      "buyback": 2090000,
+      "source": "seed"
     },
     {
       "date": "2025-12-14",
-      "sell": 1246500,
-      "buyback": 1147000
+      "sell": 2261500,
+      "buyback": 2080500,
+      "source": "seed"
     },
     {
       "date": "2025-12-15",
-      "sell": 1249000,
-      "buyback": 1149000
+      "sell": 2266000,
+      "buyback": 2084500,
+      "source": "seed"
     },
     {
       "date": "2025-12-16",
-      "sell": 1246500,
-      "buyback": 1147000
+      "sell": 2262000,
+      "buyback": 2081000,
+      "source": "seed"
     },
     {
       "date": "2025-12-17",
-      "sell": 1245500,
-      "buyback": 1146000
+      "sell": 2261000,
+      "buyback": 2080000,
+      "source": "seed"
     },
     {
       "date": "2025-12-18",
-      "sell": 1251500,
-      "buyback": 1151500
+      "sell": 2272500,
+      "buyback": 2090500,
+      "source": "seed"
     },
     {
       "date": "2025-12-19",
-      "sell": 1252000,
-      "buyback": 1152000
+      "sell": 2274500,
+      "buyback": 2092500,
+      "source": "seed"
     },
     {
       "date": "2025-12-20",
-      "sell": 1254000,
-      "buyback": 1153500
+      "sell": 2278500,
+      "buyback": 2096000,
+      "source": "seed"
     },
     {
       "date": "2025-12-21",
-      "sell": 1261500,
-      "buyback": 1160500
+      "sell": 2292500,
+      "buyback": 2109000,
+      "source": "seed"
     },
     {
       "date": "2025-12-22",
-      "sell": 1262500,
-      "buyback": 1161500
+      "sell": 2295000,
+      "buyback": 2111500,
+      "source": "seed"
     },
     {
       "date": "2025-12-23",
-      "sell": 1256000,
-      "buyback": 1155500
+      "sell": 2283500,
+      "buyback": 2101000,
+      "source": "seed"
     },
     {
       "date": "2025-12-24",
-      "sell": 1250500,
-      "buyback": 1150500
+      "sell": 2274000,
+      "buyback": 2092000,
+      "source": "seed"
     },
     {
       "date": "2025-12-25",
-      "sell": 1253500,
-      "buyback": 1153000
+      "sell": 2280500,
+      "buyback": 2098000,
+      "source": "seed"
     },
     {
       "date": "2025-12-26",
-      "sell": 1253000,
-      "buyback": 1153000
+      "sell": 2280000,
+      "buyback": 2097500,
+      "source": "seed"
     },
     {
       "date": "2025-12-27",
-      "sell": 1257000,
-      "buyback": 1156500
+      "sell": 2287500,
+      "buyback": 2104500,
+      "source": "seed"
     },
     {
       "date": "2025-12-28",
-      "sell": 1262000,
-      "buyback": 1161000
+      "sell": 2297500,
+      "buyback": 2113500,
+      "source": "seed"
     },
     {
       "date": "2025-12-29",
-      "sell": 1264000,
-      "buyback": 1163000
+      "sell": 2302000,
+      "buyback": 2118000,
+      "source": "seed"
     },
     {
       "date": "2025-12-30",
-      "sell": 1261500,
-      "buyback": 1160500
+      "sell": 2298000,
+      "buyback": 2114000,
+      "source": "seed"
     },
     {
       "date": "2025-12-31",
-      "sell": 1265500,
-      "buyback": 1164500
+      "sell": 2305500,
+      "buyback": 2121000,
+      "source": "seed"
     },
     {
       "date": "2026-01-01",
-      "sell": 1263000,
-      "buyback": 1162000
+      "sell": 2302000,
+      "buyback": 2118000,
+      "source": "seed"
     },
     {
       "date": "2026-01-02",
-      "sell": 1260000,
-      "buyback": 1159000
+      "sell": 2297000,
+      "buyback": 2113000,
+      "source": "seed"
     },
     {
       "date": "2026-01-03",
-      "sell": 1258500,
-      "buyback": 1158000
+      "sell": 2294500,
+      "buyback": 2111000,
+      "source": "seed"
     },
     {
       "date": "2026-01-04",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2307500,
+      "buyback": 2123000,
+      "source": "seed"
     },
     {
       "date": "2026-01-05",
-      "sell": 1260500,
-      "buyback": 1159500
+      "sell": 2299500,
+      "buyback": 2115500,
+      "source": "seed"
     },
     {
       "date": "2026-01-06",
-      "sell": 1261500,
-      "buyback": 1160500
+      "sell": 2302500,
+      "buyback": 2118500,
+      "source": "seed"
     },
     {
       "date": "2026-01-07",
-      "sell": 1264000,
-      "buyback": 1163000
+      "sell": 2307000,
+      "buyback": 2122500,
+      "source": "seed"
     },
     {
       "date": "2026-01-08",
-      "sell": 1260000,
-      "buyback": 1159000
+      "sell": 2300500,
+      "buyback": 2116500,
+      "source": "seed"
     },
     {
       "date": "2026-01-09",
-      "sell": 1260000,
-      "buyback": 1159000
+      "sell": 2301500,
+      "buyback": 2117500,
+      "source": "seed"
     },
     {
       "date": "2026-01-10",
-      "sell": 1257500,
-      "buyback": 1157000
+      "sell": 2297000,
+      "buyback": 2113000,
+      "source": "seed"
     },
     {
       "date": "2026-01-11",
-      "sell": 1264500,
-      "buyback": 1163500
+      "sell": 2310000,
+      "buyback": 2125000,
+      "source": "seed"
     },
     {
       "date": "2026-01-12",
-      "sell": 1259500,
-      "buyback": 1158500
+      "sell": 2302000,
+      "buyback": 2118000,
+      "source": "seed"
     },
     {
       "date": "2026-01-13",
-      "sell": 1258000,
-      "buyback": 1157500
+      "sell": 2300000,
+      "buyback": 2116000,
+      "source": "seed"
     },
     {
       "date": "2026-01-14",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2313000,
+      "buyback": 2128000,
+      "source": "seed"
     },
     {
       "date": "2026-01-15",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2313500,
+      "buyback": 2128500,
+      "source": "seed"
     },
     {
       "date": "2026-01-16",
-      "sell": 1259000,
-      "buyback": 1158500
+      "sell": 2303500,
+      "buyback": 2119000,
+      "source": "seed"
     },
     {
       "date": "2026-01-17",
-      "sell": 1266500,
-      "buyback": 1165000
+      "sell": 2318000,
+      "buyback": 2132500,
+      "source": "seed"
     },
     {
       "date": "2026-01-18",
-      "sell": 1266000,
-      "buyback": 1164500
+      "sell": 2317000,
+      "buyback": 2131500,
+      "source": "seed"
     },
     {
       "date": "2026-01-19",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2325000,
+      "buyback": 2139000,
+      "source": "seed"
     },
     {
       "date": "2026-01-20",
-      "sell": 1273500,
-      "buyback": 1171500
+      "sell": 2332500,
+      "buyback": 2146000,
+      "source": "seed"
     },
     {
       "date": "2026-01-21",
-      "sell": 1278500,
-      "buyback": 1176000
+      "sell": 2342000,
+      "buyback": 2154500,
+      "source": "seed"
     },
     {
       "date": "2026-01-22",
-      "sell": 1274500,
-      "buyback": 1172500
+      "sell": 2335000,
+      "buyback": 2148000,
+      "source": "seed"
     },
     {
       "date": "2026-01-23",
-      "sell": 1280500,
-      "buyback": 1178000
+      "sell": 2346500,
+      "buyback": 2159000,
+      "source": "seed"
     },
     {
       "date": "2026-01-24",
-      "sell": 1277000,
-      "buyback": 1175000
+      "sell": 2341500,
+      "buyback": 2154000,
+      "source": "seed"
     },
     {
       "date": "2026-01-25",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2329000,
+      "buyback": 2142500,
+      "source": "seed"
     },
     {
       "date": "2026-01-26",
-      "sell": 1264500,
-      "buyback": 1163500
+      "sell": 2319500,
+      "buyback": 2134000,
+      "source": "seed"
     },
     {
       "date": "2026-01-27",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2321000,
+      "buyback": 2135500,
+      "source": "seed"
     },
     {
       "date": "2026-01-28",
-      "sell": 1264500,
-      "buyback": 1163500
+      "sell": 2320500,
+      "buyback": 2135000,
+      "source": "seed"
     },
     {
       "date": "2026-01-29",
-      "sell": 1263000,
-      "buyback": 1162000
+      "sell": 2318500,
+      "buyback": 2133000,
+      "source": "seed"
     },
     {
       "date": "2026-01-30",
-      "sell": 1264000,
-      "buyback": 1163000
+      "sell": 2321000,
+      "buyback": 2135500,
+      "source": "seed"
     },
     {
       "date": "2026-01-31",
-      "sell": 1270500,
-      "buyback": 1169000
+      "sell": 2333500,
+      "buyback": 2147000,
+      "source": "seed"
     },
     {
       "date": "2026-02-01",
-      "sell": 1272000,
-      "buyback": 1170000
+      "sell": 2336500,
+      "buyback": 2149500,
+      "source": "seed"
     },
     {
       "date": "2026-02-02",
-      "sell": 1280000,
-      "buyback": 1177500
+      "sell": 2351500,
+      "buyback": 2163500,
+      "source": "seed"
     },
     {
       "date": "2026-02-03",
-      "sell": 1275000,
-      "buyback": 1173000
+      "sell": 2343500,
+      "buyback": 2156000,
+      "source": "seed"
     },
     {
       "date": "2026-02-04",
-      "sell": 1275000,
-      "buyback": 1173000
+      "sell": 2343500,
+      "buyback": 2156000,
+      "source": "seed"
     },
     {
       "date": "2026-02-05",
-      "sell": 1268000,
-      "buyback": 1166500
+      "sell": 2332000,
+      "buyback": 2145500,
+      "source": "seed"
     },
     {
       "date": "2026-02-06",
-      "sell": 1274500,
-      "buyback": 1172500
+      "sell": 2344500,
+      "buyback": 2157000,
+      "source": "seed"
     },
     {
       "date": "2026-02-07",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2338000,
+      "buyback": 2151000,
+      "source": "seed"
     },
     {
       "date": "2026-02-08",
-      "sell": 1270500,
-      "buyback": 1169000
+      "sell": 2338000,
+      "buyback": 2151000,
+      "source": "seed"
     },
     {
       "date": "2026-02-09",
-      "sell": 1269000,
-      "buyback": 1167500
+      "sell": 2336000,
+      "buyback": 2149000,
+      "source": "seed"
     },
     {
       "date": "2026-02-10",
-      "sell": 1265500,
-      "buyback": 1164500
+      "sell": 2330000,
+      "buyback": 2143500,
+      "source": "seed"
     },
     {
       "date": "2026-02-11",
-      "sell": 1265000,
-      "buyback": 1164000
+      "sell": 2329500,
+      "buyback": 2143000,
+      "source": "seed"
     },
     {
       "date": "2026-02-12",
-      "sell": 1270000,
-      "buyback": 1168500
+      "sell": 2339500,
+      "buyback": 2152500,
+      "source": "seed"
     },
     {
       "date": "2026-02-13",
-      "sell": 1265500,
-      "buyback": 1164500
+      "sell": 2331500,
+      "buyback": 2145000,
+      "source": "seed"
     },
     {
       "date": "2026-02-14",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2342500,
+      "buyback": 2155000,
+      "source": "seed"
     },
     {
       "date": "2026-02-15",
-      "sell": 1274000,
-      "buyback": 1172000
+      "sell": 2348000,
+      "buyback": 2160000,
+      "source": "seed"
     },
     {
       "date": "2026-02-16",
-      "sell": 1270500,
-      "buyback": 1169000
+      "sell": 2342500,
+      "buyback": 2155000,
+      "source": "seed"
     },
     {
       "date": "2026-02-17",
-      "sell": 1274000,
-      "buyback": 1172000
+      "sell": 2350000,
+      "buyback": 2162000,
+      "source": "seed"
     },
     {
       "date": "2026-02-18",
-      "sell": 1272500,
-      "buyback": 1170500
+      "sell": 2348000,
+      "buyback": 2160000,
+      "source": "seed"
     },
     {
       "date": "2026-02-19",
-      "sell": 1272500,
-      "buyback": 1170500
+      "sell": 2347500,
+      "buyback": 2159500,
+      "source": "seed"
     },
     {
       "date": "2026-02-20",
-      "sell": 1267000,
-      "buyback": 1165500
+      "sell": 2338000,
+      "buyback": 2151000,
+      "source": "seed"
     },
     {
       "date": "2026-02-21",
-      "sell": 1267500,
-      "buyback": 1166000
+      "sell": 2340000,
+      "buyback": 2153000,
+      "source": "seed"
     },
     {
       "date": "2026-02-22",
-      "sell": 1267000,
-      "buyback": 1165500
+      "sell": 2340000,
+      "buyback": 2153000,
+      "source": "seed"
     },
     {
       "date": "2026-02-23",
-      "sell": 1272500,
-      "buyback": 1170500
+      "sell": 2350500,
+      "buyback": 2162500,
+      "source": "seed"
     },
     {
       "date": "2026-02-24",
-      "sell": 1280500,
-      "buyback": 1178000
+      "sell": 2366000,
+      "buyback": 2176500,
+      "source": "seed"
     },
     {
       "date": "2026-02-25",
-      "sell": 1285000,
-      "buyback": 1182000
+      "sell": 2374500,
+      "buyback": 2184500,
+      "source": "seed"
     },
     {
       "date": "2026-02-26",
-      "sell": 1289500,
-      "buyback": 1186500
+      "sell": 2384000,
+      "buyback": 2193500,
+      "source": "seed"
     },
     {
       "date": "2026-02-27",
-      "sell": 1288000,
-      "buyback": 1185000
+      "sell": 2381000,
+      "buyback": 2190500,
+      "source": "seed"
     },
     {
       "date": "2026-02-28",
-      "sell": 1290500,
-      "buyback": 1187500
+      "sell": 2386500,
+      "buyback": 2195500,
+      "source": "seed"
     },
     {
       "date": "2026-03-01",
-      "sell": 1286000,
-      "buyback": 1183000
+      "sell": 2378500,
+      "buyback": 2188000,
+      "source": "seed"
     },
     {
       "date": "2026-03-02",
-      "sell": 1286000,
-      "buyback": 1183000
+      "sell": 2379500,
+      "buyback": 2189000,
+      "source": "seed"
     },
     {
       "date": "2026-03-03",
-      "sell": 1285500,
-      "buyback": 1182500
+      "sell": 2379000,
+      "buyback": 2188500,
+      "source": "seed"
     },
     {
       "date": "2026-03-04",
-      "sell": 1279000,
-      "buyback": 1176500
+      "sell": 2367000,
+      "buyback": 2177500,
+      "source": "seed"
     },
     {
       "date": "2026-03-05",
-      "sell": 1285500,
-      "buyback": 1182500
+      "sell": 2380000,
+      "buyback": 2189500,
+      "source": "seed"
     },
     {
       "date": "2026-03-06",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2379000,
+      "buyback": 2188500,
+      "source": "seed"
     },
     {
       "date": "2026-03-07",
-      "sell": 1281000,
-      "buyback": 1178500
+      "sell": 2373000,
+      "buyback": 2183000,
+      "source": "seed"
     },
     {
       "date": "2026-03-08",
-      "sell": 1285000,
-      "buyback": 1182000
+      "sell": 2381000,
+      "buyback": 2190500,
+      "source": "seed"
     },
     {
       "date": "2026-03-09",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2381000,
+      "buyback": 2190500,
+      "source": "seed"
     },
     {
       "date": "2026-03-10",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2395500,
+      "buyback": 2204000,
+      "source": "seed"
     },
     {
       "date": "2026-03-11",
-      "sell": 1288000,
-      "buyback": 1185000
+      "sell": 2388000,
+      "buyback": 2197000,
+      "source": "seed"
     },
     {
       "date": "2026-03-12",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2396500,
+      "buyback": 2205000,
+      "source": "seed"
     },
     {
       "date": "2026-03-13",
-      "sell": 1297000,
-      "buyback": 1193000
+      "sell": 2406000,
+      "buyback": 2213500,
+      "source": "seed"
     },
     {
       "date": "2026-03-14",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2397500,
+      "buyback": 2205500,
+      "source": "seed"
     },
     {
       "date": "2026-03-15",
-      "sell": 1294000,
-      "buyback": 1190500
+      "sell": 2402000,
+      "buyback": 2210000,
+      "source": "seed"
     },
     {
       "date": "2026-03-16",
-      "sell": 1291500,
-      "buyback": 1188000
+      "sell": 2397500,
+      "buyback": 2205500,
+      "source": "seed"
     },
     {
       "date": "2026-03-17",
-      "sell": 1287000,
-      "buyback": 1184000
+      "sell": 2390000,
+      "buyback": 2199000,
+      "source": "seed"
     },
     {
       "date": "2026-03-18",
-      "sell": 1288000,
-      "buyback": 1185000
+      "sell": 2392500,
+      "buyback": 2201000,
+      "source": "seed"
     },
     {
       "date": "2026-03-19",
-      "sell": 1289000,
-      "buyback": 1186000
+      "sell": 2394500,
+      "buyback": 2203000,
+      "source": "seed"
     },
     {
       "date": "2026-03-20",
-      "sell": 1283000,
-      "buyback": 1180500
+      "sell": 2384500,
+      "buyback": 2193500,
+      "source": "seed"
     },
     {
       "date": "2026-03-21",
-      "sell": 1289500,
-      "buyback": 1186500
+      "sell": 2397000,
+      "buyback": 2205000,
+      "source": "seed"
     },
     {
       "date": "2026-03-22",
-      "sell": 1291000,
-      "buyback": 1187500
+      "sell": 2400500,
+      "buyback": 2208500,
+      "source": "seed"
     },
     {
       "date": "2026-03-23",
-      "sell": 1294000,
-      "buyback": 1190500
+      "sell": 2406500,
+      "buyback": 2214000,
+      "source": "seed"
     },
     {
       "date": "2026-03-24",
-      "sell": 1290000,
-      "buyback": 1187000
+      "sell": 2399000,
+      "buyback": 2207000,
+      "source": "seed"
     },
     {
       "date": "2026-03-25",
-      "sell": 1295500,
-      "buyback": 1192000
+      "sell": 2410000,
+      "buyback": 2217000,
+      "source": "seed"
     },
     {
       "date": "2026-03-26",
-      "sell": 1300000,
-      "buyback": 1196000
+      "sell": 2419500,
+      "buyback": 2226000,
+      "source": "seed"
     },
     {
       "date": "2026-03-27",
-      "sell": 1306500,
-      "buyback": 1202000
+      "sell": 2431500,
+      "buyback": 2237000,
+      "source": "seed"
     },
     {
       "date": "2026-03-28",
-      "sell": 1304000,
-      "buyback": 1199500
+      "sell": 2428000,
+      "buyback": 2234000,
+      "source": "seed"
     },
     {
       "date": "2026-03-29",
-      "sell": 1301000,
-      "buyback": 1197000
+      "sell": 2423000,
+      "buyback": 2229000,
+      "source": "seed"
     },
     {
       "date": "2026-03-30",
-      "sell": 1306500,
-      "buyback": 1202000
+      "sell": 2433500,
+      "buyback": 2239000,
+      "source": "seed"
     },
     {
       "date": "2026-03-31",
-      "sell": 1303500,
-      "buyback": 1199000
+      "sell": 2429000,
+      "buyback": 2234500,
+      "source": "seed"
     },
     {
       "date": "2026-04-01",
-      "sell": 1309500,
-      "buyback": 1204500
+      "sell": 2440500,
+      "buyback": 2245500,
+      "source": "seed"
     },
     {
       "date": "2026-04-02",
-      "sell": 1311500,
-      "buyback": 1206500
+      "sell": 2445000,
+      "buyback": 2249500,
+      "source": "seed"
     },
     {
       "date": "2026-04-03",
-      "sell": 1308500,
-      "buyback": 1204000
+      "sell": 2440000,
+      "buyback": 2245000,
+      "source": "seed"
     },
     {
       "date": "2026-04-04",
-      "sell": 1303000,
-      "buyback": 1199000
+      "sell": 2429500,
+      "buyback": 2235000,
+      "source": "seed"
     },
     {
       "date": "2026-04-05",
-      "sell": 1311000,
-      "buyback": 1206000
+      "sell": 2445000,
+      "buyback": 2249500,
+      "source": "seed"
     },
     {
       "date": "2026-04-06",
-      "sell": 1310000,
-      "buyback": 1205000
+      "sell": 2444000,
+      "buyback": 2248500,
+      "source": "seed"
     },
     {
       "date": "2026-04-07",
-      "sell": 1305500,
-      "buyback": 1201000
+      "sell": 2436500,
+      "buyback": 2241500,
+      "source": "seed"
     },
     {
       "date": "2026-04-08",
-      "sell": 1309500,
-      "buyback": 1204500
+      "sell": 2444000,
+      "buyback": 2248500,
+      "source": "seed"
     },
     {
       "date": "2026-04-09",
-      "sell": 1303500,
-      "buyback": 1199000
+      "sell": 2433500,
+      "buyback": 2239000,
+      "source": "seed"
     },
     {
       "date": "2026-04-10",
-      "sell": 1306000,
-      "buyback": 1201500
+      "sell": 2439000,
+      "buyback": 2244000,
+      "source": "seed"
     },
     {
       "date": "2026-04-11",
-      "sell": 1299500,
-      "buyback": 1195500
+      "sell": 2427000,
+      "buyback": 2233000,
+      "source": "seed"
     },
     {
       "date": "2026-04-12",
-      "sell": 1295000,
-      "buyback": 1191500
+      "sell": 2419500,
+      "buyback": 2226000,
+      "source": "seed"
     },
     {
       "date": "2026-04-13",
-      "sell": 1290500,
-      "buyback": 1187500
+      "sell": 2411500,
+      "buyback": 2218500,
+      "source": "seed"
     },
     {
       "date": "2026-04-14",
-      "sell": 1292000,
-      "buyback": 1188500
+      "sell": 2415000,
+      "buyback": 2222000,
+      "source": "seed"
     },
     {
       "date": "2026-04-15",
-      "sell": 1285000,
-      "buyback": 1182000
+      "sell": 2403000,
+      "buyback": 2211000,
+      "source": "seed"
     },
     {
       "date": "2026-04-16",
-      "sell": 1283500,
-      "buyback": 1181000
+      "sell": 2400500,
+      "buyback": 2208500,
+      "source": "seed"
     },
     {
       "date": "2026-04-17",
-      "sell": 1281500,
-      "buyback": 1179000
+      "sell": 2397000,
+      "buyback": 2205000,
+      "source": "seed"
     },
     {
       "date": "2026-04-18",
-      "sell": 1281500,
-      "buyback": 1179000
+      "sell": 2397500,
+      "buyback": 2205500,
+      "source": "seed"
     },
     {
       "date": "2026-04-19",
-      "sell": 1283500,
-      "buyback": 1181000
+      "sell": 2402000,
+      "buyback": 2210000,
+      "source": "seed"
     },
     {
       "date": "2026-04-20",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2404000,
+      "buyback": 2211500,
+      "source": "seed"
     },
     {
       "date": "2026-04-21",
-      "sell": 1290500,
-      "buyback": 1187500
+      "sell": 2416000,
+      "buyback": 2222500,
+      "source": "seed"
     },
     {
       "date": "2026-04-22",
-      "sell": 1292500,
-      "buyback": 1189000
+      "sell": 2420500,
+      "buyback": 2227000,
+      "source": "seed"
     },
     {
       "date": "2026-04-23",
-      "sell": 1300000,
-      "buyback": 1196000
+      "sell": 2435500,
+      "buyback": 2240500,
+      "source": "seed"
     },
     {
       "date": "2026-04-24",
-      "sell": 1294500,
-      "buyback": 1191000
+      "sell": 2425500,
+      "buyback": 2231500,
+      "source": "seed"
     },
     {
       "date": "2026-04-25",
-      "sell": 1297000,
-      "buyback": 1193000
+      "sell": 2430500,
+      "buyback": 2236000,
+      "source": "seed"
     },
     {
       "date": "2026-04-26",
-      "sell": 1290000,
-      "buyback": 1187000
+      "sell": 2418000,
+      "buyback": 2224500,
+      "source": "seed"
     },
     {
       "date": "2026-04-27",
-      "sell": 1293500,
-      "buyback": 1190000
+      "sell": 2425000,
+      "buyback": 2231000,
+      "source": "seed"
     },
     {
       "date": "2026-04-28",
-      "sell": 1293000,
-      "buyback": 1189500
+      "sell": 2425000,
+      "buyback": 2231000,
+      "source": "seed"
     },
     {
       "date": "2026-04-29",
-      "sell": 1291500,
-      "buyback": 1188000
+      "sell": 2422500,
+      "buyback": 2228500,
+      "source": "seed"
     },
     {
       "date": "2026-04-30",
-      "sell": 1294000,
-      "buyback": 1190500
+      "sell": 2428000,
+      "buyback": 2234000,
+      "source": "seed"
     },
     {
       "date": "2026-05-01",
-      "sell": 1290000,
-      "buyback": 1187000
+      "sell": 2421500,
+      "buyback": 2228000,
+      "source": "seed"
     },
     {
       "date": "2026-05-02",
-      "sell": 1293000,
-      "buyback": 1189500
+      "sell": 2427500,
+      "buyback": 2233500,
+      "source": "seed"
     },
     {
       "date": "2026-05-03",
-      "sell": 1287500,
-      "buyback": 1184500
+      "sell": 2417000,
+      "buyback": 2223500,
+      "source": "seed"
     },
     {
       "date": "2026-05-04",
-      "sell": 1296000,
-      "buyback": 1192500
+      "sell": 2434000,
+      "buyback": 2239500,
+      "source": "seed"
     },
     {
       "date": "2026-05-05",
-      "sell": 1292500,
-      "buyback": 1189000
+      "sell": 2428000,
+      "buyback": 2234000,
+      "source": "seed"
     },
     {
       "date": "2026-05-06",
-      "sell": 1291000,
-      "buyback": 1187500
+      "sell": 2425000,
+      "buyback": 2231000,
+      "source": "seed"
     },
     {
       "date": "2026-05-07",
-      "sell": 1284500,
-      "buyback": 1181500
+      "sell": 2414000,
+      "buyback": 2221000,
+      "source": "seed"
     },
     {
       "date": "2026-05-08",
-      "sell": 1281000,
-      "buyback": 1178500
+      "sell": 2408500,
+      "buyback": 2216000,
+      "source": "seed"
     },
     {
       "date": "2026-05-09",
-      "sell": 1276500,
-      "buyback": 1174500
+      "sell": 2400000,
+      "buyback": 2208000,
+      "source": "seed"
     },
     {
       "date": "2026-05-10",
-      "sell": 1271000,
-      "buyback": 1169500
+      "sell": 2390000,
+      "buyback": 2199000,
+      "source": "seed"
     },
     {
       "date": "2026-05-11",
-      "sell": 1268000,
-      "buyback": 1166500
+      "sell": 2385500,
+      "buyback": 2194500,
+      "source": "seed"
     },
     {
       "date": "2026-05-12",
-      "sell": 1276500,
-      "buyback": 1174500
+      "sell": 2402000,
+      "buyback": 2210000,
+      "source": "seed"
     },
     {
       "date": "2026-05-13",
-      "sell": 1282000,
-      "buyback": 1179500
+      "sell": 2412500,
+      "buyback": 2219500,
+      "source": "seed"
     },
     {
       "date": "2026-05-14",
-      "sell": 1289500,
-      "buyback": 1186500
+      "sell": 2427000,
+      "buyback": 2233000,
+      "source": "seed"
     },
     {
       "date": "2026-05-15",
-      "sell": 1284000,
-      "buyback": 1181500
+      "sell": 2418000,
+      "buyback": 2224500,
+      "source": "seed"
     },
     {
       "date": "2026-05-16",
-      "sell": 1289000,
-      "buyback": 1186000
+      "sell": 2427500,
+      "buyback": 2233500,
+      "source": "seed"
     },
     {
       "date": "2026-05-17",
-      "sell": 1298500,
-      "buyback": 1194500
+      "sell": 2446000,
+      "buyback": 2250500,
+      "source": "seed"
     },
     {
       "date": "2026-05-18",
-      "sell": 1299000,
-      "buyback": 1195000
+      "sell": 2448000,
+      "buyback": 2252000,
+      "source": "seed"
     },
     {
       "date": "2026-05-19",
-      "sell": 1306500,
-      "buyback": 1202000
+      "sell": 2462500,
+      "buyback": 2265500,
+      "source": "seed"
     },
     {
       "date": "2026-05-20",
-      "sell": 1315500,
-      "buyback": 1210500
+      "sell": 2479000,
+      "buyback": 2280500,
+      "source": "seed"
     },
     {
       "date": "2026-05-21",
-      "sell": 1310000,
-      "buyback": 1205000
+      "sell": 2470000,
+      "buyback": 2272500,
+      "source": "seed"
     },
     {
       "date": "2026-05-22",
-      "sell": 1305000,
-      "buyback": 1200500
+      "sell": 2460500,
+      "buyback": 2263500,
+      "source": "seed"
     },
     {
       "date": "2026-05-23",
-      "sell": 1303000,
-      "buyback": 1199000
+      "sell": 2457500,
+      "buyback": 2261000,
+      "source": "seed"
     },
     {
       "date": "2026-05-24",
-      "sell": 1302000,
-      "buyback": 1198000
+      "sell": 2456000,
+      "buyback": 2259500,
+      "source": "seed"
     },
     {
       "date": "2026-05-25",
-      "sell": 1310500,
-      "buyback": 1205500
+      "sell": 2473000,
+      "buyback": 2275000,
+      "source": "seed"
     },
     {
       "date": "2026-05-26",
-      "sell": 1309500,
-      "buyback": 1204500
+      "sell": 2471500,
+      "buyback": 2274000,
+      "source": "seed"
     },
     {
       "date": "2026-05-27",
-      "sell": 1313000,
-      "buyback": 1208000
+      "sell": 2479000,
+      "buyback": 2280500,
+      "source": "seed"
     },
     {
       "date": "2026-05-28",
-      "sell": 1317500,
-      "buyback": 1212000
+      "sell": 2488000,
+      "buyback": 2289000,
+      "source": "seed"
     },
     {
       "date": "2026-05-29",
-      "sell": 1317500,
-      "buyback": 1212000
+      "sell": 2488000,
+      "buyback": 2289000,
+      "source": "seed"
     },
     {
       "date": "2026-05-30",
-      "sell": 1318000,
-      "buyback": 1212500
+      "sell": 2490000,
+      "buyback": 2291000,
+      "source": "seed"
     },
     {
       "date": "2026-05-31",
-      "sell": 1319000,
-      "buyback": 1213500
+      "sell": 2492000,
+      "buyback": 2292500,
+      "source": "seed"
     },
     {
       "date": "2026-06-01",
-      "sell": 1313000,
-      "buyback": 1208000
+      "sell": 2481000,
+      "buyback": 2282500,
+      "source": "seed"
     },
     {
       "date": "2026-06-02",
-      "sell": 1308000,
-      "buyback": 1203500
+      "sell": 2472500,
+      "buyback": 2274500,
+      "source": "seed"
     },
     {
       "date": "2026-06-03",
-      "sell": 1304500,
-      "buyback": 1200000
+      "sell": 2467000,
+      "buyback": 2269500,
+      "source": "seed"
     },
     {
       "date": "2026-06-04",
-      "sell": 1302500,
-      "buyback": 1198500
+      "sell": 2463000,
+      "buyback": 2266000,
+      "source": "seed"
     },
     {
       "date": "2026-06-05",
-      "sell": 1298500,
-      "buyback": 1194500
+      "sell": 2456000,
+      "buyback": 2259500,
+      "source": "seed"
     },
     {
       "date": "2026-06-06",
-      "sell": 1301500,
-      "buyback": 1197500
+      "sell": 2462000,
+      "buyback": 2265000,
+      "source": "seed"
     },
     {
       "date": "2026-06-07",
-      "sell": 1306500,
-      "buyback": 1202000
+      "sell": 2472500,
+      "buyback": 2274500,
+      "source": "seed"
     },
     {
       "date": "2026-06-08",
-      "sell": 1304500,
-      "buyback": 1200000
+      "sell": 2468500,
+      "buyback": 2271000,
+      "source": "seed"
     },
     {
       "date": "2026-06-09",
-      "sell": 1303000,
-      "buyback": 1199000
+      "sell": 2467000,
+      "buyback": 2269500,
+      "source": "seed"
     },
     {
       "date": "2026-06-10",
-      "sell": 1305000,
-      "buyback": 1200500
+      "sell": 2471500,
+      "buyback": 2274000,
+      "source": "seed"
     },
     {
       "date": "2026-06-11",
-      "sell": 1319000,
-      "buyback": 1213500
+      "sell": 2498000,
+      "buyback": 2298000,
+      "source": "seed"
     },
     {
       "date": "2026-06-12",
-      "sell": 1317000,
-      "buyback": 1211500
+      "sell": 2494500,
+      "buyback": 2295000,
+      "source": "seed"
     },
     {
       "date": "2026-06-13",
-      "sell": 1318500,
-      "buyback": 1213000
+      "sell": 2498000,
+      "buyback": 2298000,
+      "source": "seed"
     },
     {
       "date": "2026-06-14",
-      "sell": 1321500,
-      "buyback": 1216000
+      "sell": 2504500,
+      "buyback": 2304000,
+      "source": "seed"
     },
     {
       "date": "2026-06-15",
-      "sell": 1333500,
-      "buyback": 1227000
+      "sell": 2527500,
+      "buyback": 2325500,
+      "source": "seed"
     },
     {
       "date": "2026-06-16",
-      "sell": 1339000,
-      "buyback": 1232000
+      "sell": 2538500,
+      "buyback": 2335500,
+      "source": "seed"
     }
   ]
 }

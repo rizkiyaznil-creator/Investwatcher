@@ -67,7 +67,7 @@ async function main() {
   const date = new Date().toISOString().slice(0, 10);
   const store = await readStore();
   const idx = store.points.findIndex((p) => p.date === date);
-  const point = { date, sell: data.sell, buyback: data.buyback };
+  const point = { date, sell: data.sell, buyback: data.buyback, source: "live" };
   if (idx >= 0) store.points[idx] = point;
   else store.points.push(point);
   store.points.sort((a, b) => (a.date < b.date ? -1 : 1));

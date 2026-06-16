@@ -34,6 +34,10 @@ export interface Quote {
   marketTime?: number;
   /** True when served from mock fallback instead of live data. */
   mock?: boolean;
+  /** True when derived from a proxy (e.g. Antam estimated from world gold). */
+  estimated?: boolean;
+  /** Optional human note about the data source. */
+  note?: string;
 }
 
 export interface Candle {
@@ -51,6 +55,8 @@ export interface HistoryResponse {
   range: RangeKey;
   candles: Candle[];
   mock?: boolean;
+  /** True when derived from a proxy series (e.g. Antam from world gold). */
+  estimated?: boolean;
 }
 
 export type RangeKey = "1D" | "1W" | "1M" | "3M" | "1Y" | "5Y";

@@ -30,8 +30,8 @@ function round500(n) {
 }
 
 const points = [];
-let price = 1_150_000; // ~start
-const target = 1_345_000; // ~end
+let price = 1_950_000; // ~start (≈ setahun lalu)
+const target = 2_550_000; // ~end (≈ level 2026, fallback bila sumber live mati)
 for (let i = days - 1; i >= 0; i--) {
   const d = new Date();
   d.setUTCDate(d.getUTCDate() - i);
@@ -41,7 +41,7 @@ for (let i = days - 1; i >= 0; i--) {
   price = Math.max(900_000, price + drift + noise);
   const sell = round500(price);
   const buyback = round500(sell * 0.92);
-  points.push({ date, sell, buyback });
+  points.push({ date, sell, buyback, source: "seed" });
 }
 
 const store = { unit: "per gram", currency: "IDR", points };
