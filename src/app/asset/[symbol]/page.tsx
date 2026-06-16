@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { Candle, Quote, RangeKey } from "@/lib/types";
-import { getAsset } from "@/lib/assets";
+import { useCatalog } from "@/components/CatalogContext";
 import { sma, rsi, latestRsi, type LinePoint } from "@/lib/indicators";
 import {
   changeColor,
@@ -29,7 +29,8 @@ export default function AssetDetailPage() {
   const symbol = decodeURIComponent(
     Array.isArray(params.symbol) ? params.symbol[0] : params.symbol,
   );
-  const asset = getAsset(symbol);
+  const { resolve } = useCatalog();
+  const asset = resolve(symbol);
   const { convert } = useCurrency();
   const { has, add, remove } = useWatchlist();
 

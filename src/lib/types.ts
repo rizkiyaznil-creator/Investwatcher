@@ -1,4 +1,13 @@
-export type AssetType = "commodity" | "stock_us" | "stock_id" | "gold_antam" | "fx";
+export type AssetType =
+  | "commodity"
+  | "stock_us"
+  | "stock_id"
+  | "gold_antam"
+  | "fx"
+  | "crypto"
+  | "index"
+  | "etf"
+  | "other";
 
 export interface Asset {
   /** Yahoo Finance symbol (or synthetic id for non-Yahoo sources like Antam). */
