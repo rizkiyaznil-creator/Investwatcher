@@ -201,9 +201,25 @@ function SortableRow({
           className="flex items-center gap-2"
         >
           <span className="text-lg">{asset.icon ?? "•"}</span>
-          <span>
+          <span className="min-w-0">
             <span className="block font-medium text-slate-800 dark:text-slate-100">{asset.short}</span>
             <span className="block text-xs text-slate-500 dark:text-slate-400">{asset.name}</span>
+            {/* Compact trend + 52w position for small screens where those
+                columns are hidden (parity with desktop). */}
+            {(q?.spark || pos != null) && (
+              <span className="mt-1 flex items-center gap-2 md:hidden">
+                {q?.spark && (
+                  <span className="sm:hidden">
+                    <Sparkline data={q.spark} up={up} width={72} height={18} />
+                  </span>
+                )}
+                {pos != null && (
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                    52mg {pos.toFixed(0)}%
+                  </span>
+                )}
+              </span>
+            )}
           </span>
         </Link>
       </td>
