@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import InstallShare from "@/components/InstallShare";
+import AiStatus from "@/components/AiStatus";
 
 export const metadata: Metadata = {
   title: "Tentang — InvestWatcher",
@@ -80,6 +81,9 @@ export default function AboutPage() {
           </li>
         </ul>
       </div>
+
+      {/* AI feature status */}
+      <AiStatus />
 
       {/* Install & share */}
       <InstallShare />
