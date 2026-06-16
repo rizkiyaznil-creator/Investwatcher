@@ -27,18 +27,18 @@ export default function RsiChart({ data, height = 130 }: Props) {
         height,
         layout: {
           background: { type: ColorType.Solid, color: "transparent" },
-          textColor: "#9ca3af",
+          textColor: "#475569",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
         },
         grid: {
-          vertLines: { color: "rgba(55,65,81,0.2)" },
-          horzLines: { color: "rgba(55,65,81,0.2)" },
+          vertLines: { color: "rgba(148,163,184,0.18)" },
+          horzLines: { color: "rgba(148,163,184,0.18)" },
         },
         rightPriceScale: {
-          borderColor: "rgba(55,65,81,0.5)",
+          borderColor: "rgba(148,163,184,0.45)",
           autoScale: false,
         },
-        timeScale: { borderColor: "rgba(55,65,81,0.5)", visible: false },
+        timeScale: { borderColor: "rgba(148,163,184,0.45)", visible: false },
       });
 
       const series = chart.addLineSeries({
@@ -81,7 +81,7 @@ export default function RsiChart({ data, height = 130 }: Props) {
 
   if (!data.length) {
     return (
-      <div className="flex h-[130px] items-center justify-center text-sm text-gray-500">
+      <div className="flex h-[130px] items-center justify-center text-sm text-slate-500">
         Data tidak cukup untuk menghitung RSI pada rentang ini.
       </div>
     );

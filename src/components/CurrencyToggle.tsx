@@ -13,7 +13,7 @@ export default function CurrencyToggle() {
   const { mode, setMode, rate, rateMock } = useCurrency();
   return (
     <div className="flex items-center gap-2">
-      <div className="flex rounded-lg border border-gray-800 bg-gray-900 p-0.5">
+      <div className="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
         {MODES.map((m) => (
           <button
             key={m.key}
@@ -21,16 +21,16 @@ export default function CurrencyToggle() {
             className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
               mode === m.key
                 ? "bg-brand text-white"
-                : "text-gray-400 hover:text-gray-200"
+                : "text-slate-500 hover:text-slate-800"
             }`}
           >
             {m.label}
           </button>
         ))}
       </div>
-      <span className="hidden text-xs text-gray-500 sm:inline">
+      <span className="hidden text-xs text-slate-500 sm:inline">
         1 USD = Rp{formatNumber(rate)}
-        {rateMock && <span className="ml-1 text-amber-500">(estimasi)</span>}
+        {rateMock && <span className="ml-1 text-amber-700">(estimasi)</span>}
       </span>
     </div>
   );

@@ -3,40 +3,50 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+  --bg: #f5f8fc;
 }
 
 html,
 body {
-  background-color: #0b0f17;
-  color: #e5e7eb;
+  background-color: var(--bg);
+  color: #1e293b; /* slate-800 */
 }
 
-/* Thin scrollbars for the dark theme */
+body {
+  background-image: radial-gradient(
+    1200px 400px at 50% -10%,
+    rgba(16, 185, 129, 0.08),
+    transparent 70%
+  );
+  background-attachment: fixed;
+}
+
+/* Thin, light scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #374151 transparent;
+  scrollbar-color: #cbd5e1 transparent;
 }
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #374151;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 @layer components {
   .card {
-    @apply rounded-xl border border-gray-800 bg-gray-900/60 backdrop-blur;
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
   }
   .btn {
     @apply inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors;
   }
   .btn-ghost {
-    @apply btn text-gray-300 hover:bg-gray-800;
+    @apply btn text-slate-600 hover:bg-slate-100;
   }
   .btn-primary {
-    @apply btn bg-brand text-white hover:bg-brand-dark;
+    @apply btn bg-brand text-white shadow-sm hover:bg-brand-dark;
   }
 }
