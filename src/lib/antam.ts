@@ -1,5 +1,6 @@
 import type { Quote, Candle, RangeKey } from "./types";
 import { mockHistory, mockQuote } from "./mock";
+import { getStoredAntamCandles, latestStored } from "./antamStore";
 
 /**
  * Emas Antam (Logam Mulia) price source.
@@ -45,21 +46,38 @@ function extractRupiah(html: string, re: RegExp): number | null {
 
 export async function getAntamQuote(): Promise<Quote> {
   const scraped = await scrapeAntam();
-  if (!scraped) return mockQuote(ANTAM_SYMBOL);
+  // If live scrape fails, try the snapshot store (still real data) before mock.
+  const sourced = scraped ?? (await storedAsScrape());
+  if (!sourced) return mockQuote(ANTAM_SYMBOL);
 
-  const { sell, buyback } = scraped;
-  const baseQuote = mockQuote(ANTAM_SYMBOL); // reuse for prevClose/spark estimate
-  const change = sell - baseQuote.previousClose;
+  const { sell, buyback } = sourced;
+  const base = mockQuote(ANTAM_SYMBOL); // for spark + 52w estimate
+
+  // Prefer real previous close & 52w range derived from the store when present.
+  const stored = await getStoredAntamCandles("1Y");
+  let previousClose = base.previousClose;
+  let high52 = base.high52;
+  let low52 = base.low52;
+  let spark = base.spark;
+  if (stored && stored.length >= 2) {
+    previousClose = stored[stored.length - 2].close;
+    const closes = stored.map((c) => c.close);
+    high52 = Math.max(...closes);
+    low52 = Math.min(...closes);
+    spark = closes.slice(-30);
+  }
+
+  const change = sell - previousClose;
   return {
     symbol: ANTAM_SYMBOL,
     price: sell,
-    previousClose: baseQuote.previousClose,
+    previousClose,
     change: Math.round(change),
-    changePercent: Math.round((change / baseQuote.previousClose) * 10000) / 100,
+    changePercent: Math.round((change / previousClose) * 10000) / 100,
     currency: "IDR",
-    high52: baseQuote.high52,
-    low52: baseQuote.low52,
-    spark: baseQuote.spark,
+    high52,
+    low52,
+    spark,
     buyback,
     spread: sell - buyback,
     marketTime: Math.floor(Date.now() / 1000),
@@ -67,10 +85,18 @@ export async function getAntamQuote(): Promise<Quote> {
   };
 }
 
+/** Use the latest stored snapshot as if it were a fresh scrape. */
+async function storedAsScrape(): Promise<{ sell: number; buyback: number } | null> {
+  const last = await latestStored();
+  return last ? { sell: last.sell, buyback: last.buyback } : null;
+}
+
 export async function getAntamHistory(
   range: RangeKey,
 ): Promise<{ candles: Candle[]; mock: boolean }> {
-  // Antam does not expose historical series publicly; we use the deterministic
-  // mock series so the chart works. (A future version could store daily scrapes.)
+  // Prefer the accumulated daily snapshot store (real data). Fall back to the
+  // deterministic mock series when the store has too few points for this range.
+  const stored = await getStoredAntamCandles(range);
+  if (stored && stored.length >= 2) return { candles: stored, mock: false };
   return { candles: mockHistory(ANTAM_SYMBOL, range), mock: true };
 }

@@ -18,6 +18,7 @@ import { useWatchlist } from "@/hooks/useWatchlist";
 import PriceChart, { type Overlay } from "@/components/PriceChart";
 import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
+import NewsPanel from "@/components/NewsPanel";
 
 const RANGES: RangeKey[] = ["1D", "1W", "1M", "3M", "1Y", "5Y"];
 const INTRADAY: RangeKey[] = ["1D", "1W"];
@@ -283,7 +284,10 @@ export default function AssetDetailPage() {
         </div>
       )}
 
-      <AlertPanel symbol={symbol} currentPrice={quote?.price} />
+      <div className="grid gap-4 md:grid-cols-2">
+        <AlertPanel symbol={symbol} currentPrice={quote?.price} />
+        <NewsPanel symbol={symbol} />
+      </div>
     </div>
   );
 }

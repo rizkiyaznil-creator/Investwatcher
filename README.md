@@ -19,6 +19,11 @@ Aplikasi web untuk **memantau grafik & harga komoditas investasi dunia, emas Ant
 - 🔔 **Alert harga**: notifikasi saat harga menembus target (di atas/di bawah)
 - 💱 **Konversi mata uang USD ↔ IDR** (komoditas dunia diquote USD; investor lokal butuh rupiah)
 
+**Fitur lanjutan**
+- ⚖️ **Perbandingan multi-aset** (`/compare`): beberapa aset dalam satu grafik, dinormalisasi ke % perubahan untuk melihat mana yang outperform
+- 📰 **Berita per-aset**: berita terkait pada halaman detail (Google News RSS + fallback contoh)
+- 🗄️ **Historis emas Antam**: snapshot harga harian disimpan ke `data/antam-history.json` (di-commit ke repo) lalu ditampilkan sebagai grafik historis nyata
+
 ## 🧱 Tech Stack
 
 | Bagian | Teknologi |
@@ -30,7 +35,22 @@ Aplikasi web untuk **memantau grafik & harga komoditas investasi dunia, emas Ant
 | Emas Antam | Scraping harga-emas.org (best-effort) |
 | Penyimpanan | `localStorage` (watchlist, alert, preferensi) |
 
-Tidak ada database di v1 — data historis diambil on-demand dari sumber data.
+Data harga diambil on-demand dari sumber data. Untuk emas Antam, histori
+disimpan sebagai **JSON store yang di-commit ke repo** (`data/antam-history.json`)
+— persisten tanpa server DB, cocok untuk deployment ephemeral/serverless, dan
+mudah diganti dengan database sungguhan di kemudian hari.
+
+## 🗄️ Historis emas Antam (snapshot harian)
+
+```bash
+node scripts/seed-antam.mjs            # buat data awal (sekali saja)
+node scripts/snapshot-antam.mjs        # ambil 1 snapshot hari ini (scrape live)
+node scripts/snapshot-antam.mjs --sell 1350000 --buyback 1242000   # manual
+```
+
+GitHub Actions (`.github/workflows/antam-snapshot.yml`) menjalankan snapshot tiap
+hari (~09:00 WIB) dan meng-commit perubahan otomatis, sehingga grafik historis
+emas Antam terus bertambah dari data nyata.
 
 ## 🚀 Menjalankan
 
@@ -64,18 +84,22 @@ harga-emas.org
 src/
   app/
     page.tsx                 # Dashboard (watchlist)
-    asset/[symbol]/page.tsx  # Detail aset: grafik, indikator, alert
+    compare/page.tsx         # Perbandingan multi-aset
+    asset/[symbol]/page.tsx  # Detail aset: grafik, indikator, alert, berita
     api/quotes/route.ts      # Quote batch (live + fallback)
     api/history/route.ts     # Data historis OHLC
-  components/                # UI: chart, tabel, picker, alert, dll.
+    api/news/route.ts        # Berita per-aset
+  components/                # UI: chart, compare, tabel, picker, alert, news…
   hooks/                     # useWatchlist, useAlerts
-  lib/                       # assets catalog, yahoo, antam, indicators, mock
+  lib/                       # assets, yahoo, antam, antamStore, news, indicators, mock
+scripts/                     # seed-antam, snapshot-antam
+data/antam-history.json      # store historis emas Antam
+.github/workflows/           # antam-snapshot (cron harian)
 ```
 
 ## 🗺️ Rencana berikutnya (ide)
 
-- Berita per-aset & kalender ekonomi
 - Portfolio tracker (catat kepemilikan → untung/rugi)
-- Perbandingan beberapa aset dalam satu grafik (normalisasi %)
+- Kalender ekonomi (rilis data penting)
 - Korelasi antar-aset & seasonality komoditas
-- Penyimpanan historis harian untuk emas Antam (butuh DB + scheduler)
+- Migrasi store emas Antam ke database sungguhan bila kebutuhan bertambah

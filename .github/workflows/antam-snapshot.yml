@@ -1,0 +1,39 @@
+name: Snapshot harga Emas Antam
+
+# Menyimpan harga emas Antam harian ke data/antam-history.json (sebagai
+# "database" historis yang di-commit ke repo). Jalan otomatis tiap hari, dan
+# bisa dipicu manual dari tab Actions.
+
+on:
+  schedule:
+    # 02:00 UTC ~= 09:00 WIB setiap hari
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Ambil snapshot harga Antam
+        run: node scripts/snapshot-antam.mjs
+
+      - name: Commit perubahan (jika ada)
+        run: |
+          if [[ -n "$(git status --porcelain data/antam-history.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/antam-history.json
+            git commit -m "chore: snapshot harga emas Antam $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "Tidak ada perubahan."
+          fi

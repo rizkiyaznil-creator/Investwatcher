@@ -29,6 +29,9 @@ export default function RootLayout({
               <Link href="/" className="btn-ghost">
                 Dashboard
               </Link>
+              <Link href="/compare" className="btn-ghost">
+                Bandingkan
+              </Link>
               <a
                 href="https://code.claude.com/docs/en/claude-code-on-the-web"
                 target="_blank"
