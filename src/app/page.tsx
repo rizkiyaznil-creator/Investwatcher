@@ -60,10 +60,10 @@ export default function DashboardPage() {
   return (
     <div className="space-y-5">
       {usingMock && (
-        <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
+        <div className="rounded-lg border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 px-4 py-2.5 text-sm text-amber-800 dark:text-amber-200">
           ⚠️ Menampilkan <strong>data contoh (mock)</strong>. Sumber data live
           belum dapat diakses dari lingkungan ini — tambahkan host seperti{" "}
-          <code className="rounded bg-amber-100 px-1">
+          <code className="rounded bg-amber-100 dark:bg-amber-900/40 px-1">
             query1.finance.yahoo.com
           </code>{" "}
           ke network egress allowlist untuk data asli.
@@ -73,7 +73,7 @@ export default function DashboardPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             {symbols.length} aset dipantau
             {updatedAt && (
               <>
@@ -81,7 +81,7 @@ export default function DashboardPage() {
                 {new Date(updatedAt).toLocaleTimeString("id-ID")}
               </>
             )}
-            {loading && <span className="ml-2 text-slate-400">memuat…</span>}
+            {loading && <span className="ml-2 text-slate-400 dark:text-slate-500">memuat…</span>}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -98,7 +98,7 @@ export default function DashboardPage() {
         onReorder={setAll}
       />
 
-      <p className="text-xs text-slate-400">
+      <p className="text-xs text-slate-400 dark:text-slate-500">
         Tip: klik sebuah aset untuk melihat grafik detail, indikator teknikal
         (MA &amp; RSI), dan mengatur alert harga.
       </p>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import Providers from "@/components/Providers";
+import ThemeToggle from "@/components/ThemeToggle";
+import { THEME_INIT_SCRIPT } from "@/components/ThemeContext";
 
 export const metadata: Metadata = {
   title: "InvestWatcher — Pantau Harga Komoditas & Saham",
@@ -15,9 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body className="min-h-screen antialiased">
-        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <Providers>
+        <header className="sticky top-0 z-20 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-900/70">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <Link href="/" className="flex items-center gap-2">
               <span className="text-xl">📈</span>
@@ -32,23 +36,18 @@ export default function RootLayout({
               <Link href="/compare" className="btn-ghost">
                 Bandingkan
               </Link>
-              <a
-                href="https://code.claude.com/docs/en/claude-code-on-the-web"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost text-slate-500"
-              >
-                Bantuan
-              </a>
+              <Link href="/about" className="btn-ghost">
+                Tentang
+              </Link>
+              <ThemeToggle />
             </nav>
           </div>
         </header>
-        <Providers>
-          <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
-        </Providers>
-        <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
+        <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+        <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400 dark:text-slate-500">
           InvestWatcher · Data hanya untuk informasi, bukan saran investasi.
         </footer>
+        </Providers>
       </body>
     </html>
   );

@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import type { Candle } from "@/lib/types";
 import type { LinePoint } from "@/lib/indicators";
+import { useTheme } from "./ThemeContext";
+import { chartPalette } from "@/lib/chartTheme";
 
 export interface Overlay {
   label: string;
@@ -27,12 +29,14 @@ export default function PriceChart({
   height = 380,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const { resolved } = useTheme();
 
   useEffect(() => {
     if (!ref.current) return;
     let disposed = false;
     let chart: any;
     let handleResize: (() => void) | undefined;
+    const pal = chartPalette(resolved);
 
     (async () => {
       const lib = await import("lightweight-charts");
@@ -43,17 +47,17 @@ export default function PriceChart({
         height,
         layout: {
           background: { type: ColorType.Solid, color: "transparent" },
-          textColor: "#475569",
+          textColor: pal.axis,
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
         },
         grid: {
-          vertLines: { color: "rgba(148,163,184,0.22)" },
-          horzLines: { color: "rgba(148,163,184,0.22)" },
+          vertLines: { color: pal.grid },
+          horzLines: { color: pal.grid },
         },
         crosshair: { mode: CrosshairMode.Normal },
-        rightPriceScale: { borderColor: "rgba(148,163,184,0.45)" },
+        rightPriceScale: { borderColor: pal.border },
         timeScale: {
-          borderColor: "rgba(148,163,184,0.45)",
+          borderColor: pal.border,
           timeVisible: intraday,
           secondsVisible: false,
         },
@@ -118,7 +122,7 @@ export default function PriceChart({
       if (handleResize) window.removeEventListener("resize", handleResize);
       if (chart) chart.remove();
     };
-  }, [candles, type, overlays, intraday, height]);
+  }, [candles, type, overlays, intraday, height, resolved]);
 
   return <div ref={ref} className="w-full" style={{ height }} />;
 }
