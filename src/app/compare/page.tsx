@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { Candle, RangeKey } from "@/lib/types";
-import { ASSETS, getAsset } from "@/lib/assets";
+import { useCatalog } from "@/components/CatalogContext";
 import { colorAt } from "@/lib/colors";
 import { formatPercent } from "@/lib/format";
 import CompareChart, { type CompareSeries } from "@/components/CompareChart";
@@ -14,6 +14,7 @@ const MAX = 6;
 const DEFAULT = ["GC=F", "SI=F", "CL=F"];
 
 export default function ComparePage() {
+  const { all, resolve } = useCatalog();
   const [selected, setSelected] = useState<string[]>(DEFAULT);
   const [range, setRange] = useState<RangeKey>("3M");
   const [data, setData] = useState<Record<string, Candle[]>>({});
@@ -51,7 +52,7 @@ export default function ComparePage() {
     () =>
       selected.map((symbol, i) => ({
         symbol,
-        name: getAsset(symbol)?.short ?? symbol,
+        name: resolve(symbol).short,
         color: colorAt(i),
         candles: data[symbol] ?? [],
       })),
@@ -154,7 +155,7 @@ export default function ComparePage() {
           Pilih aset ({selected.length}/{MAX})
         </h3>
         <div className="flex flex-wrap gap-2">
-          {ASSETS.filter((a) => a.type !== "fx").map((a) => {
+          {all.filter((a) => a.type !== "fx").map((a) => {
             const on = selected.includes(a.symbol);
             const disabled = !on && selected.length >= MAX;
             return (

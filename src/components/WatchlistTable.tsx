@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Quote } from "@/lib/types";
-import { getAsset } from "@/lib/assets";
+import { useCatalog } from "./CatalogContext";
 import {
   changeColor,
   formatPercent,
@@ -27,6 +27,7 @@ export default function WatchlistTable({
   onRemove,
 }: Props) {
   const { convert } = useCurrency();
+  const { resolve } = useCatalog();
 
   if (symbols.length === 0) {
     return (
@@ -72,7 +73,7 @@ export default function WatchlistTable({
           </thead>
           <tbody>
             {symbols.map((symbol) => {
-              const asset = getAsset(symbol);
+              const asset = resolve(symbol);
               const q = quotes[symbol];
               const up = (q?.changePercent ?? 0) >= 0;
               const pos = q ? rangePosition(q) : null;
