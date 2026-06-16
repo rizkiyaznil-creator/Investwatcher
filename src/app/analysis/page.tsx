@@ -8,6 +8,7 @@ import { useWatchlist } from "@/hooks/useWatchlist";
 import { useCatalog } from "@/components/CatalogContext";
 import InfoTip from "@/components/InfoTip";
 import CorrelationMatrix from "@/components/CorrelationMatrix";
+import InvestmentCalculator from "@/components/InvestmentCalculator";
 
 interface Row {
   symbol: string;
@@ -157,6 +158,8 @@ export default function AnalysisPage() {
           ⚠️ Sebagian/semua data adalah contoh (mock) — sumber live belum dapat diakses dari lingkungan ini.
         </div>
       )}
+
+      <InvestmentCalculator />
 
       {symbols.length === 0 ? (
         <div className="card p-10 text-center text-slate-500 dark:text-slate-400">
