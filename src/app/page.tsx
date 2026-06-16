@@ -11,7 +11,7 @@ import CurrencyToggle from "@/components/CurrencyToggle";
 const REFRESH_MS = 60_000;
 
 export default function DashboardPage() {
-  const { symbols, loaded, add, remove } = useWatchlist();
+  const { symbols, loaded, add, remove, setAll } = useWatchlist();
   const { alerts, evaluate } = useAlerts();
   const toasts = useTriggerToasts(alerts);
 
@@ -95,6 +95,7 @@ export default function DashboardPage() {
         quotes={quotes}
         loading={loading}
         onRemove={remove}
+        onReorder={setAll}
       />
 
       <p className="text-xs text-slate-400">
