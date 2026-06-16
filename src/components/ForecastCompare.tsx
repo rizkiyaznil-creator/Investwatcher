@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useCatalog } from "./CatalogContext";
+import AmountInput from "./AmountInput";
 import { useWatchlist } from "@/hooks/useWatchlist";
 import { useForecastHistory } from "@/hooks/useForecastHistory";
 import { formatPrice } from "@/lib/format";
@@ -146,11 +147,9 @@ export default function ForecastCompare() {
         <label className="text-sm">
           <span className="mb-1 block text-slate-500 dark:text-slate-400">Jumlah</span>
           <div className="flex gap-1">
-            <input
-              type="number"
-              min={0}
+            <AmountInput
               value={amount}
-              onChange={(e) => setAmount(Math.max(0, Number(e.target.value)))}
+              onChange={setAmount}
               className="w-32 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm tabular-nums outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900"
             />
             <select

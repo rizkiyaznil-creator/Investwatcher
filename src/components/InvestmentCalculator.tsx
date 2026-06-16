@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useCatalog } from "./CatalogContext";
+import AmountInput from "./AmountInput";
 import { useForecastHistory } from "@/hooks/useForecastHistory";
 import { formatPrice } from "@/lib/format";
 import type { TechForecast } from "@/lib/forecast";
@@ -169,11 +170,9 @@ export default function InvestmentCalculator() {
         <label className="text-sm">
           <span className="mb-1 block text-slate-500 dark:text-slate-400">Jumlah investasi</span>
           <div className="flex gap-2">
-            <input
-              type="number"
-              min={0}
+            <AmountInput
               value={amount}
-              onChange={(e) => setAmount(Math.max(0, Number(e.target.value)))}
+              onChange={setAmount}
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm tabular-nums outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900"
             />
             <select
