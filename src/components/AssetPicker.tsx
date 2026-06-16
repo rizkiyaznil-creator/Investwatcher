@@ -45,22 +45,22 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
             onClick={() => setOpen(false)}
             aria-hidden
           />
-          <div className="absolute right-0 z-40 mt-2 max-h-[70vh] w-80 overflow-y-auto rounded-xl border border-gray-800 bg-gray-900 p-3 shadow-2xl">
+          <div className="absolute right-0 z-40 mt-2 max-h-[70vh] w-80 overflow-y-auto rounded-xl border border-slate-200 bg-white p-3 shadow-2xl">
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari komoditas / saham…"
-              className="mb-3 w-full rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-sm outline-none focus:border-brand"
+              className="mb-3 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand"
             />
             {Object.keys(groups).length === 0 && (
-              <p className="py-4 text-center text-sm text-gray-500">
+              <p className="py-4 text-center text-sm text-slate-500">
                 Tidak ada hasil.
               </p>
             )}
             {Object.entries(groups).map(([cat, items]) => (
               <div key={cat} className="mb-3">
-                <p className="mb-1 px-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                <p className="mb-1 px-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
                   {cat}
                 </p>
                 <ul className="space-y-0.5">
@@ -73,15 +73,15 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                           onClick={() => onAdd(a.symbol)}
                           className={`flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm ${
                             added
-                              ? "cursor-default text-gray-600"
-                              : "hover:bg-gray-800"
+                              ? "cursor-default text-slate-400"
+                              : "hover:bg-slate-100"
                           }`}
                         >
                           <span className="flex items-center gap-2">
                             <span>{a.icon}</span>
                             <span>{a.name}</span>
                           </span>
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-slate-500">
                             {added ? "✓" : "+"}
                           </span>
                         </button>

@@ -19,6 +19,7 @@ import PriceChart, { type Overlay } from "@/components/PriceChart";
 import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
 import NewsPanel from "@/components/NewsPanel";
+import InfoTip from "@/components/InfoTip";
 
 const RANGES: RangeKey[] = ["1D", "1W", "1M", "3M", "1Y", "5Y"];
 const INTRADAY: RangeKey[] = ["1D", "1W"];
@@ -96,7 +97,7 @@ export default function AssetDetailPage() {
   if (!asset) {
     return (
       <div className="card p-10 text-center">
-        <p className="text-gray-300">Aset tidak dikenal: {symbol}</p>
+        <p className="text-slate-600">Aset tidak dikenal: {symbol}</p>
         <Link href="/" className="btn-primary mt-4">
           ← Kembali ke dashboard
         </Link>
@@ -107,7 +108,7 @@ export default function AssetDetailPage() {
   return (
     <div className="space-y-5">
       <div>
-        <Link href="/" className="text-sm text-gray-500 hover:text-gray-300">
+        <Link href="/" className="text-sm text-slate-500 hover:text-slate-700">
           ← Dashboard
         </Link>
       </div>
@@ -118,7 +119,7 @@ export default function AssetDetailPage() {
           <span className="text-3xl">{asset.icon}</span>
           <div>
             <h1 className="text-2xl font-bold">{asset.name}</h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-500">
               {asset.symbol} · {asset.category}
               {asset.unit ? ` · ${asset.unit}` : ""}
             </p>
@@ -126,7 +127,7 @@ export default function AssetDetailPage() {
         </div>
         <button
           onClick={() => (inList ? remove(symbol) : add(symbol))}
-          className={inList ? "btn-ghost border border-gray-700" : "btn-primary"}
+          className={inList ? "btn-ghost border border-slate-300" : "btn-primary"}
         >
           {inList ? "★ Di watchlist" : "☆ Tambah ke watchlist"}
         </button>
@@ -145,26 +146,32 @@ export default function AssetDetailPage() {
                   className={`mt-1 text-sm tabular-nums ${changeColor(quote.changePercent)}`}
                 >
                   {formatChange(quote.change)} ({formatPercent(quote.changePercent)})
-                  <span className="ml-1 text-gray-500">hari ini</span>
+                  <span className="ml-1 text-slate-500">
+                    <InfoTip text="Selisih harga dibanding penutupan hari perdagangan sebelumnya.">
+                      hari ini
+                    </InfoTip>
+                  </span>
                 </div>
               )}
             </div>
 
             {quote?.high52 != null && quote?.low52 != null && (
               <div className="min-w-[180px]">
-                <div className="mb-1 flex justify-between text-xs text-gray-500">
-                  <span>52mg Rendah</span>
+                <div className="mb-1 flex justify-between text-xs text-slate-500">
+                  <InfoTip text="Rentang harga selama 52 minggu terakhir. Titik hijau menunjukkan posisi harga sekarang: dekat L = relatif murah, dekat H = relatif mahal.">
+                    52mg Rendah
+                  </InfoTip>
                   <span>52mg Tinggi</span>
                 </div>
-                <div className="relative h-1.5 rounded-full bg-gray-700">
+                <div className="relative h-1.5 rounded-full bg-slate-200">
                   {pos != null && (
                     <div
-                      className="absolute top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-gray-900 bg-brand"
+                      className="absolute top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-brand"
                       style={{ left: `${pos}%` }}
                     />
                   )}
                 </div>
-                <div className="mt-1 flex justify-between text-xs tabular-nums text-gray-400">
+                <div className="mt-1 flex justify-between text-xs tabular-nums text-slate-500">
                   <span>{formatPrice(quote.low52, quote.currency)}</span>
                   <span>{formatPrice(quote.high52, quote.currency)}</span>
                 </div>
@@ -172,29 +179,40 @@ export default function AssetDetailPage() {
             )}
 
             {quote?.buyback != null && (
-              <div className="rounded-lg bg-gray-800/40 px-4 py-2 text-sm">
-                <div className="text-gray-400">Buyback</div>
+              <div className="rounded-lg bg-slate-100 px-4 py-2 text-sm">
+                <div className="text-slate-500">
+                  <InfoTip text="Harga saat Anda menjual emas kembali ke Antam — biasanya lebih rendah dari harga beli.">
+                    Buyback
+                  </InfoTip>
+                </div>
                 <div className="font-medium tabular-nums">
                   {formatPrice(quote.buyback, quote.currency)}
                 </div>
                 {quote.spread != null && (
-                  <div className="text-xs text-amber-400">
-                    Spread {formatPrice(quote.spread, quote.currency)}
+                  <div className="text-xs text-amber-700">
+                    <InfoTip text="Selisih harga beli dan buyback. Ini biaya yang Anda tanggung saat membeli lalu menjual emas.">
+                      Spread
+                    </InfoTip>{" "}
+                    {formatPrice(quote.spread, quote.currency)}
                   </div>
                 )}
               </div>
             )}
 
             {rsiNow != null && (
-              <div className="rounded-lg bg-gray-800/40 px-4 py-2 text-sm">
-                <div className="text-gray-400">RSI (14)</div>
+              <div className="rounded-lg bg-slate-100 px-4 py-2 text-sm">
+                <div className="text-slate-500">
+                  <InfoTip text="Relative Strength Index (14 periode), indikator momentum 0–100. Di atas 70 = jenuh beli (mungkin terlalu mahal), di bawah 30 = jenuh jual (mungkin terlalu murah).">
+                    RSI (14)
+                  </InfoTip>
+                </div>
                 <div
                   className={`font-medium tabular-nums ${
                     rsiNow >= 70
                       ? "text-down"
                       : rsiNow <= 30
                         ? "text-up"
-                        : "text-gray-200"
+                        : "text-slate-700"
                   }`}
                 >
                   {rsiNow.toFixed(1)}{" "}
@@ -210,28 +228,28 @@ export default function AssetDetailPage() {
             )}
           </div>
         ) : (
-          <div className="text-gray-500">Memuat data harga…</div>
+          <div className="text-slate-500">Memuat data harga…</div>
         )}
         {quote?.mock && (
-          <p className="mt-3 text-xs text-amber-500">
+          <p className="mt-3 text-xs text-amber-700">
             ⚠️ Data contoh (mock) — sumber live belum dapat diakses dari
             lingkungan ini.
           </p>
         )}
         {!quote?.mock && quote?.estimated && quote?.note && (
-          <p className="mt-3 text-xs text-amber-400">ℹ️ {quote.note}</p>
+          <p className="mt-3 text-xs text-amber-700">ℹ️ {quote.note}</p>
         )}
       </div>
 
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex rounded-lg border border-gray-800 bg-gray-900 p-0.5">
+        <div className="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
           {RANGES.map((r) => (
             <button
               key={r}
               onClick={() => setRange(r)}
               className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-                range === r ? "bg-brand text-white" : "text-gray-400 hover:text-gray-200"
+                range === r ? "bg-brand text-white" : "text-slate-500 hover:text-slate-800"
               }`}
             >
               {r}
@@ -255,7 +273,7 @@ export default function AssetDetailPage() {
       {/* Chart */}
       <div className="card p-4">
         {loading && candles.length === 0 ? (
-          <div className="flex h-[380px] items-center justify-center text-gray-500">
+          <div className="flex h-[380px] items-center justify-center text-slate-500">
             Memuat grafik…
           </div>
         ) : (
@@ -267,7 +285,10 @@ export default function AssetDetailPage() {
           />
         )}
         {showMA && (
-          <div className="mt-2 flex gap-4 px-1 text-xs text-gray-500">
+          <div className="mt-2 flex items-center gap-4 px-1 text-xs text-slate-500">
+            <InfoTip text="Moving Average / rata-rata harga selama 20 & 50 periode. Garis ini memuluskan fluktuasi untuk melihat arah tren; perpotongan MA sering dipakai sebagai sinyal.">
+              <span className="font-medium">MA</span>
+            </InfoTip>
             <span className="flex items-center gap-1">
               <span className="inline-block h-2 w-3 rounded bg-[#3b82f6]" /> MA20
             </span>
@@ -280,7 +301,7 @@ export default function AssetDetailPage() {
 
       {showRSI && (
         <div className="card p-4">
-          <div className="mb-1 px-1 text-xs font-medium text-gray-400">
+          <div className="mb-1 px-1 text-xs font-medium text-slate-500">
             RSI (14) — di atas 70 jenuh beli, di bawah 30 jenuh jual
           </div>
           <RsiChart data={rsiData} />
@@ -310,7 +331,7 @@ function Toggle({
       className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
         active
           ? "border-brand bg-brand/15 text-brand"
-          : "border-gray-700 text-gray-400 hover:text-gray-200"
+          : "border-slate-300 text-slate-500 hover:text-slate-800"
       }`}
     >
       {children}

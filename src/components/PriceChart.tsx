@@ -43,17 +43,17 @@ export default function PriceChart({
         height,
         layout: {
           background: { type: ColorType.Solid, color: "transparent" },
-          textColor: "#9ca3af",
+          textColor: "#475569",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
         },
         grid: {
-          vertLines: { color: "rgba(55,65,81,0.3)" },
-          horzLines: { color: "rgba(55,65,81,0.3)" },
+          vertLines: { color: "rgba(148,163,184,0.22)" },
+          horzLines: { color: "rgba(148,163,184,0.22)" },
         },
         crosshair: { mode: CrosshairMode.Normal },
-        rightPriceScale: { borderColor: "rgba(55,65,81,0.5)" },
+        rightPriceScale: { borderColor: "rgba(148,163,184,0.45)" },
         timeScale: {
-          borderColor: "rgba(55,65,81,0.5)",
+          borderColor: "rgba(148,163,184,0.45)",
           timeVisible: intraday,
           secondsVisible: false,
         },

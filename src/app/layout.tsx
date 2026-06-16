@@ -15,9 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="dark">
+    <html lang="id">
       <body className="min-h-screen antialiased">
-        <header className="sticky top-0 z-20 border-b border-gray-800 bg-[#0b0f17]/80 backdrop-blur">
+        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <Link href="/" className="flex items-center gap-2">
               <span className="text-xl">📈</span>
@@ -36,7 +36,7 @@ export default function RootLayout({
                 href="https://code.claude.com/docs/en/claude-code-on-the-web"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-ghost text-gray-500"
+                className="btn-ghost text-slate-500"
               >
                 Bantuan
               </a>
@@ -46,7 +46,7 @@ export default function RootLayout({
         <Providers>
           <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
         </Providers>
-        <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-gray-600">
+        <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-slate-400">
           InvestWatcher · Data hanya untuk informasi, bukan saran investasi.
         </footer>
       </body>

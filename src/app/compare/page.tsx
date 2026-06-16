@@ -79,31 +79,31 @@ export default function ComparePage() {
   return (
     <div className="space-y-5">
       <div>
-        <Link href="/" className="text-sm text-gray-500 hover:text-gray-300">
+        <Link href="/" className="text-sm text-slate-500 hover:text-slate-700">
           ← Dashboard
         </Link>
         <h1 className="mt-1 text-2xl font-bold">Perbandingan Aset</h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-slate-500">
           Bandingkan kinerja beberapa aset (dinormalisasi ke % perubahan dari
           awal periode). Pilih hingga {MAX} aset.
         </p>
       </div>
 
       {mock && (
-        <div className="rounded-lg border border-amber-700/50 bg-amber-900/20 px-4 py-2 text-sm text-amber-300">
+        <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-800">
           ⚠️ Sebagian/semua data adalah contoh (mock) — sumber live belum dapat
           diakses dari lingkungan ini.
         </div>
       )}
 
       {/* Range */}
-      <div className="flex rounded-lg border border-gray-800 bg-gray-900 p-0.5">
+      <div className="flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
         {RANGES.map((r) => (
           <button
             key={r}
             onClick={() => setRange(r)}
             className={`rounded-md px-3 py-1 text-sm font-medium transition-colors ${
-              range === r ? "bg-brand text-white" : "text-gray-400 hover:text-gray-200"
+              range === r ? "bg-brand text-white" : "text-slate-500 hover:text-slate-800"
             }`}
           >
             {r}
@@ -114,11 +114,11 @@ export default function ComparePage() {
       {/* Chart */}
       <div className="card p-4">
         {selected.length === 0 ? (
-          <div className="flex h-[420px] items-center justify-center text-gray-500">
+          <div className="flex h-[420px] items-center justify-center text-slate-500">
             Pilih minimal satu aset di bawah.
           </div>
         ) : loading && Object.keys(data).length === 0 ? (
-          <div className="flex h-[420px] items-center justify-center text-gray-500">
+          <div className="flex h-[420px] items-center justify-center text-slate-500">
             Memuat…
           </div>
         ) : (
@@ -133,7 +133,7 @@ export default function ComparePage() {
                 className="inline-block h-2.5 w-3 rounded"
                 style={{ backgroundColor: p.color }}
               />
-              <span className="text-gray-300">{p.name}</span>
+              <span className="text-slate-600">{p.name}</span>
               {p.change != null && (
                 <span
                   className={
@@ -150,7 +150,7 @@ export default function ComparePage() {
 
       {/* Asset selector */}
       <div className="card p-4">
-        <h3 className="mb-3 text-sm font-semibold text-gray-300">
+        <h3 className="mb-3 text-sm font-semibold text-slate-600">
           Pilih aset ({selected.length}/{MAX})
         </h3>
         <div className="flex flex-wrap gap-2">
@@ -166,8 +166,8 @@ export default function ComparePage() {
                   on
                     ? "border-brand bg-brand/15 text-brand"
                     : disabled
-                      ? "cursor-not-allowed border-gray-800 text-gray-600"
-                      : "border-gray-700 text-gray-400 hover:text-gray-200"
+                      ? "cursor-not-allowed border-slate-200 text-slate-400"
+                      : "border-slate-300 text-slate-500 hover:text-slate-800"
                 }`}
               >
                 {a.icon} {a.short}

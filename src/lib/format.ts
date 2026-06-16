@@ -41,5 +41,5 @@ export function rangePosition(q: Quote): number | null {
 export function changeColor(value: number): string {
   if (value > 0) return "text-up";
   if (value < 0) return "text-down";
-  return "text-gray-400";
+  return "text-slate-500";
 }
