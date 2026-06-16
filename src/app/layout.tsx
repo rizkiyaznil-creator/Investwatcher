@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import Providers from "@/components/Providers";
 import ThemeToggle from "@/components/ThemeToggle";
+import AuthMenu from "@/components/AuthMenu";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { THEME_INIT_SCRIPT } from "@/components/ThemeContext";
 
@@ -66,6 +67,7 @@ export default function RootLayout({
                 Tentang
               </Link>
               <ThemeToggle />
+              <AuthMenu />
             </nav>
           </div>
         </header>

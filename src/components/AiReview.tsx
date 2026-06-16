@@ -43,12 +43,7 @@ export default function AiReview({ symbol }: { symbol: string }) {
   return (
     <div className="card p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="flex items-center gap-2 font-semibold">
-          🤖 Ulasan AI
-          <span className="rounded bg-brand/15 px-1.5 py-0.5 text-xs font-normal text-brand">
-            gaya wealth management
-          </span>
-        </h3>
+        <h3 className="flex items-center gap-2 font-semibold">🤖 Ulasan AI</h3>
       </div>
 
       <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
