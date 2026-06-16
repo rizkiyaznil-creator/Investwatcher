@@ -59,3 +59,56 @@ export function technicalForecast(
     spanYears: m.spanYears,
   };
 }
+
+export interface PathBand {
+  /** Years elapsed since the projection was made (capped at horizon). */
+  elapsedYears: number;
+  /** Fraction of the horizon elapsed, 0..1. */
+  elapsedFraction: number;
+  /** Expected return up to "now" along the projected path (%). */
+  expectedSoFarPct: number;
+  lowSoFarPct: number;
+  highSoFarPct: number;
+}
+
+/**
+ * Reconstruct the projected return band at an intermediate point in time, so a
+ * realized return can be compared fairly against "where the projection said we
+ * should be by now". Derives annual log-drift (µ) and volatility (σ) from the
+ * stored horizon-end expected/low/high, then scales to elapsed time.
+ */
+export function projectedBandAt(
+  p: {
+    createdAt: number;
+    years: number;
+    expectedReturnPct: number;
+    lowReturnPct: number;
+    highReturnPct: number;
+  },
+  atMs: number,
+): PathBand {
+  const YEAR_MS = 365.25 * 24 * 3600 * 1000;
+  const years = Math.max(p.years, 1e-6);
+  const elapsedYears = Math.min(
+    years,
+    Math.max(0, (atMs - p.createdAt) / YEAR_MS),
+  );
+  const elapsedFraction = elapsedYears / years;
+
+  const mu = Math.log(1 + p.expectedReturnPct / 100) / years; // annual drift
+  // Half-width of the band (in log space) at the horizon, averaged.
+  const sHigh = Math.log(1 + p.highReturnPct / 100) - mu * years;
+  const sLow = mu * years - Math.log(1 + p.lowReturnPct / 100);
+  const spreadHorizon = Math.max(0, (sHigh + sLow) / 2);
+  const sigma = spreadHorizon / Math.sqrt(years);
+
+  const drift = mu * elapsedYears;
+  const spread = sigma * Math.sqrt(elapsedYears);
+  return {
+    elapsedYears,
+    elapsedFraction,
+    expectedSoFarPct: (Math.exp(drift) - 1) * 100,
+    lowSoFarPct: (Math.exp(drift - spread) - 1) * 100,
+    highSoFarPct: (Math.exp(drift + spread) - 1) * 100,
+  };
+}

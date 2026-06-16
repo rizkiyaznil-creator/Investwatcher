@@ -9,6 +9,8 @@ import { useCatalog } from "@/components/CatalogContext";
 import InfoTip from "@/components/InfoTip";
 import CorrelationMatrix from "@/components/CorrelationMatrix";
 import InvestmentCalculator from "@/components/InvestmentCalculator";
+import ForecastCompare from "@/components/ForecastCompare";
+import ForecastHistory from "@/components/ForecastHistory";
 
 interface Row {
   symbol: string;
@@ -160,6 +162,10 @@ export default function AnalysisPage() {
       )}
 
       <InvestmentCalculator />
+
+      <ForecastCompare />
+
+      <ForecastHistory />
 
       {symbols.length === 0 ? (
         <div className="card p-10 text-center text-slate-500 dark:text-slate-400">

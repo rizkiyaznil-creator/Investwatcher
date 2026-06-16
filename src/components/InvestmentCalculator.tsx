@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useCatalog } from "./CatalogContext";
+import { useForecastHistory } from "@/hooks/useForecastHistory";
 import { formatPrice } from "@/lib/format";
 import type { TechForecast } from "@/lib/forecast";
 
@@ -44,7 +45,11 @@ function pctStr(v: number | null | undefined): string {
 
 export default function InvestmentCalculator() {
   const { all, resolve } = useCatalog();
+  const { add } = useForecastHistory();
   const assets = useMemo(() => all.filter((a) => a.type !== "fx"), [all]);
+
+  const [savedTech, setSavedTech] = useState(false);
+  const [savedAi, setSavedAi] = useState(false);
 
   const [symbol, setSymbol] = useState("GC=F");
   const [amount, setAmount] = useState(10_000_000);
@@ -63,6 +68,8 @@ export default function InvestmentCalculator() {
     let cancelled = false;
     setTechLoading(true);
     setAi(null); // invalidate AI when inputs change
+    setSavedTech(false);
+    setSavedAi(false);
     const t = setTimeout(() => {
       fetch(`/api/forecast?symbol=${encodeURIComponent(symbol)}&horizon=${horizon}`)
         .then((r) => r.json())
@@ -95,6 +102,45 @@ export default function InvestmentCalculator() {
     retPct == null ? null : amount * (1 + retPct / 100);
 
   const t = tech?.technical;
+
+  const saveTech = () => {
+    if (!t || t.baseReturnPct == null || !tech) return;
+    add({
+      symbol,
+      assetName: resolve(symbol).short,
+      method: "technical",
+      horizonMonths: horizon,
+      years: horizon / 12,
+      basePrice: tech.price,
+      priceCurrency: tech.currency,
+      amount,
+      amountCurrency: currency,
+      expectedReturnPct: t.baseReturnPct,
+      lowReturnPct: t.lowReturnPct ?? t.baseReturnPct,
+      highReturnPct: t.highReturnPct ?? t.baseReturnPct,
+    });
+    setSavedTech(true);
+  };
+
+  const saveAi = () => {
+    if (!ai || !ai.enabled || ai.expectedReturnPct == null || !tech) return;
+    add({
+      symbol,
+      assetName: resolve(symbol).short,
+      method: "ai",
+      providerLabel: ai.providerLabel,
+      horizonMonths: horizon,
+      years: horizon / 12,
+      basePrice: tech.price,
+      priceCurrency: tech.currency,
+      amount,
+      amountCurrency: currency,
+      expectedReturnPct: ai.expectedReturnPct,
+      lowReturnPct: ai.lowReturnPct ?? ai.expectedReturnPct,
+      highReturnPct: ai.highReturnPct ?? ai.expectedReturnPct,
+    });
+    setSavedAi(true);
+  };
 
   return (
     <div className="card p-5">
@@ -211,6 +257,13 @@ export default function InvestmentCalculator() {
                 Basis: CAGR {pctStr(t.annualReturnPct)}/th, volatilitas {t.annualVolPct?.toFixed(0) ?? "?"}%/th
                 {t.spanYears ? ` (~${t.spanYears.toFixed(1)} th data)` : ""}.
               </p>
+              <button
+                onClick={saveTech}
+                disabled={savedTech}
+                className="mt-3 rounded-lg border border-slate-300 px-3 py-1 text-xs text-slate-600 hover:text-brand disabled:opacity-50 dark:border-slate-700 dark:text-slate-300"
+              >
+                {savedTech ? "✓ Tersimpan di riwayat" : "💾 Simpan proyeksi"}
+              </button>
             </>
           ) : (
             <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -277,6 +330,13 @@ export default function InvestmentCalculator() {
               <p className="mt-2 text-[11px] text-slate-400 dark:text-slate-500">
                 {ai.providerLabel}{ai.model ? ` · ${ai.model}` : ""}
               </p>
+              <button
+                onClick={saveAi}
+                disabled={savedAi}
+                className="mt-3 rounded-lg border border-slate-300 px-3 py-1 text-xs text-slate-600 hover:text-brand disabled:opacity-50 dark:border-slate-700 dark:text-slate-300"
+              >
+                {savedAi ? "✓ Tersimpan di riwayat" : "💾 Simpan proyeksi"}
+              </button>
             </>
           ) : (
             <p className="rounded bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
