@@ -11,7 +11,21 @@ import { getAsset } from "@/lib/assets";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const MODEL = "claude-opus-4-8";
+type ProviderKind = "anthropic" | "deepseek";
+
+interface Provider {
+  label: string;
+  model: string;
+  kind: ProviderKind;
+  /** Env var holding the API key. */
+  envKey: string;
+}
+
+const PROVIDERS: Record<string, Provider> = {
+  claude: { label: "Claude", model: "claude-opus-4-8", kind: "anthropic", envKey: "ANTHROPIC_API_KEY" },
+  "deepseek-chat": { label: "DeepSeek V3", model: "deepseek-chat", kind: "deepseek", envKey: "DEEPSEEK_API_KEY" },
+  "deepseek-reasoner": { label: "DeepSeek R1", model: "deepseek-reasoner", kind: "deepseek", envKey: "DEEPSEEK_API_KEY" },
+};
 
 const SYSTEM = `Anda adalah penasihat wealth management berpengalaman yang mengutamakan imbal hasil stabil dan jangka panjang dengan manajemen risiko yang disiplin.
 
@@ -27,27 +41,19 @@ Aturan:
 - Gunakan Bahasa Indonesia yang jelas dan ringkas (maksimal ~320 kata). Boleh memakai sub-judul singkat dan poin-poin.
 - Akhiri dengan satu baris: "⚠️ Ini analisis edukatif, bukan saran investasi. Lakukan riset mandiri."`;
 
-interface Ctx {
-  symbol: string;
-  candles: Awaited<ReturnType<typeof getDailyHistory>>["candles"];
-  mock: boolean;
-}
-
-async function gatherCandles(symbol: string): Promise<Ctx> {
-  if (symbol === "ANTAM-GOLD") {
-    const { candles, mock } = await getAntamDailyHistory();
-    return { symbol, candles, mock };
-  }
-  const { candles, mock } = await getDailyHistory(symbol);
-  return { symbol, candles, mock };
-}
-
 function pct(v: number | null | undefined): string {
   return v == null ? "n/a" : `${v >= 0 ? "+" : ""}${v.toFixed(1)}%`;
 }
 
+async function gatherCandles(symbol: string) {
+  if (symbol === "ANTAM-GOLD") return getAntamDailyHistory();
+  return getDailyHistory(symbol);
+}
+
 export async function GET(req: NextRequest) {
   const symbol = req.nextUrl.searchParams.get("symbol")?.trim();
+  const providerKey = req.nextUrl.searchParams.get("provider") ?? "claude";
+  const provider = PROVIDERS[providerKey] ?? PROVIDERS.claude;
   if (!symbol) {
     return NextResponse.json({ error: "symbol required" }, { status: 400 });
   }
@@ -56,7 +62,6 @@ export async function GET(req: NextRequest) {
   const name = asset?.name ?? symbol;
   const typeLabel = asset?.category ?? "Aset";
 
-  // Gather all evidence in parallel.
   const [quote, ctx, fundamentals, news] = await Promise.all([
     symbol === "ANTAM-GOLD" ? getAntamQuote() : getQuote(symbol),
     gatherCandles(symbol),
@@ -68,7 +73,6 @@ export async function GET(req: NextRequest) {
   const signals = evaluateSignals(ctx.candles);
   const dataMock = ctx.mock || quote.mock;
 
-  // Build the evidence block for the model.
   const ret = (label: string) =>
     metrics.returns.find((r) => r.label === label)?.value ?? null;
 
@@ -106,44 +110,89 @@ ${dataMock ? "CATATAN: sebagian data adalah contoh (mock) karena sumber live ter
 
 Tulis ulasan wealth-management Anda berdasarkan data di atas.`;
 
-  // No API key → graceful fallback (heuristic synthesis).
-  if (!process.env.ANTHROPIC_API_KEY) {
+  // No key for the chosen provider → heuristic fallback.
+  if (!process.env[provider.envKey]) {
     return NextResponse.json({
       enabled: false,
+      provider: providerKey,
+      providerLabel: provider.label,
       mock: dataMock,
       text: heuristicReview(name, signals, metrics, fundamentals.available, news.items.length, ret),
-      note: "Ulasan AI nonaktif (ANTHROPIC_API_KEY belum diset). Menampilkan ringkasan otomatis non-AI. Set ANTHROPIC_API_KEY di environment untuk ulasan AI penuh.",
+      note: `Ulasan AI nonaktif untuk ${provider.label} (${provider.envKey} belum diset). Menampilkan ringkasan otomatis non-AI. Set ${provider.envKey} di environment lalu redeploy.`,
     });
   }
 
   try {
-    const client = new Anthropic();
-    // adaptive thinking + output_config.effort are supported by the API/model
-    // but may not be typed in the installed SDK version yet.
-    const params = {
-      model: MODEL,
-      max_tokens: 2000,
-      thinking: { type: "adaptive" },
-      output_config: { effort: "medium" },
-      system: SYSTEM,
-      messages: [{ role: "user", content: evidence }],
-    } as unknown as Anthropic.MessageCreateParamsNonStreaming;
-    const msg = await client.messages.create(params);
-    const text = msg.content
-      .filter((b): b is Anthropic.TextBlock => b.type === "text")
-      .map((b) => b.text)
-      .join("\n")
-      .trim();
-    return NextResponse.json({ enabled: true, mock: dataMock, model: MODEL, text });
+    const text =
+      provider.kind === "anthropic"
+        ? await callAnthropic(provider.model, evidence)
+        : await callDeepseek(provider.model, evidence);
+    return NextResponse.json({
+      enabled: true,
+      provider: providerKey,
+      providerLabel: provider.label,
+      model: provider.model,
+      mock: dataMock,
+      text,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({
       enabled: false,
+      provider: providerKey,
+      providerLabel: provider.label,
       mock: dataMock,
       text: heuristicReview(name, signals, metrics, fundamentals.available, news.items.length, ret),
-      note: `Ulasan AI gagal dibuat (${message}). Menampilkan ringkasan otomatis non-AI.`,
+      note: `Ulasan ${provider.label} gagal dibuat (${message}). Menampilkan ringkasan otomatis non-AI.`,
     });
   }
+}
+
+async function callAnthropic(model: string, evidence: string): Promise<string> {
+  const client = new Anthropic();
+  // adaptive thinking + effort may not be typed in the installed SDK version.
+  const params = {
+    model,
+    max_tokens: 2000,
+    thinking: { type: "adaptive" },
+    output_config: { effort: "medium" },
+    system: SYSTEM,
+    messages: [{ role: "user", content: evidence }],
+  } as unknown as Anthropic.MessageCreateParamsNonStreaming;
+  const msg = await client.messages.create(params);
+  return msg.content
+    .filter((b): b is Anthropic.TextBlock => b.type === "text")
+    .map((b) => b.text)
+    .join("\n")
+    .trim();
+}
+
+async function callDeepseek(model: string, evidence: string): Promise<string> {
+  const res = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        { role: "system", content: SYSTEM },
+        { role: "user", content: evidence },
+      ],
+      max_tokens: 2000,
+      temperature: 0.4,
+      stream: false,
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`HTTP ${res.status}${body ? `: ${body.slice(0, 200)}` : ""}`);
+  }
+  const json = await res.json();
+  const text: string | undefined = json?.choices?.[0]?.message?.content;
+  if (!text) throw new Error("respons kosong");
+  return text.trim();
 }
 
 function heuristicReview(
