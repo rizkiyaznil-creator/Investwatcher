@@ -1,7 +1,7 @@
 import type { Quote, Candle, RangeKey } from "./types";
-import { mockHistory, mockQuote } from "./mock";
-import { getStoredAntamCandles, latestStored } from "./antamStore";
-import { getQuote, getHistory } from "./yahoo";
+import { mockHistory, mockQuote, mockDailyHistory } from "./mock";
+import { getStoredAntamCandles, latestStored, readStore } from "./antamStore";
+import { getQuote, getHistory, getDailyHistory } from "./yahoo";
 
 /**
  * Emas Antam (Logam Mulia) price source — strengthened with multiple fallbacks.
@@ -180,6 +180,42 @@ async function getRealSnapshotCandles(range: RangeKey): Promise<Candle[] | null>
   const hasReal = store.points.some((p) => (p as { source?: string }).source === "live");
   if (!hasReal) return null;
   return getStoredAntamCandles(range);
+}
+
+/** Long daily Antam history for analytics (real gold-derived > store > mock). */
+export async function getAntamDailyHistory(): Promise<{
+  candles: Candle[];
+  mock: boolean;
+}> {
+  const live = await liveGoldAndFx();
+  if (live) {
+    const { candles, mock } = await getDailyHistory("GC=F", "5y");
+    if (!mock && candles.length >= 2) {
+      const factor = (live.rate * SELL_PREMIUM) / TROY_OZ_GRAMS;
+      return {
+        candles: candles.map((c) => ({
+          time: c.time,
+          open: round500(c.open * factor),
+          high: round500(c.high * factor),
+          low: round500(c.low * factor),
+          close: round500(c.close * factor),
+        })),
+        mock: false,
+      };
+    }
+  }
+  const store = await readStore();
+  if (store && store.points.length >= 2) {
+    const candles = store.points
+      .slice()
+      .sort((a, b) => (a.date < b.date ? -1 : 1))
+      .map((p) => {
+        const time = Math.floor(new Date(p.date + "T00:00:00Z").getTime() / 1000);
+        return { time, open: p.sell, high: p.sell, low: p.sell, close: p.sell };
+      });
+    return { candles, mock: false };
+  }
+  return { candles: mockDailyHistory(ANTAM_SYMBOL), mock: true };
 }
 
 /** Build an Antam history series from the world-gold series converted to IDR. */

@@ -151,6 +151,35 @@ function round(n: number): number {
   return Math.round(n * 10000) / 10000;
 }
 
+/** Deterministic daily series of `days` length, for analytics fallback. */
+export function mockDailyHistory(symbol: string, days = 1300): Candle[] {
+  const base = baseFor(symbol);
+  const vol = volFor(symbol);
+  const rng = makeRng(hashString(symbol + ":daily"));
+  const now = Math.floor(Date.now() / 1000);
+  const candles: Candle[] = [];
+  let price = base * (0.6 + rng() * 0.3); // start lower so there is long-run growth
+  for (let i = days - 1; i >= 0; i--) {
+    const time = now - i * 24 * 3600;
+    const shock = (rng() - 0.5) * 2 * vol;
+    const drift = 0.0003; // mild upward drift
+    const open = price;
+    price = Math.max(0.0001, price * (1 + shock + drift));
+    const close = price;
+    const hi = Math.max(open, close) * (1 + rng() * vol * 0.5);
+    const lo = Math.min(open, close) * (1 - rng() * vol * 0.5);
+    candles.push({
+      time,
+      open: round(open),
+      high: round(hi),
+      low: round(lo),
+      close: round(close),
+      volume: Math.round((1 + rng()) * 1_000_000),
+    });
+  }
+  return candles;
+}
+
 export function mockQuote(symbol: string): Quote {
   const candles = mockHistory(symbol, "1M");
   const last = candles[candles.length - 1];

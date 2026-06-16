@@ -1,6 +1,6 @@
 import type { Candle, Quote, RangeKey } from "./types";
 import { getAsset } from "./assets";
-import { mockHistory, mockQuote } from "./mock";
+import { mockHistory, mockQuote, mockDailyHistory } from "./mock";
 
 /**
  * Thin Yahoo Finance client. Yahoo has no official public API, so we use the
@@ -130,6 +130,37 @@ export async function getQuote(symbol: string): Promise<Quote> {
 
 export async function getQuotes(symbols: string[]): Promise<Quote[]> {
   return Promise.all(symbols.map((s) => getQuote(s)));
+}
+
+/** Long daily history (for analytics). Defaults to ~5 years of daily bars. */
+export async function getDailyHistory(
+  symbol: string,
+  range = "5y",
+): Promise<{ candles: Candle[]; mock: boolean }> {
+  const result = await fetchChart(symbol, `range=${range}&interval=1d`);
+  if (!result) return { candles: mockDailyHistory(symbol), mock: true };
+  try {
+    const timestamps: number[] = result.timestamp ?? [];
+    const q = result.indicators?.quote?.[0] ?? {};
+    const candles: Candle[] = [];
+    for (let i = 0; i < timestamps.length; i++) {
+      const close = q.close?.[i];
+      const open = q.open?.[i];
+      if (close == null || open == null) continue;
+      candles.push({
+        time: timestamps[i],
+        open,
+        high: q.high?.[i] ?? Math.max(open, close),
+        low: q.low?.[i] ?? Math.min(open, close),
+        close,
+        volume: q.volume?.[i] ?? undefined,
+      });
+    }
+    if (candles.length === 0) return { candles: mockDailyHistory(symbol), mock: true };
+    return { candles, mock: false };
+  } catch {
+    return { candles: mockDailyHistory(symbol), mock: true };
+  }
 }
 
 function round(n: number): number {
