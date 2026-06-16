@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import InstallShare from "@/components/InstallShare";
 
 export const metadata: Metadata = {
   title: "Tentang — InvestWatcher",
@@ -79,6 +80,9 @@ export default function AboutPage() {
           </li>
         </ul>
       </div>
+
+      {/* Install & share */}
+      <InstallShare />
 
       {/* Credit */}
       <div className="card p-6 text-center">
