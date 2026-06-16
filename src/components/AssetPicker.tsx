@@ -87,15 +87,15 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
       {open && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} aria-hidden />
-          <div className="absolute right-0 z-40 mt-2 max-h-[75vh] w-96 max-w-[90vw] overflow-y-auto rounded-xl border border-slate-200 bg-white p-3 shadow-2xl">
+          <div className="absolute right-0 z-40 mt-2 max-h-[75vh] w-96 max-w-[90vw] overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-2xl">
             <input
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari saham US/Indonesia, komoditas, kripto…"
-              className="mb-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand"
+              className="mb-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:border-brand"
             />
-            <p className="mb-3 px-1 text-[11px] text-slate-400">
+            <p className="mb-3 px-1 text-[11px] text-slate-400 dark:text-slate-500">
               Ketik nama atau kode (mis. <span className="font-mono">BMRI.JK</span>,{" "}
               <span className="font-mono">TSLA</span>,{" "}
               <span className="font-mono">BTC-USD</span>).
@@ -105,15 +105,15 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
               /* Live search results */
               <div>
                 {searching && (
-                  <p className="py-2 text-center text-sm text-slate-400">Mencari…</p>
+                  <p className="py-2 text-center text-sm text-slate-400 dark:text-slate-500">Mencari…</p>
                 )}
                 {!searching && results.length === 0 && (
-                  <p className="py-4 text-center text-sm text-slate-500">
+                  <p className="py-4 text-center text-sm text-slate-500 dark:text-slate-400">
                     Tidak ada hasil untuk “{query.trim()}”.
                   </p>
                 )}
                 {searchMock && results.length > 0 && (
-                  <p className="mb-2 rounded bg-amber-50 px-2 py-1 text-[11px] text-amber-700">
+                  <p className="mb-2 rounded bg-amber-50 dark:bg-amber-950/40 px-2 py-1 text-[11px] text-amber-700 dark:text-amber-300">
                     Pencarian online belum bisa diakses — menampilkan dari daftar bawaan.
                   </p>
                 )}
@@ -126,14 +126,14 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                           disabled={added}
                           onClick={() => addResult(r)}
                           className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left text-sm ${
-                            added ? "cursor-default text-slate-400" : "hover:bg-slate-100"
+                            added ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
                           }`}
                         >
                           <span className="flex min-w-0 items-center gap-2">
                             <span>{iconForType(r.type)}</span>
                             <span className="min-w-0">
-                              <span className="block truncate text-slate-800">{r.name}</span>
-                              <span className="block text-xs text-slate-400">
+                              <span className="block truncate text-slate-800 dark:text-slate-100">{r.name}</span>
+                              <span className="block text-xs text-slate-400 dark:text-slate-500">
                                 <span className="font-mono">{r.symbol}</span>
                                 {" · "}
                                 {TYPE_LABEL[r.type] ?? r.type}
@@ -141,7 +141,7 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                               </span>
                             </span>
                           </span>
-                          <span className="shrink-0 text-xs text-slate-400">
+                          <span className="shrink-0 text-xs text-slate-400 dark:text-slate-500">
                             {added ? "✓" : "+ tambah"}
                           </span>
                         </button>
@@ -154,7 +154,7 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
               /* Featured catalog browse */
               Object.entries(groups).map(([cat, items]) => (
                 <div key={cat} className="mb-3">
-                  <p className="mb-1 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  <p className="mb-1 px-1 text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                     {cat}
                   </p>
                   <ul className="space-y-0.5">
@@ -166,14 +166,14 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                             disabled={added}
                             onClick={() => onAdd(a.symbol)}
                             className={`flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm ${
-                              added ? "cursor-default text-slate-400" : "hover:bg-slate-100"
+                              added ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
                             }`}
                           >
                             <span className="flex items-center gap-2">
                               <span>{a.icon}</span>
                               <span>{a.name}</span>
                             </span>
-                            <span className="text-xs text-slate-400">{added ? "✓" : "+"}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">{added ? "✓" : "+"}</span>
                           </button>
                         </li>
                       );

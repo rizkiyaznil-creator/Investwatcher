@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import type { LinePoint } from "@/lib/indicators";
+import { useTheme } from "./ThemeContext";
+import { chartPalette } from "@/lib/chartTheme";
 
 interface Props {
   data: LinePoint[];
@@ -11,12 +13,14 @@ interface Props {
 /** Compact RSI sub-chart with 30/70 guide lines. */
 export default function RsiChart({ data, height = 130 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const { resolved } = useTheme();
 
   useEffect(() => {
     if (!ref.current || !data.length) return;
     let disposed = false;
     let chart: any;
     let handleResize: (() => void) | undefined;
+    const pal = chartPalette(resolved);
 
     (async () => {
       const lib = await import("lightweight-charts");
@@ -27,18 +31,18 @@ export default function RsiChart({ data, height = 130 }: Props) {
         height,
         layout: {
           background: { type: ColorType.Solid, color: "transparent" },
-          textColor: "#475569",
+          textColor: pal.axis,
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
         },
         grid: {
-          vertLines: { color: "rgba(148,163,184,0.18)" },
-          horzLines: { color: "rgba(148,163,184,0.18)" },
+          vertLines: { color: pal.grid },
+          horzLines: { color: pal.grid },
         },
         rightPriceScale: {
-          borderColor: "rgba(148,163,184,0.45)",
+          borderColor: pal.border,
           autoScale: false,
         },
-        timeScale: { borderColor: "rgba(148,163,184,0.45)", visible: false },
+        timeScale: { borderColor: pal.border, visible: false },
       });
 
       const series = chart.addLineSeries({
@@ -77,11 +81,11 @@ export default function RsiChart({ data, height = 130 }: Props) {
       if (handleResize) window.removeEventListener("resize", handleResize);
       if (chart) chart.remove();
     };
-  }, [data, height]);
+  }, [data, height, resolved]);
 
   if (!data.length) {
     return (
-      <div className="flex h-[130px] items-center justify-center text-sm text-slate-500">
+      <div className="flex h-[130px] items-center justify-center text-sm text-slate-500 dark:text-slate-400">
         Data tidak cukup untuk menghitung RSI pada rentang ini.
       </div>
     );

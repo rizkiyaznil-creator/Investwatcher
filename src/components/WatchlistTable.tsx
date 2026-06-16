@@ -71,7 +71,7 @@ export default function WatchlistTable({
 
   if (symbols.length === 0) {
     return (
-      <div className="card p-10 text-center text-slate-500">
+      <div className="card p-10 text-center text-slate-500 dark:text-slate-400">
         Watchlist kosong. Klik <span className="text-brand">“+ Tambah aset”</span>{" "}
         untuk mulai memantau.
       </div>
@@ -89,7 +89,7 @@ export default function WatchlistTable({
         >
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-slate-200 dark:border-slate-800 text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 <th className="w-8 px-2 py-3"></th>
                 <th className="px-4 py-3 font-medium">Aset</th>
                 <th className="px-4 py-3 text-right font-medium">Harga</th>
@@ -134,7 +134,7 @@ export default function WatchlistTable({
           </table>
         </DndContext>
       </div>
-      <p className="border-t border-slate-200 px-4 py-2 text-[11px] text-slate-400">
+      <p className="border-t border-slate-200 dark:border-slate-800 px-4 py-2 text-[11px] text-slate-400 dark:text-slate-500">
         Tahan ikon ⠿ lalu geser untuk mengubah urutan aset.
       </p>
     </div>
@@ -178,10 +178,10 @@ function SortableRow({
     <tr
       ref={setNodeRef}
       style={style}
-      className={`group border-b border-slate-200 last:border-0 ${
+      className={`group border-b border-slate-200 dark:border-slate-800 last:border-0 ${
         isDragging
-          ? "relative z-10 bg-white shadow-lg"
-          : "hover:bg-slate-50"
+          ? "relative z-10 bg-white dark:bg-slate-900 shadow-lg"
+          : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
       }`}
     >
       <td className="px-2 py-3 align-middle">
@@ -190,7 +190,7 @@ function SortableRow({
           {...listeners}
           aria-label="Seret untuk mengurutkan"
           title="Seret untuk mengurutkan"
-          className="flex h-7 w-6 cursor-grab touch-none items-center justify-center rounded text-slate-300 hover:bg-slate-100 hover:text-slate-500 active:cursor-grabbing"
+          className="flex h-7 w-6 cursor-grab touch-none items-center justify-center rounded text-slate-300 dark:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-500 dark:hover:text-slate-300 active:cursor-grabbing"
         >
           <GripIcon />
         </button>
@@ -202,8 +202,8 @@ function SortableRow({
         >
           <span className="text-lg">{asset.icon ?? "•"}</span>
           <span>
-            <span className="block font-medium text-slate-800">{asset.short}</span>
-            <span className="block text-xs text-slate-500">{asset.name}</span>
+            <span className="block font-medium text-slate-800 dark:text-slate-100">{asset.short}</span>
+            <span className="block text-xs text-slate-500 dark:text-slate-400">{asset.name}</span>
           </span>
         </Link>
       </td>
@@ -211,9 +211,9 @@ function SortableRow({
         {disp ? (
           formatPrice(disp.value, disp.currency)
         ) : loading ? (
-          <span className="text-slate-400">…</span>
+          <span className="text-slate-400 dark:text-slate-500">…</span>
         ) : (
-          <span className="text-slate-400">—</span>
+          <span className="text-slate-400 dark:text-slate-500">—</span>
         )}
       </td>
       <td
@@ -226,34 +226,34 @@ function SortableRow({
           {q?.spark ? (
             <Sparkline data={q.spark} up={up} />
           ) : (
-            <span className="text-slate-400">—</span>
+            <span className="text-slate-400 dark:text-slate-500">—</span>
           )}
         </div>
       </td>
       <td className="hidden px-4 py-3 md:table-cell">
         {pos != null ? (
           <div className="w-40">
-            <div className="relative h-1.5 rounded-full bg-slate-200">
+            <div className="relative h-1.5 rounded-full bg-slate-200 dark:bg-slate-700">
               <div
-                className="absolute top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-brand"
+                className="absolute top-1/2 h-3 w-3 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white dark:border-slate-900 bg-brand"
                 style={{ left: `${pos}%` }}
               />
             </div>
-            <div className="mt-1 flex justify-between text-[10px] text-slate-500">
+            <div className="mt-1 flex justify-between text-[10px] text-slate-500 dark:text-slate-400">
               <span>L</span>
               <span>{pos.toFixed(0)}%</span>
               <span>H</span>
             </div>
           </div>
         ) : (
-          <span className="text-slate-400">—</span>
+          <span className="text-slate-400 dark:text-slate-500">—</span>
         )}
       </td>
       <td className="px-4 py-3 text-right">
         <button
           onClick={() => onRemove(symbol)}
           title="Hapus dari watchlist"
-          className="text-slate-400 opacity-0 transition group-hover:opacity-100 hover:text-down"
+          className="text-slate-400 dark:text-slate-500 opacity-0 transition group-hover:opacity-100 hover:text-down"
         >
           ✕
         </button>

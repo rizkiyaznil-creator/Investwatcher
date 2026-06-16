@@ -35,7 +35,7 @@ export default function AlertPanel({ symbol, currentPrice }: Props) {
         <select
           value={direction}
           onChange={(e) => setDirection(e.target.value as "above" | "below")}
-          className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm outline-none focus:border-brand"
+          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-2 text-sm outline-none focus:border-brand"
         >
           <option value="above">Naik ke / di atas</option>
           <option value="below">Turun ke / di bawah</option>
@@ -47,7 +47,7 @@ export default function AlertPanel({ symbol, currentPrice }: Props) {
           placeholder={
             currentPrice ? formatNumber(currentPrice) : "harga target"
           }
-          className="w-32 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand"
+          className="w-32 flex-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm outline-none focus:border-brand"
         />
         <button type="submit" className="btn-primary">
           Tambah
@@ -59,7 +59,7 @@ export default function AlertPanel({ symbol, currentPrice }: Props) {
           {alerts.map((a) => (
             <li
               key={a.id}
-              className="flex items-center justify-between rounded-lg bg-slate-100 px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg bg-slate-100 dark:bg-slate-800 px-3 py-2 text-sm"
             >
               <span>
                 {a.direction === "above" ? "≥" : "≤"}{" "}
@@ -71,12 +71,12 @@ export default function AlertPanel({ symbol, currentPrice }: Props) {
                     tercapai
                   </span>
                 ) : (
-                  <span className="ml-2 text-xs text-slate-500">aktif</span>
+                  <span className="ml-2 text-xs text-slate-500 dark:text-slate-400">aktif</span>
                 )}
               </span>
               <button
                 onClick={() => remove(a.id)}
-                className="text-slate-500 hover:text-down"
+                className="text-slate-500 dark:text-slate-400 hover:text-down"
                 title="Hapus alert"
               >
                 ✕
@@ -86,7 +86,7 @@ export default function AlertPanel({ symbol, currentPrice }: Props) {
         </ul>
       )}
 
-      <p className="mt-3 text-xs text-slate-400">
+      <p className="mt-3 text-xs text-slate-400 dark:text-slate-500">
         Alert dievaluasi setiap kali harga diperbarui (~tiap menit) selama tab
         terbuka. Notifikasi browser akan muncul bila diizinkan.
       </p>

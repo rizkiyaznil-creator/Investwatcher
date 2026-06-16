@@ -7,10 +7,19 @@
   --bg: #f5f8fc;
 }
 
+html.dark {
+  color-scheme: dark;
+  --bg: #0b1220;
+}
+
 html,
 body {
   background-color: var(--bg);
   color: #1e293b; /* slate-800 */
+}
+
+html.dark body {
+  color: #e2e8f0; /* slate-200 */
 }
 
 body {
@@ -22,7 +31,15 @@ body {
   background-attachment: fixed;
 }
 
-/* Thin, light scrollbars */
+html.dark body {
+  background-image: radial-gradient(
+    1200px 400px at 50% -10%,
+    rgba(16, 185, 129, 0.1),
+    transparent 70%
+  );
+}
+
+/* Thin scrollbars (light) */
 * {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
@@ -35,16 +52,22 @@ body {
   background: #cbd5e1;
   border-radius: 4px;
 }
+html.dark *::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+html.dark * {
+  scrollbar-color: #334155 transparent;
+}
 
 @layer components {
   .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+    @apply rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm;
   }
   .btn {
     @apply inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors;
   }
   .btn-ghost {
-    @apply btn text-slate-600 hover:bg-slate-100;
+    @apply btn text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
   }
   .btn-primary {
     @apply btn bg-brand text-white shadow-sm hover:bg-brand-dark;

@@ -37,13 +37,13 @@ export default function InfoTip({
         tabIndex={0}
         role="button"
         aria-label="Penjelasan"
-        className="inline-flex h-3.5 w-3.5 cursor-help select-none items-center justify-center rounded-full border border-slate-300 text-[9px] font-bold normal-case leading-none text-slate-400 outline-none transition-colors hover:border-brand hover:text-brand focus:border-brand focus:text-brand"
+        className="inline-flex h-3.5 w-3.5 cursor-help select-none items-center justify-center rounded-full border border-slate-300 dark:border-slate-700 text-[9px] font-bold normal-case leading-none text-slate-400 dark:text-slate-500 outline-none transition-colors hover:border-brand hover:text-brand focus:border-brand focus:text-brand"
       >
         i
       </span>
       <span
         role="tooltip"
-        className={`pointer-events-none absolute z-50 w-56 max-w-[80vw] rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-normal normal-case leading-relaxed tracking-normal text-slate-600 opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100 ${ALIGN[align]} ${
+        className={`pointer-events-none absolute z-50 w-56 max-w-[80vw] rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2 text-xs font-normal normal-case leading-relaxed tracking-normal text-slate-600 dark:text-slate-300 opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100 ${ALIGN[align]} ${
           side === "top" ? "bottom-full mb-2" : "top-full mt-2"
         }`}
       >

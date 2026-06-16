@@ -40,33 +40,33 @@ export default function NewsPanel({ symbol }: { symbol: string }) {
       <h3 className="mb-3 flex items-center gap-2 font-semibold">
         📰 Berita terkait
         {mock && (
-          <span className="rounded bg-amber-100 px-1.5 py-0.5 text-xs font-normal text-amber-700">
+          <span className="rounded bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 text-xs font-normal text-amber-700 dark:text-amber-300">
             contoh
           </span>
         )}
       </h3>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Memuat berita…</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Memuat berita…</p>
       ) : items.length === 0 ? (
-        <p className="text-sm text-slate-500">Belum ada berita.</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Belum ada berita.</p>
       ) : (
         <ul className="space-y-3">
           {items.map((n, i) => {
             const isLink = n.url && n.url !== "#";
             const inner = (
               <>
-                <p className="text-sm text-slate-700 group-hover:text-brand">
+                <p className="text-sm text-slate-700 dark:text-slate-200 group-hover:text-brand">
                   {n.title}
                 </p>
-                <p className="mt-0.5 text-xs text-slate-500">
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
                   {n.source}
                   {n.publishedAt ? ` · ${timeAgo(n.publishedAt)}` : ""}
                 </p>
               </>
             );
             return (
-              <li key={i} className="group border-b border-slate-200 pb-3 last:border-0 last:pb-0">
+              <li key={i} className="group border-b border-slate-200 dark:border-slate-800 pb-3 last:border-0 last:pb-0">
                 {isLink ? (
                   <a href={n.url} target="_blank" rel="noreferrer">
                     {inner}
