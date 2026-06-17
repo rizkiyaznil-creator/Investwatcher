@@ -57,6 +57,9 @@ export default function RootLayout({
               <Link href="/" className="btn-ghost">
                 Dashboard
               </Link>
+              <Link href="/peluang" className="btn-ghost">
+                Peluang
+              </Link>
               <Link href="/compare" className="btn-ghost">
                 Bandingkan
               </Link>
