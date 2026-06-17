@@ -6,6 +6,7 @@ import { getFundamentals, type Fundamentals } from "@/lib/fundamentals";
 import { getFinancials, hasFinancials, summarizeFinancialsForAI } from "@/lib/financials";
 import { getRelativeValuation, hasPeerGroup, summarizeValuationForAI } from "@/lib/valuation";
 import { getMacroContext, summarizeMacroForAI } from "@/lib/macro";
+import { getCalendar, hasCalendar, summarizeCalendarForAI } from "@/lib/calendar";
 import { getNews } from "@/lib/news";
 import { computeMetrics } from "@/lib/analytics";
 import { evaluateSignals } from "@/lib/signals";
@@ -80,7 +81,7 @@ export async function GET(req: NextRequest) {
   const name = asset?.name ?? symbol;
   const typeLabel = asset?.category ?? "Aset";
 
-  const [quote, ctx, fundamentals, news, financials, valuation, macro] = await Promise.all([
+  const [quote, ctx, fundamentals, news, financials, valuation, macro, calendar] = await Promise.all([
     symbol === "ANTAM-GOLD" ? getAntamQuote() : getQuote(symbol),
     gatherCandles(symbol),
     symbol === "ANTAM-GOLD" ? Promise.resolve<Fundamentals>({ available: false, metrics: [] }) : getFundamentals(symbol),
@@ -88,6 +89,7 @@ export async function GET(req: NextRequest) {
     hasFinancials(symbol) ? getFinancials(symbol) : Promise.resolve(null),
     hasPeerGroup(symbol) ? getRelativeValuation(symbol) : Promise.resolve(null),
     getMacroContext(symbol),
+    hasCalendar(symbol) ? getCalendar(symbol) : Promise.resolve(null),
   ]);
 
   const metrics = computeMetrics(ctx.candles);
@@ -132,6 +134,9 @@ ${valuation && valuation.available ? summarizeValuationForAI(valuation) : "Tidak
 
 == KONTEKS MAKRO ==
 ${macro.available ? summarizeMacroForAI(macro) : "Tidak tersedia."}
+
+== JADWAL LAPORAN & DIVIDEN ==
+${calendar && calendar.available ? summarizeCalendarForAI(calendar) : "Tidak tersedia."}
 
 == BERITA TERKINI ==
 ${newsText}
