@@ -4,6 +4,7 @@ import { getQuote, getDailyHistory } from "@/lib/yahoo";
 import { getAntamQuote, getAntamDailyHistory } from "@/lib/antam";
 import { getFundamentals, type Fundamentals } from "@/lib/fundamentals";
 import { getFinancials, hasFinancials, summarizeFinancialsForAI } from "@/lib/financials";
+import { getRelativeValuation, hasPeerGroup, summarizeValuationForAI } from "@/lib/valuation";
 import { getNews } from "@/lib/news";
 import { computeMetrics } from "@/lib/analytics";
 import { evaluateSignals } from "@/lib/signals";
@@ -117,6 +118,7 @@ export async function GET(req: NextRequest) {
     symbol === "ANTAM-GOLD" ? { available: false, metrics: [] } : await getFundamentals(symbol);
   const news = await getNews(symbol);
   const financials = hasFinancials(symbol) ? await getFinancials(symbol) : null;
+  const valuation = hasPeerGroup(symbol) ? await getRelativeValuation(symbol) : null;
   const ret = (l: string) => metrics.returns.find((r) => r.label === l)?.value ?? null;
 
   const evidence = `ASET: ${asset?.name ?? symbol} (${symbol}) — ${asset?.category ?? "Aset"}
@@ -127,6 +129,7 @@ KINERJA & RISIKO: 1B ${pct(ret("1B"))}, YTD ${pct(ret("YTD"))}, 1Th ${pct(ret("1
 TEKNIKAL: ${signals.verdict} (Beli ${signals.buyPct}% / Tahan ${signals.holdPct}% / Jual ${signals.sellPct}%); ${signals.items.map((i) => `${i.label}=${i.signal}`).join(", ")}.
 FUNDAMENTAL: ${fundamentals.available ? fundamentals.metrics.map((m) => `${m.label}: ${m.value}`).join("; ") : "terbatas"}.
 LAPORAN KEUANGAN: ${financials && financials.available ? summarizeFinancialsForAI(financials).replace(/\n/g, " ") : "terbatas"}.
+VALUASI RELATIF: ${valuation && valuation.available ? summarizeValuationForAI(valuation) : "terbatas"}.
 BERITA: ${news.items.slice(0, 5).map((n) => n.title).join(" | ") || "tidak ada"}.
 ACUAN STATISTIK (proyeksi teknikal ${horizon} bln): basis ${pct(technical.baseReturnPct)}, rentang ${pct(technical.lowReturnPct)}..${pct(technical.highReturnPct)}.
 
