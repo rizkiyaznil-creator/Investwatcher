@@ -20,6 +20,7 @@ import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
 import AnalysisPanel from "@/components/AnalysisPanel";
 import AiReview from "@/components/AiReview";
+import FinancialStatements from "@/components/FinancialStatements";
 import NewsPanel from "@/components/NewsPanel";
 import InfoTip from "@/components/InfoTip";
 
@@ -249,6 +250,9 @@ export default function AssetDetailPage() {
 
       {/* AI narrative review (fundamental + technical + news) */}
       <AiReview symbol={symbol} />
+
+      {/* Financial statements (stocks only; hidden otherwise) */}
+      <FinancialStatements symbol={symbol} />
 
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">

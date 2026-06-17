@@ -3,6 +3,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getQuote, getDailyHistory } from "@/lib/yahoo";
 import { getAntamQuote, getAntamDailyHistory } from "@/lib/antam";
 import { getFundamentals, type Fundamentals } from "@/lib/fundamentals";
+import { getFinancials, hasFinancials, summarizeFinancialsForAI } from "@/lib/financials";
 import { getNews } from "@/lib/news";
 import { computeMetrics } from "@/lib/analytics";
 import { evaluateSignals } from "@/lib/signals";
@@ -62,11 +63,12 @@ export async function GET(req: NextRequest) {
   const name = asset?.name ?? symbol;
   const typeLabel = asset?.category ?? "Aset";
 
-  const [quote, ctx, fundamentals, news] = await Promise.all([
+  const [quote, ctx, fundamentals, news, financials] = await Promise.all([
     symbol === "ANTAM-GOLD" ? getAntamQuote() : getQuote(symbol),
     gatherCandles(symbol),
     symbol === "ANTAM-GOLD" ? Promise.resolve<Fundamentals>({ available: false, metrics: [] }) : getFundamentals(symbol),
     getNews(symbol),
+    hasFinancials(symbol) ? getFinancials(symbol) : Promise.resolve(null),
   ]);
 
   const metrics = computeMetrics(ctx.candles);
@@ -102,6 +104,9 @@ Rincian: ${signals.items.map((i) => `${i.label}=${i.signal}`).join(", ")}.
 
 == FUNDAMENTAL ==
 ${fundText}
+
+== LAPORAN KEUANGAN (ringkasan tahunan) ==
+${financials && financials.available ? summarizeFinancialsForAI(financials) : "Tidak tersedia."}
 
 == BERITA TERKINI ==
 ${newsText}
