@@ -1,11 +1,5 @@
 import { getAsset } from "./assets";
-
-const HOSTS = [
-  "https://query1.finance.yahoo.com",
-  "https://query2.finance.yahoo.com",
-];
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36";
+import { yahooQuoteSummary } from "./yahoo-fetch";
 
 /**
  * Peer groups built from the static catalog. Only same-industry sets of >=3
@@ -76,31 +70,21 @@ function raw(v: any): number | undefined {
 
 async function fetchSnapshot(symbol: string): Promise<PeerSnapshot | null> {
   const modules = "summaryDetail,defaultKeyStatistics";
-  for (const host of HOSTS) {
-    try {
-      const url = `${host}/v10/finance/quoteSummary/${encodeURIComponent(symbol)}?modules=${modules}`;
-      const res = await fetch(url, {
-        headers: { "User-Agent": UA, Accept: "application/json" },
-        next: { revalidate: 21600 },
-      });
-      if (!res.ok) continue;
-      const json = await res.json();
-      const r = json?.quoteSummary?.result?.[0];
-      if (!r) continue;
-      const sd = r.summaryDetail ?? {};
-      const ks = r.defaultKeyStatistics ?? {};
-      return {
-        symbol,
-        short: getAsset(symbol)?.short ?? symbol,
-        trailingPE: raw(sd.trailingPE),
-        forwardPE: raw(sd.forwardPE) ?? raw(ks.forwardPE),
-        priceToBook: raw(ks.priceToBook),
-      };
-    } catch {
-      // try next host
-    }
+  try {
+    const r = await yahooQuoteSummary(symbol, modules, 21600);
+    if (!r) return null;
+    const sd = r.summaryDetail ?? {};
+    const ks = r.defaultKeyStatistics ?? {};
+    return {
+      symbol,
+      short: getAsset(symbol)?.short ?? symbol,
+      trailingPE: raw(sd.trailingPE),
+      forwardPE: raw(sd.forwardPE) ?? raw(ks.forwardPE),
+      priceToBook: raw(ks.priceToBook),
+    };
+  } catch {
+    return null;
   }
-  return null;
 }
 
 function median(xs: number[]): number | undefined {

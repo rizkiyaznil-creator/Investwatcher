@@ -1,9 +1,4 @@
-const HOSTS = [
-  "https://query1.finance.yahoo.com",
-  "https://query2.finance.yahoo.com",
-];
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36";
+import { yahooQuoteSummary } from "./yahoo-fetch";
 
 export interface Fundamentals {
   available: boolean;
@@ -43,19 +38,10 @@ function raw(v: any): number | undefined {
 export async function getFundamentals(symbol: string): Promise<Fundamentals> {
   const modules =
     "summaryDetail,defaultKeyStatistics,financialData,assetProfile";
-  for (const host of HOSTS) {
+  {
     try {
-      const url = `${host}/v10/finance/quoteSummary/${encodeURIComponent(
-        symbol,
-      )}?modules=${modules}`;
-      const res = await fetch(url, {
-        headers: { "User-Agent": UA, Accept: "application/json" },
-        next: { revalidate: 3600 },
-      });
-      if (!res.ok) continue;
-      const json = await res.json();
-      const result = json?.quoteSummary?.result?.[0];
-      if (!result) continue;
+      const result = await yahooQuoteSummary(symbol, modules, 3600);
+      if (!result) return { available: false, metrics: [] };
 
       const sd = result.summaryDetail ?? {};
       const ks = result.defaultKeyStatistics ?? {};
