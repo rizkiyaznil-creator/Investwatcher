@@ -1,12 +1,6 @@
 import { getAsset } from "./assets";
 import { universeFor, type Market } from "./screener-universe";
-
-const HOSTS = [
-  "https://query1.finance.yahoo.com",
-  "https://query2.finance.yahoo.com",
-];
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36";
+import { yahooQuoteSummary } from "./yahoo-fetch";
 
 export type Style = "balanced" | "deepvalue" | "garp";
 
@@ -67,17 +61,10 @@ const MODULES = "summaryDetail,defaultKeyStatistics,financialData,price,assetPro
 
 async function fetchSnapshot(symbol: string): Promise<Snapshot | null> {
   const market: "us" | "id" = symbol.endsWith(".JK") ? "id" : "us";
-  for (const host of HOSTS) {
+  {
     try {
-      const url = `${host}/v10/finance/quoteSummary/${encodeURIComponent(symbol)}?modules=${MODULES}`;
-      const res = await fetch(url, {
-        headers: { "User-Agent": UA, Accept: "application/json" },
-        next: { revalidate: 43200 }, // 12h
-      });
-      if (!res.ok) continue;
-      const json = await res.json();
-      const r = json?.quoteSummary?.result?.[0];
-      if (!r) continue;
+      const r = await yahooQuoteSummary(symbol, MODULES, 43200); // 12h
+      if (r) {
       const sd = r.summaryDetail ?? {};
       const ks = r.defaultKeyStatistics ?? {};
       const fd = r.financialData ?? {};
@@ -106,8 +93,9 @@ async function fetchSnapshot(symbol: string): Promise<Snapshot | null> {
         fiftyTwoWeekHigh: raw(sd.fiftyTwoWeekHigh),
         fiftyTwoWeekLow: raw(sd.fiftyTwoWeekLow),
       };
+      }
     } catch {
-      // next host
+      // fall through
     }
   }
   return null;
