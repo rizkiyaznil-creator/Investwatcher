@@ -101,14 +101,23 @@ export async function getQuote(symbol: string): Promise<Quote> {
     const meta = result.meta;
     const asset = getAsset(symbol);
     const price: number = meta.regularMarketPrice ?? meta.previousClose;
-    const previousClose: number =
-      meta.chartPreviousClose ?? meta.previousClose ?? price;
-    const change = price - previousClose;
-    const changePercent = previousClose ? (change / previousClose) * 100 : 0;
 
     const closes: number[] = (result.indicators?.quote?.[0]?.close ?? []).filter(
       (c: number | null) => c != null,
     );
+
+    // Daily change must compare against the PRIOR TRADING DAY's close.
+    // meta.chartPreviousClose is the close at the START of the chart range
+    // (~1 month ago for our 1mo request), so using it here turned the daily
+    // change into a ~1-month change. Prefer the real previous close; fall back
+    // to the second-to-last daily candle.
+    const previousClose: number =
+      meta.previousClose ??
+      (closes.length >= 2 ? closes[closes.length - 2] : undefined) ??
+      meta.chartPreviousClose ??
+      price;
+    const change = price - previousClose;
+    const changePercent = previousClose ? (change / previousClose) * 100 : 0;
 
     return {
       symbol,
