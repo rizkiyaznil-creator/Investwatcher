@@ -3,6 +3,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getQuote, getDailyHistory } from "@/lib/yahoo";
 import { getAntamQuote, getAntamDailyHistory } from "@/lib/antam";
 import { getFundamentals, type Fundamentals } from "@/lib/fundamentals";
+import { getFinancials, hasFinancials, summarizeFinancialsForAI } from "@/lib/financials";
 import { getNews } from "@/lib/news";
 import { computeMetrics } from "@/lib/analytics";
 import { evaluateSignals } from "@/lib/signals";
@@ -102,6 +103,7 @@ export async function GET(req: NextRequest) {
   const fundamentals: Fundamentals =
     symbol === "ANTAM-GOLD" ? { available: false, metrics: [] } : await getFundamentals(symbol);
   const news = await getNews(symbol);
+  const financials = hasFinancials(symbol) ? await getFinancials(symbol) : null;
   const ret = (l: string) => metrics.returns.find((r) => r.label === l)?.value ?? null;
 
   const evidence = `ASET: ${asset?.name ?? symbol} (${symbol}) — ${asset?.category ?? "Aset"}
@@ -111,6 +113,7 @@ HORIZON PROYEKSI: ${horizon} bulan.
 KINERJA & RISIKO: 1B ${pct(ret("1B"))}, YTD ${pct(ret("YTD"))}, 1Th ${pct(ret("1Th"))}, 5Th ${pct(ret("5Th"))}. Volatilitas ${pct(metrics.volatility)}/th, max drawdown ${pct(metrics.maxDrawdown)}, CAGR ${pct(metrics.cagr)}.
 TEKNIKAL: ${signals.verdict} (Beli ${signals.buyPct}% / Tahan ${signals.holdPct}% / Jual ${signals.sellPct}%); ${signals.items.map((i) => `${i.label}=${i.signal}`).join(", ")}.
 FUNDAMENTAL: ${fundamentals.available ? fundamentals.metrics.map((m) => `${m.label}: ${m.value}`).join("; ") : "terbatas"}.
+LAPORAN KEUANGAN: ${financials && financials.available ? summarizeFinancialsForAI(financials).replace(/\n/g, " ") : "terbatas"}.
 BERITA: ${news.items.slice(0, 5).map((n) => n.title).join(" | ") || "tidak ada"}.
 ACUAN STATISTIK (proyeksi teknikal ${horizon} bln): basis ${pct(technical.baseReturnPct)}, rentang ${pct(technical.lowReturnPct)}..${pct(technical.highReturnPct)}.
 
