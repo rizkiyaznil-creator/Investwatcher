@@ -5,6 +5,7 @@ import { getAntamQuote, getAntamDailyHistory } from "@/lib/antam";
 import { getFundamentals, type Fundamentals } from "@/lib/fundamentals";
 import { getFinancials, hasFinancials, summarizeFinancialsForAI } from "@/lib/financials";
 import { getRelativeValuation, hasPeerGroup, summarizeValuationForAI } from "@/lib/valuation";
+import { getMacroContext, summarizeMacroForAI } from "@/lib/macro";
 import { getNews } from "@/lib/news";
 import { computeMetrics } from "@/lib/analytics";
 import { evaluateSignals } from "@/lib/signals";
@@ -119,6 +120,7 @@ export async function GET(req: NextRequest) {
   const news = await getNews(symbol);
   const financials = hasFinancials(symbol) ? await getFinancials(symbol) : null;
   const valuation = hasPeerGroup(symbol) ? await getRelativeValuation(symbol) : null;
+  const macro = await getMacroContext(symbol);
   const ret = (l: string) => metrics.returns.find((r) => r.label === l)?.value ?? null;
 
   const evidence = `ASET: ${asset?.name ?? symbol} (${symbol}) — ${asset?.category ?? "Aset"}
@@ -130,6 +132,7 @@ TEKNIKAL: ${signals.verdict} (Beli ${signals.buyPct}% / Tahan ${signals.holdPct}
 FUNDAMENTAL: ${fundamentals.available ? fundamentals.metrics.map((m) => `${m.label}: ${m.value}`).join("; ") : "terbatas"}.
 LAPORAN KEUANGAN: ${financials && financials.available ? summarizeFinancialsForAI(financials).replace(/\n/g, " ") : "terbatas"}.
 VALUASI RELATIF: ${valuation && valuation.available ? summarizeValuationForAI(valuation) : "terbatas"}.
+KONTEKS MAKRO: ${macro.available ? summarizeMacroForAI(macro) : "terbatas"}.
 BERITA: ${news.items.slice(0, 5).map((n) => n.title).join(" | ") || "tidak ada"}.
 ACUAN STATISTIK (proyeksi teknikal ${horizon} bln): basis ${pct(technical.baseReturnPct)}, rentang ${pct(technical.lowReturnPct)}..${pct(technical.highReturnPct)}.
 
