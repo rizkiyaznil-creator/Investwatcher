@@ -22,6 +22,7 @@ import AnalysisPanel from "@/components/AnalysisPanel";
 import AiReview from "@/components/AiReview";
 import FinancialStatements from "@/components/FinancialStatements";
 import ValuationPeers from "@/components/ValuationPeers";
+import MacroContext from "@/components/MacroContext";
 import NewsPanel from "@/components/NewsPanel";
 import InfoTip from "@/components/InfoTip";
 
@@ -251,6 +252,9 @@ export default function AssetDetailPage() {
 
       {/* AI narrative review (fundamental + technical + news) */}
       <AiReview symbol={symbol} />
+
+      {/* Macro backdrop (rates, dollar, related markets) */}
+      <MacroContext symbol={symbol} />
 
       {/* Relative valuation vs peer group (hidden when no peer group) */}
       <ValuationPeers symbol={symbol} />
