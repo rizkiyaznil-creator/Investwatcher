@@ -14,6 +14,7 @@ interface AiResult {
   expectedReturnPct?: number;
   lowReturnPct?: number;
   highReturnPct?: number;
+  confidence?: string;
   rationale?: string;
   note?: string;
 }
@@ -310,6 +311,11 @@ export default function InvestmentCalculator() {
               <div className={`text-sm tabular-nums ${color(ai.expectedReturnPct)}`}>
                 {pctStr(ai.expectedReturnPct)} dalam {horizon} bln
               </div>
+              {ai.confidence && (
+                <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                  Keyakinan: <span className="font-medium">{ai.confidence}</span>
+                </div>
+              )}
               <div className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                 Rentang skenario:
                 <div className="mt-1 flex justify-between tabular-nums">

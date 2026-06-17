@@ -25,12 +25,20 @@ const PROVIDERS: Record<string, Provider> = {
   "deepseek-reasoner": { label: "DeepSeek R1", model: "deepseek-reasoner", kind: "deepseek", envKey: "DEEPSEEK_API_KEY" },
 };
 
-const AI_SYSTEM = `Anda analis investasi yang berhati-hati dan jujur soal ketidakpastian.
-Berdasarkan DATA yang diberikan, buat PERKIRAAN (bukan jaminan) persentase perubahan harga aset untuk horizon waktu yang diminta, mempertimbangkan teknikal, fundamental, kondisi pasar, dan berita.
-Sadari prediksi pasar sangat tidak pasti; berikan rentang skenario yang realistis (bear ke bull), jangan terlalu sempit.
-Balas HANYA dengan JSON valid tanpa teks lain, format persis:
-{"expectedReturnPct": number, "lowReturnPct": number, "highReturnPct": number, "rationale": "..."}
-Ketentuan: angka dalam PERSEN (mis. 8.5 = +8.5%, -4 = -4%). Harus lowReturnPct <= expectedReturnPct <= highReturnPct. "rationale" maksimal ~70 kata, Bahasa Indonesia, menyebut faktor utama. Jangan menjanjikan keuntungan.`;
+const AI_SYSTEM = `Anda analis investasi yang berhati-hati dan jujur soal ketidakpastian. Anda membuat PERKIRAAN (bukan jaminan) persentase perubahan harga aset untuk horizon yang diminta, berdasarkan DATA yang diberikan.
+
+CARA BERPIKIR:
+- Mulai dari ACUAN STATISTIK (proyeksi teknikal berbasis tren & volatilitas historis) sebagai titik awal netral.
+- Sesuaikan naik/turun HANYA bila ada alasan kuat dari fundamental, valuasi, laporan keuangan, berita, atau makro — dan jelaskan singkat di rationale. Jangan menyimpang jauh dari acuan tanpa alasan jelas.
+- Lebar rentang (low→high) HARUS mencerminkan ketidakpastian: makin tinggi volatilitas dan makin panjang horizon, makin lebar. Untuk aset volatil/kripto, lebarkan; jangan terlalu sempit.
+- Jika data bertanda mock/contoh atau terbatas, turunkan keyakinan (confidence) dan perlebar rentang.
+- Hindari optimisme berlebihan; untuk jangka pendek, jangkar lebih dekat ke acuan statistik.
+
+ATURAN ANGKA: dalam PERSEN (8.5 = +8.5%, -4 = -4%). WAJIB lowReturnPct <= expectedReturnPct <= highReturnPct. Jangan menjanjikan untung. Jangan mengarang fakta.
+
+Balas HANYA JSON valid tanpa teks lain, format persis:
+{"expectedReturnPct": number, "lowReturnPct": number, "highReturnPct": number, "confidence": "Rendah"|"Menengah"|"Tinggi", "rationale": "..."}
+"confidence" mencerminkan keyakinan Anda (rendah jika data terbatas/aset sangat volatil). "rationale" maksimal ~70 kata, Bahasa Indonesia, sebut 2–3 faktor utama yang paling memengaruhi perkiraan.`;
 
 function pct(v: number | null | undefined): string {
   return v == null ? "n/a" : `${v >= 0 ? "+" : ""}${v.toFixed(1)}%`;
@@ -45,8 +53,11 @@ interface AiForecast {
   expectedReturnPct: number;
   lowReturnPct: number;
   highReturnPct: number;
+  confidence?: string;
   rationale: string;
 }
+
+const CONFIDENCE_SET = new Set(["Rendah", "Menengah", "Tinggi"]);
 
 function parseAiJson(text: string): AiForecast | null {
   try {
@@ -59,10 +70,12 @@ function parseAiJson(text: string): AiForecast | null {
     let hi = Number(obj.highReturnPct);
     if (![e, lo, hi].every(Number.isFinite)) return null;
     if (lo > hi) [lo, hi] = [hi, lo];
+    const conf = typeof obj.confidence === "string" ? obj.confidence.trim() : "";
     return {
       expectedReturnPct: e,
       lowReturnPct: Math.min(lo, e),
       highReturnPct: Math.max(hi, e),
+      confidence: CONFIDENCE_SET.has(conf) ? conf : undefined,
       rationale: typeof obj.rationale === "string" ? obj.rationale : "",
     };
   } catch {
@@ -145,7 +158,7 @@ async function callAnthropic(model: string, evidence: string): Promise<string> {
     model,
     max_tokens: 1200,
     thinking: { type: "adaptive" },
-    output_config: { effort: "low" },
+    output_config: { effort: "medium" },
     system: AI_SYSTEM,
     messages: [{ role: "user", content: evidence }],
   } as unknown as Anthropic.MessageCreateParamsNonStreaming;
