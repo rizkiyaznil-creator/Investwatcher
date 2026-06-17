@@ -21,6 +21,7 @@ import AlertPanel from "@/components/AlertPanel";
 import AnalysisPanel from "@/components/AnalysisPanel";
 import AiReview from "@/components/AiReview";
 import FinancialStatements from "@/components/FinancialStatements";
+import EarningsDividend from "@/components/EarningsDividend";
 import ValuationPeers from "@/components/ValuationPeers";
 import MacroContext from "@/components/MacroContext";
 import NewsPanel from "@/components/NewsPanel";
@@ -261,6 +262,9 @@ export default function AssetDetailPage() {
 
       {/* Financial statements (stocks only; hidden otherwise) */}
       <FinancialStatements symbol={symbol} />
+
+      {/* Earnings & dividend calendar (stocks only; hidden otherwise) */}
+      <EarningsDividend symbol={symbol} />
 
       {/* Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
