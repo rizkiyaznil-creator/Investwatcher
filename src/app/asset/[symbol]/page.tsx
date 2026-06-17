@@ -20,6 +20,7 @@ import RsiChart from "@/components/RsiChart";
 import AlertPanel from "@/components/AlertPanel";
 import AnalysisPanel from "@/components/AnalysisPanel";
 import AiReview from "@/components/AiReview";
+import FundamentalRatios from "@/components/FundamentalRatios";
 import FinancialStatements from "@/components/FinancialStatements";
 import EarningsDividend from "@/components/EarningsDividend";
 import ValuationPeers from "@/components/ValuationPeers";
@@ -256,6 +257,9 @@ export default function AssetDetailPage() {
 
       {/* Macro backdrop (rates, dollar, related markets) */}
       <MacroContext symbol={symbol} />
+
+      {/* Valuation & fundamental ratios (all stocks; hidden for non-stocks) */}
+      <FundamentalRatios symbol={symbol} currentPrice={quote?.price} currency={quote?.currency} />
 
       {/* Relative valuation vs peer group (hidden when no peer group) */}
       <ValuationPeers symbol={symbol} />
