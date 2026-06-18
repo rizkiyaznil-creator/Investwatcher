@@ -7,16 +7,19 @@ import { useCatalog } from "@/components/CatalogContext";
 import { colorAt } from "@/lib/colors";
 import { formatPercent } from "@/lib/format";
 import CompareChart, { type CompareSeries } from "@/components/CompareChart";
+import CompareValuation from "@/components/CompareValuation";
 
 const RANGES: RangeKey[] = ["1W", "1M", "3M", "1Y", "5Y"];
 const INTRADAY: RangeKey[] = ["1W"];
 const MAX = 6;
 const DEFAULT = ["GC=F", "SI=F", "CL=F"];
+type View = "performance" | "valuation";
 
 export default function ComparePage() {
   const { all, resolve } = useCatalog();
   const [selected, setSelected] = useState<string[]>(DEFAULT);
   const [range, setRange] = useState<RangeKey>("3M");
+  const [view, setView] = useState<View>("performance");
   const [data, setData] = useState<Record<string, Candle[]>>({});
   const [loading, setLoading] = useState(false);
   const [mock, setMock] = useState(false);
@@ -69,6 +72,15 @@ export default function ComparePage() {
     });
   }, [series]);
 
+  const stockSymbols = useMemo(
+    () =>
+      selected.filter((s) => {
+        const t = resolve(s).type;
+        return t === "stock_us" || t === "stock_id";
+      }),
+    [selected, resolve],
+  );
+
   const toggle = (symbol: string) => {
     setSelected((prev) => {
       if (prev.includes(symbol)) return prev.filter((s) => s !== symbol);
@@ -85,12 +97,33 @@ export default function ComparePage() {
         </Link>
         <h1 className="mt-1 text-2xl font-bold">Perbandingan Aset</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Bandingkan kinerja beberapa aset (dinormalisasi ke % perubahan dari
-          awal periode). Pilih hingga {MAX} aset.
+          {view === "performance"
+            ? `Bandingkan kinerja beberapa aset (dinormalisasi ke % perubahan dari awal periode). Pilih hingga ${MAX} aset.`
+            : "Sandingkan rasio valuasi & fundamental beberapa emiten saham dalam satu tabel."}
         </p>
       </div>
 
-      {mock && (
+      {/* View toggle */}
+      <div className="flex rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 p-0.5">
+        {([
+          ["performance", "📈 Kinerja"],
+          ["valuation", "📊 Valuasi"],
+        ] as [View, string][]).map(([v, label]) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`flex-1 rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+              view === v
+                ? "bg-brand text-white"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {view === "performance" && mock && (
         <div className="rounded-lg border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 px-4 py-2 text-sm text-amber-800 dark:text-amber-200">
           ⚠️ Sebagian/semua data adalah contoh (mock) — sumber live belum dapat
           diakses dari lingkungan ini.
@@ -98,6 +131,7 @@ export default function ComparePage() {
       )}
 
       {/* Range */}
+      {view === "performance" && (
       <div className="flex rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 p-0.5">
         {RANGES.map((r) => (
           <button
@@ -111,8 +145,10 @@ export default function ComparePage() {
           </button>
         ))}
       </div>
+      )}
 
       {/* Chart */}
+      {view === "performance" && (
       <div className="card p-4">
         {selected.length === 0 ? (
           <div className="flex h-[420px] items-center justify-center text-slate-500 dark:text-slate-400">
@@ -148,6 +184,14 @@ export default function ComparePage() {
           ))}
         </div>
       </div>
+      )}
+
+      {/* Valuation table */}
+      {view === "valuation" && (
+        <div className="card p-4">
+          <CompareValuation symbols={stockSymbols} />
+        </div>
+      )}
 
       {/* Asset selector */}
       <div className="card p-4">
