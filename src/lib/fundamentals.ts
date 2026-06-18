@@ -6,8 +6,8 @@ export interface Fundamentals {
   industry?: string;
   country?: string;
   summary?: string;
-  /** Key ratios/metrics as label -> formatted value. */
-  metrics: { label: string; value: string }[];
+  /** Key ratios/metrics as label -> formatted value (+ raw number for comparison). */
+  metrics: { label: string; value: string; num?: number }[];
   analyst?: {
     recommendation?: string;
     targetMean?: number;
@@ -48,23 +48,24 @@ export async function getFundamentals(symbol: string): Promise<Fundamentals> {
       const fd = result.financialData ?? {};
       const ap = result.assetProfile ?? {};
 
-      const metrics: { label: string; value: string }[] = [];
-      const push = (label: string, v: string | null) => {
-        if (v != null) metrics.push({ label, value: v });
+      const metrics: { label: string; value: string; num?: number }[] = [];
+      const push = (label: string, n: number | undefined, opts: { pct?: boolean; money?: boolean } = {}) => {
+        const v = fmtNum(n, opts);
+        if (v != null) metrics.push({ label, value: v, num: n });
       };
 
-      push("P/E (trailing)", fmtNum(raw(sd.trailingPE)));
-      push("P/E (forward)", fmtNum(raw(sd.forwardPE) ?? raw(ks.forwardPE)));
-      push("PEG", fmtNum(raw(ks.pegRatio)));
-      push("P/B", fmtNum(raw(ks.priceToBook)));
-      push("Kapitalisasi pasar", fmtNum(raw(sd.marketCap) ?? raw(ks.enterpriseValue), { money: true }));
-      push("Margin laba", fmtNum(raw(ks.profitMargins) ?? raw(fd.profitMargins), { pct: true }));
-      push("ROE", fmtNum(raw(fd.returnOnEquity), { pct: true }));
-      push("Pertumbuhan pendapatan", fmtNum(raw(fd.revenueGrowth), { pct: true }));
-      push("Pertumbuhan laba", fmtNum(raw(fd.earningsGrowth), { pct: true }));
-      push("Debt/Equity", fmtNum(raw(fd.debtToEquity)));
-      push("Dividend yield", fmtNum(raw(sd.dividendYield), { pct: true }));
-      push("Beta", fmtNum(raw(sd.beta) ?? raw(ks.beta)));
+      push("P/E (trailing)", raw(sd.trailingPE));
+      push("P/E (forward)", raw(sd.forwardPE) ?? raw(ks.forwardPE));
+      push("PEG", raw(ks.pegRatio));
+      push("P/B", raw(ks.priceToBook));
+      push("Kapitalisasi pasar", raw(sd.marketCap) ?? raw(ks.enterpriseValue), { money: true });
+      push("Margin laba", raw(ks.profitMargins) ?? raw(fd.profitMargins), { pct: true });
+      push("ROE", raw(fd.returnOnEquity), { pct: true });
+      push("Pertumbuhan pendapatan", raw(fd.revenueGrowth), { pct: true });
+      push("Pertumbuhan laba", raw(fd.earningsGrowth), { pct: true });
+      push("Debt/Equity", raw(fd.debtToEquity));
+      push("Dividend yield", raw(sd.dividendYield), { pct: true });
+      push("Beta", raw(sd.beta) ?? raw(ks.beta));
 
       const analyst = {
         recommendation: fd.recommendationKey as string | undefined,
