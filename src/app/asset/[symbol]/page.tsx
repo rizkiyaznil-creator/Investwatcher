@@ -28,6 +28,7 @@ import MacroContext from "@/components/MacroContext";
 import NewsPanel from "@/components/NewsPanel";
 import DailyLevels from "@/components/DailyLevels";
 import TradePlanner from "@/components/TradePlanner";
+import IntradayAlertPanel from "@/components/IntradayAlertPanel";
 import InfoTip from "@/components/InfoTip";
 import { isIdx } from "@/lib/idx";
 
@@ -260,6 +261,7 @@ export default function AssetDetailPage() {
         <>
           <DailyLevels symbol={symbol} />
           <TradePlanner symbol={symbol} currentPrice={quote?.price} currency={quote?.currency} />
+          <IntradayAlertPanel symbol={symbol} />
         </>
       )}
 
