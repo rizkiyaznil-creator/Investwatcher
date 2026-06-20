@@ -26,7 +26,10 @@ import EarningsDividend from "@/components/EarningsDividend";
 import ValuationPeers from "@/components/ValuationPeers";
 import MacroContext from "@/components/MacroContext";
 import NewsPanel from "@/components/NewsPanel";
+import DailyLevels from "@/components/DailyLevels";
+import TradePlanner from "@/components/TradePlanner";
 import InfoTip from "@/components/InfoTip";
+import { isIdx } from "@/lib/idx";
 
 const RANGES: RangeKey[] = ["1D", "1W", "1M", "3M", "1Y", "5Y"];
 const INTRADAY: RangeKey[] = ["1D", "1W"];
@@ -251,6 +254,14 @@ export default function AssetDetailPage() {
 
       {/* Unified analysis: recommendation + performance/risk + seasonality */}
       <AnalysisPanel symbol={symbol} />
+
+      {/* Day-trading tools for IDX stocks: levels + risk/position planner */}
+      {isIdx(symbol) && (
+        <>
+          <DailyLevels symbol={symbol} />
+          <TradePlanner symbol={symbol} currentPrice={quote?.price} currency={quote?.currency} />
+        </>
+      )}
 
       {/* AI narrative review (fundamental + technical + news) */}
       <AiReview symbol={symbol} />
