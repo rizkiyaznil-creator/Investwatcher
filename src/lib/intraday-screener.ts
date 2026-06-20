@@ -13,6 +13,8 @@ export interface IntradayRow {
   vwapDistPct?: number;
   /** Position within today's range, 0 (low) .. 1 (high). */
   rangePos?: number;
+  /** Concrete bullish intraday/scalping signal tags. */
+  signals: string[];
   /** Composite momentum score 0..100. */
   score: number;
   mock?: boolean;
@@ -68,6 +70,15 @@ async function rowFor(symbol: string): Promise<IntradayRow> {
       100 * clamp(0.45 * (chgN * 0.5 + 0.5) + 0.3 * rvN + 0.12 * vwapN + 0.13 * rangeN, 0, 1),
     );
 
+    // Concrete bullish scalping signal tags.
+    const signals: string[] = [];
+    if (aboveVwap) signals.push("Di atas VWAP");
+    if (d.intraday?.orHigh != null && last != null && last > d.intraday.orHigh)
+      signals.push("Breakout OR");
+    if ((d.relVol ?? 0) >= 1.5) signals.push(`RelVol ${(d.relVol ?? 0).toFixed(1)}x`);
+    if ((rangePos ?? 0) >= 0.8) signals.push("Dekat High");
+    if ((changePct ?? 0) >= 1.5) signals.push(`Menguat +${(changePct ?? 0).toFixed(1)}%`);
+
     return {
       symbol,
       name,
@@ -78,11 +89,12 @@ async function rowFor(symbol: string): Promise<IntradayRow> {
       aboveVwap,
       vwapDistPct,
       rangePos,
+      signals,
       score,
       mock: d.mock,
     };
   } catch {
-    return { symbol, name, currency, score: 0, mock: true };
+    return { symbol, name, currency, signals: [], score: 0, mock: true };
   }
 }
 

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { formatPrice } from "@/lib/format";
 import InfoTip from "@/components/InfoTip";
+import ScalpingSignals from "@/components/ScalpingSignals";
 import type { ScoredStock } from "@/lib/screener";
 
 type Market = "all" | "us" | "id";
@@ -113,6 +114,9 @@ export default function PeluangPage() {
 
   return (
     <div className="space-y-5">
+      {/* Quick-access intraday scalping/day-trading signals (IDX) */}
+      <ScalpingSignals />
+
       <div>
         <h1 className="text-2xl font-bold">💎 Peluang — Saham Undervalued</h1>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
