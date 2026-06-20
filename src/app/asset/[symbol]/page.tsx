@@ -27,6 +27,7 @@ import ValuationPeers from "@/components/ValuationPeers";
 import MacroContext from "@/components/MacroContext";
 import NewsPanel from "@/components/NewsPanel";
 import DailyLevels from "@/components/DailyLevels";
+import IntradaySignalsPanel from "@/components/IntradaySignalsPanel";
 import TradePlanner from "@/components/TradePlanner";
 import IntradayAlertPanel from "@/components/IntradayAlertPanel";
 import InfoTip from "@/components/InfoTip";
@@ -259,6 +260,7 @@ export default function AssetDetailPage() {
       {/* Day-trading tools for IDX stocks: levels + risk/position planner */}
       {isIdx(symbol) && (
         <>
+          <IntradaySignalsPanel symbol={symbol} />
           <DailyLevels symbol={symbol} />
           <TradePlanner symbol={symbol} currentPrice={quote?.price} currency={quote?.currency} />
           <IntradayAlertPanel symbol={symbol} />

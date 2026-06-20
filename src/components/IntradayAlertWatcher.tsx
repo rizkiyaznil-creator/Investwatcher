@@ -17,6 +17,8 @@ interface Snap {
   vwap?: number;
   orHigh?: number;
   orLow?: number;
+  ema9?: number;
+  ema20?: number;
 }
 interface Toast {
   id: string;
@@ -48,6 +50,10 @@ function crossed(type: IntradayAlert["type"], prev: Snap, cur: Snap): boolean {
       return prev.orHigh != null && prev.last != null && cur.orHigh != null && prev.last <= prev.orHigh && cur.last > cur.orHigh;
     case "or_low":
       return prev.orLow != null && prev.last != null && cur.orLow != null && prev.last >= prev.orLow && cur.last < cur.orLow;
+    case "ema_up":
+      return prev.ema9 != null && prev.ema20 != null && cur.ema9 != null && cur.ema20 != null && prev.ema9 <= prev.ema20 && cur.ema9 > cur.ema20;
+    case "ema_down":
+      return prev.ema9 != null && prev.ema20 != null && cur.ema9 != null && cur.ema20 != null && prev.ema9 >= prev.ema20 && cur.ema9 < cur.ema20;
   }
 }
 
@@ -87,6 +93,8 @@ export default function IntradayAlertWatcher() {
             vwap: d.intraday?.vwap,
             orHigh: d.intraday?.orHigh,
             orLow: d.intraday?.orLow,
+            ema9: d.signals?.ema9,
+            ema20: d.signals?.ema20,
           };
           const prev = prevRef.current.get(s);
           if (prev) {

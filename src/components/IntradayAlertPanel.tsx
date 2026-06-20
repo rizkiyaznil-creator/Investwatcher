@@ -6,7 +6,14 @@ import {
   type IntradayAlertType,
 } from "@/hooks/useIntradayAlerts";
 
-const TYPES: IntradayAlertType[] = ["vwap_up", "vwap_down", "or_high", "or_low"];
+const TYPES: IntradayAlertType[] = [
+  "vwap_up",
+  "vwap_down",
+  "or_high",
+  "or_low",
+  "ema_up",
+  "ema_down",
+];
 
 /** Arm & manage intraday (VWAP / opening-range) alerts for a single asset. */
 export default function IntradayAlertPanel({ symbol }: { symbol: string }) {

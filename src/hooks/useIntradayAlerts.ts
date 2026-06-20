@@ -2,7 +2,13 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export type IntradayAlertType = "vwap_up" | "vwap_down" | "or_high" | "or_low";
+export type IntradayAlertType =
+  | "vwap_up"
+  | "vwap_down"
+  | "or_high"
+  | "or_low"
+  | "ema_up"
+  | "ema_down";
 
 export interface IntradayAlert {
   id: string;
@@ -17,6 +23,8 @@ export const INTRADAY_ALERT_LABEL: Record<IntradayAlertType, string> = {
   vwap_down: "Tembus VWAP ↓",
   or_high: "Tembus Opening Range High",
   or_low: "Tembus Opening Range Low",
+  ema_up: "Golden cross 5m (EMA9>EMA20)",
+  ema_down: "Death cross 5m (EMA9<EMA20)",
 };
 
 const KEY = "investwatcher.intradayAlerts.v1";
