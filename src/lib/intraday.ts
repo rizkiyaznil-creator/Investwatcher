@@ -1,6 +1,7 @@
 import { getHistory, getDailyHistory } from "./yahoo";
 import { getAsset } from "./assets";
 import { isIdx, autoReject, pivotPoints, type AutoReject, type PivotLevels } from "./idx";
+import { evaluateIntradaySignals, type IntradaySignals } from "./intraday-signals";
 import type { Candle } from "./types";
 
 export interface DailyLevels {
@@ -32,6 +33,8 @@ export interface DailyLevels {
     orHigh?: number;
     orLow?: number;
   };
+  /** Short-term technical signals from 5m candles. */
+  signals?: IntradaySignals;
 }
 
 /** YYYY-MM-DD in Asia/Jakarta for a unix-seconds timestamp. */
@@ -120,6 +123,10 @@ export async function getDailyLevels(symbol: string): Promise<DailyLevels> {
       avgVolume,
       relVol,
       intraday,
+      signals: evaluateIntradaySignals(
+        todays.length >= 20 ? todays : intra.candles,
+        intraday?.vwap,
+      ),
     };
   } catch {
     return { available: false, symbol, isIdx: idx, currency };
