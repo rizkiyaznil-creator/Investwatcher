@@ -15,6 +15,12 @@ export interface DailyLevels {
   prevLow?: number;
   pivots?: PivotLevels;
   autoReject?: AutoReject;
+  /** Today's cumulative volume (so far). */
+  todayVolume?: number;
+  /** Average daily volume over the prior ~20 sessions. */
+  avgVolume?: number;
+  /** Relative volume = todayVolume / avgVolume (accumulates through the day). */
+  relVol?: number;
   /** Today's intraday stats (when a session exists today). */
   intraday?: {
     open?: number;
@@ -67,8 +73,24 @@ export async function getDailyLevels(symbol: string): Promise<DailyLevels> {
     const pivots = pivotPoints(prev.high, prev.low, prev.close);
     const ar = autoReject(prev.close);
 
+    // Average daily volume over prior sessions (exclude today's partial candle).
+    const priorDaily = lastIsToday ? dc.slice(0, -1) : dc;
+    const volSamples = priorDaily.slice(-20).map((c) => c.volume ?? 0).filter((v) => v > 0);
+    const avgVolume = volSamples.length
+      ? volSamples.reduce((a, b) => a + b, 0) / volSamples.length
+      : undefined;
+
     // Today's intraday candles only (range=1d already, but guard against bleed).
     const todays = intra.candles.filter((c) => dateJakarta(c.time) === today);
+    const todayVolume = todays.length
+      ? todays.reduce((a, c) => a + (c.volume ?? 0), 0)
+      : lastIsToday
+        ? dc[dc.length - 1].volume
+        : undefined;
+    const relVol =
+      todayVolume != null && avgVolume != null && avgVolume > 0
+        ? todayVolume / avgVolume
+        : undefined;
     let intraday: DailyLevels["intraday"];
     if (todays.length > 0) {
       const or = todays.slice(0, 6); // first ~30 min of 5m candles
@@ -94,6 +116,9 @@ export async function getDailyLevels(symbol: string): Promise<DailyLevels> {
       prevLow: prev.low,
       pivots,
       autoReject: idx ? ar : undefined,
+      todayVolume,
+      avgVolume,
+      relVol,
       intraday,
     };
   } catch {
