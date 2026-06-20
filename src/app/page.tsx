@@ -16,6 +16,9 @@ export default function DashboardPage() {
   const toasts = useTriggerToasts(alerts);
 
   const [quotes, setQuotes] = useState<Record<string, Quote>>({});
+  const [signals, setSignals] = useState<
+    Record<string, { verdict: string; score: number }>
+  >({});
   const [loading, setLoading] = useState(false);
   const [usingMock, setUsingMock] = useState(false);
   const [updatedAt, setUpdatedAt] = useState<number | null>(null);
@@ -57,6 +60,34 @@ export default function DashboardPage() {
     return () => clearInterval(id);
   }, [loaded, symbols, fetchQuotes]);
 
+  // Technical verdict per asset (changes slowly -> fetch once per symbol set).
+  useEffect(() => {
+    if (!loaded || symbols.length === 0) {
+      setSignals({});
+      return;
+    }
+    let cancelled = false;
+    fetch(`/api/analysis?symbols=${encodeURIComponent(symbols.join(","))}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return;
+        const map: Record<string, { verdict: string; score: number }> = {};
+        for (const row of d.rows ?? []) {
+          if (row?.signals) {
+            map[row.symbol] = {
+              verdict: row.signals.verdict,
+              score: row.signals.score,
+            };
+          }
+        }
+        setSignals(map);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [loaded, symbols]);
+
   return (
     <div className="space-y-5">
       {usingMock && (
@@ -93,6 +124,7 @@ export default function DashboardPage() {
       <WatchlistTable
         symbols={symbols}
         quotes={quotes}
+        signals={signals}
         loading={loading}
         onRemove={remove}
         onReorder={setAll}

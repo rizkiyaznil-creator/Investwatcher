@@ -63,6 +63,7 @@ export function evaluateSignals(candles: Candle[]): SignalSummary {
   if (price != null) {
     const ma20 = latestSma(candles, 20);
     const ma50 = latestSma(candles, 50);
+    const ma200 = latestSma(candles, 200);
     if (ma20 != null) {
       add(
         "Harga vs MA20",
@@ -82,6 +83,24 @@ export function evaluateSignals(candles: Candle[]): SignalSummary {
         "MA20 vs MA50",
         ma20 > ma50 ? "buy" : ma20 < ma50 ? "sell" : "hold",
         ma20 > ma50 ? "Golden cross (MA20 di atas MA50)" : "Death cross (MA20 di bawah MA50)",
+      );
+    }
+    if (ma200 != null) {
+      add(
+        "Harga vs MA200",
+        price > ma200 ? "buy" : price < ma200 ? "sell" : "hold",
+        price > ma200
+          ? "Di atas MA200 (fase bullish jangka panjang)"
+          : "Di bawah MA200 (fase bearish jangka panjang)",
+      );
+    }
+    if (ma50 != null && ma200 != null) {
+      add(
+        "MA50 vs MA200",
+        ma50 > ma200 ? "buy" : ma50 < ma200 ? "sell" : "hold",
+        ma50 > ma200
+          ? "Golden cross jangka panjang (MA50 di atas MA200)"
+          : "Death cross jangka panjang (MA50 di bawah MA200)",
       );
     }
   }

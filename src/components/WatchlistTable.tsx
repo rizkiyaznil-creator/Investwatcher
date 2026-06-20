@@ -33,13 +33,44 @@ import { useCurrency } from "./CurrencyContext";
 import Sparkline from "./Sparkline";
 import InfoTip from "./InfoTip";
 
+export interface SignalBadge {
+  verdict: string;
+  score: number;
+}
+
 interface Props {
   symbols: string[];
   quotes: Record<string, Quote>;
+  /** Technical verdict per symbol (Beli/Tahan/Jual). Optional. */
+  signals?: Record<string, SignalBadge>;
   loading: boolean;
   onRemove: (symbol: string) => void;
   /** Persist a new order after drag-and-drop reordering. */
   onReorder: (symbols: string[]) => void;
+}
+
+const VERDICT_STYLE: Record<string, string> = {
+  "Beli Kuat": "bg-up/15 text-up",
+  Beli: "bg-up/15 text-up",
+  Tahan: "bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-200",
+  Jual: "bg-down/15 text-down",
+  "Jual Kuat": "bg-down/15 text-down",
+};
+
+/** Compact technical verdict pill (shared by desktop & mobile). */
+function VerdictPill({ sig }: { sig: SignalBadge | undefined }) {
+  if (!sig || !sig.verdict || sig.verdict === "—") {
+    return <span className="text-slate-300 dark:text-slate-600">—</span>;
+  }
+  return (
+    <span
+      className={`inline-block rounded px-1.5 py-0.5 text-xs font-semibold ${
+        VERDICT_STYLE[sig.verdict] ?? "bg-slate-200 text-slate-500 dark:bg-slate-700"
+      }`}
+    >
+      {sig.verdict}
+    </span>
+  );
 }
 
 /** Tracks whether the viewport is desktop-width (>= md). */
@@ -58,6 +89,7 @@ function useIsDesktop() {
 export default function WatchlistTable({
   symbols,
   quotes,
+  signals,
   loading,
   onRemove,
   onReorder,
@@ -119,6 +151,13 @@ export default function WatchlistTable({
                     </th>
                     <th className="px-4 py-3 text-center font-medium">
                       <span className="inline-flex">
+                        <InfoTip text="Verdict teknikal gabungan (MA20/50/200, golden/death cross, RSI, MACD, Bollinger, momentum) menjadi Beli/Tahan/Jual. Edukatif, bukan saran investasi.">
+                          Sinyal
+                        </InfoTip>
+                      </span>
+                    </th>
+                    <th className="px-4 py-3 text-center font-medium">
+                      <span className="inline-flex">
                         <InfoTip text="Grafik mini dari 30 harga terakhir untuk melihat arah pergerakan secara sekilas.">
                           Tren 30 titik
                         </InfoTip>
@@ -141,6 +180,7 @@ export default function WatchlistTable({
                       key={symbol}
                       symbol={symbol}
                       quote={quotes[symbol]}
+                      signal={signals?.[symbol]}
                       loading={loading}
                       onRemove={onRemove}
                     />
@@ -155,6 +195,7 @@ export default function WatchlistTable({
                   key={symbol}
                   symbol={symbol}
                   quote={quotes[symbol]}
+                  signal={signals?.[symbol]}
                   loading={loading}
                   onRemove={onRemove}
                 />
@@ -173,6 +214,7 @@ export default function WatchlistTable({
 interface RowProps {
   symbol: string;
   quote: Quote | undefined;
+  signal?: SignalBadge;
   loading: boolean;
   onRemove: (symbol: string) => void;
 }
@@ -196,7 +238,7 @@ function RangeBar({ pos, className = "" }: { pos: number; className?: string }) 
   );
 }
 
-function DesktopRow({ symbol, quote, loading, onRemove }: RowProps) {
+function DesktopRow({ symbol, quote, signal, loading, onRemove }: RowProps) {
   const { resolve } = useCatalog();
   const { convert } = useCurrency();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
@@ -255,6 +297,9 @@ function DesktopRow({ symbol, quote, loading, onRemove }: RowProps) {
       <td className={`px-4 py-3 text-right tabular-nums ${q ? changeColor(q.changePercent) : ""}`}>
         {q ? formatPercent(q.changePercent) : "—"}
       </td>
+      <td className="px-4 py-3 text-center">
+        <VerdictPill sig={signal} />
+      </td>
       <td className="px-4 py-3">
         <div className="flex justify-center">
           {q?.spark ? (
@@ -284,7 +329,7 @@ function DesktopRow({ symbol, quote, loading, onRemove }: RowProps) {
   );
 }
 
-function MobileCard({ symbol, quote, loading, onRemove }: RowProps) {
+function MobileCard({ symbol, quote, signal, loading, onRemove }: RowProps) {
   const { resolve } = useCatalog();
   const { convert } = useCurrency();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
@@ -350,6 +395,12 @@ function MobileCard({ symbol, quote, loading, onRemove }: RowProps) {
           <div className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">Perubahan</div>
           <div className={`tabular-nums font-medium ${q ? changeColor(q.changePercent) : ""}`}>
             {q ? formatPercent(q.changePercent) : "—"}
+          </div>
+        </div>
+        <div>
+          <div className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">Sinyal</div>
+          <div className="mt-0.5">
+            <VerdictPill sig={signal} />
           </div>
         </div>
         <div>
