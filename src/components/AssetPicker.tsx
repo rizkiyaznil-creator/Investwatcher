@@ -8,6 +8,13 @@ import { useCatalog } from "./CatalogContext";
 interface Props {
   inWatchlist: string[];
   onAdd: (symbol: string) => void;
+  /**
+   * When false, assets already in `inWatchlist` stay selectable (e.g. portfolio
+   * "buy more" averaging). Default true keeps them disabled (watchlist).
+   */
+  disableExisting?: boolean;
+  /** Label for the action when an asset is already present but still selectable. */
+  existingLabel?: string;
 }
 
 const TYPE_LABEL: Record<string, string> = {
@@ -23,7 +30,12 @@ const TYPE_LABEL: Record<string, string> = {
 };
 
 /** Picker with live universe search (Yahoo) + browsable featured catalog. */
-export default function AssetPicker({ inWatchlist, onAdd }: Props) {
+export default function AssetPicker({
+  inWatchlist,
+  onAdd,
+  disableExisting = true,
+  existingLabel = "+ tambah",
+}: Props) {
   const { all, addCustom } = useCatalog();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -120,13 +132,14 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                 <ul className="space-y-0.5">
                   {results.map((r) => {
                     const added = inWatchlist.includes(r.symbol);
+                    const blocked = added && disableExisting;
                     return (
                       <li key={r.symbol}>
                         <button
-                          disabled={added}
+                          disabled={blocked}
                           onClick={() => addResult(r)}
                           className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-2 text-left text-sm ${
-                            added ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                            blocked ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
                           }`}
                         >
                           <span className="flex min-w-0 items-center gap-2">
@@ -142,7 +155,7 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                             </span>
                           </span>
                           <span className="shrink-0 text-xs text-slate-400 dark:text-slate-500">
-                            {added ? "✓" : "+ tambah"}
+                            {added ? (blocked ? "✓" : existingLabel) : "+ tambah"}
                           </span>
                         </button>
                       </li>
@@ -160,20 +173,21 @@ export default function AssetPicker({ inWatchlist, onAdd }: Props) {
                   <ul className="space-y-0.5">
                     {items.map((a) => {
                       const added = inWatchlist.includes(a.symbol);
+                      const blocked = added && disableExisting;
                       return (
                         <li key={a.symbol}>
                           <button
-                            disabled={added}
+                            disabled={blocked}
                             onClick={() => onAdd(a.symbol)}
                             className={`flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm ${
-                              added ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                              blocked ? "cursor-default text-slate-400 dark:text-slate-500" : "hover:bg-slate-100 dark:hover:bg-slate-800"
                             }`}
                           >
                             <span className="flex items-center gap-2">
                               <span>{a.icon}</span>
                               <span>{a.name}</span>
                             </span>
-                            <span className="text-xs text-slate-400 dark:text-slate-500">{added ? "✓" : "+"}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">{added ? (blocked ? "✓" : "+") : "+"}</span>
                           </button>
                         </li>
                       );

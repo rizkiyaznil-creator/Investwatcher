@@ -211,6 +211,16 @@ export default function PortfolioPage() {
                 <span className="font-semibold">{resolve(pending).short}</span>
                 <button type="button" onClick={() => setPending(null)} className="text-xs text-slate-400 hover:text-down">ganti</button>
               </div>
+              {(() => {
+                const ex = holdings.find((h) => h.symbol === pending);
+                if (!ex) return null;
+                const lots = isIdx(pending) ? `${ex.shares / LOT_SIZE} lot` : `${ex.shares} saham`;
+                return (
+                  <div className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
+                    Sudah dimiliki: {lots} @ {formatPrice(ex.avgPrice, resolve(pending).currency)} — pembelian ini akan dirata-ratakan.
+                  </div>
+                );
+              })()}
             </div>
             <label className="block">
               <span className="text-xs text-slate-500 dark:text-slate-400">{isIdx(pending) ? "Jumlah (lot)" : "Jumlah (saham)"}</span>
@@ -223,7 +233,12 @@ export default function PortfolioPage() {
             <button type="submit" className="btn-primary">Tambah</button>
           </form>
         ) : (
-          <AssetPicker inWatchlist={symbols} onAdd={(s) => setPending(s)} />
+          <AssetPicker
+            inWatchlist={symbols}
+            onAdd={(s) => setPending(s)}
+            disableExisting={false}
+            existingLabel="+ tambah lot"
+          />
         )}
       </div>
 
