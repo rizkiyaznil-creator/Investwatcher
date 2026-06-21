@@ -15,6 +15,8 @@ interface Props {
   disableExisting?: boolean;
   /** Label for the action when an asset is already present but still selectable. */
   existingLabel?: string;
+  /** Text on the trigger button. */
+  buttonLabel?: string;
 }
 
 const TYPE_LABEL: Record<string, string> = {
@@ -35,6 +37,7 @@ export default function AssetPicker({
   onAdd,
   disableExisting = true,
   existingLabel = "+ tambah",
+  buttonLabel = "+ Tambah aset",
 }: Props) {
   const { all, addCustom } = useCatalog();
   const [open, setOpen] = useState(false);
@@ -94,7 +97,7 @@ export default function AssetPicker({
   return (
     <div className="relative">
       <button onClick={() => setOpen((v) => !v)} className="btn-primary">
-        + Tambah aset
+        {buttonLabel}
       </button>
       {open && (
         <>

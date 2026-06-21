@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCatalog } from "./CatalogContext";
 import AmountInput from "./AmountInput";
+import AssetPicker from "./AssetPicker";
 import { useForecastHistory } from "@/hooks/useForecastHistory";
 import { formatPrice } from "@/lib/format";
 import type { TechForecast } from "@/lib/forecast";
@@ -46,9 +47,8 @@ function pctStr(v: number | null | undefined): string {
 }
 
 export default function InvestmentCalculator() {
-  const { all, resolve } = useCatalog();
+  const { resolve } = useCatalog();
   const { add } = useForecastHistory();
-  const assets = useMemo(() => all.filter((a) => a.type !== "fx"), [all]);
 
   const [savedTech, setSavedTech] = useState(false);
   const [savedAi, setSavedAi] = useState(false);
@@ -154,20 +154,24 @@ export default function InvestmentCalculator() {
 
       {/* Form */}
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <label className="text-sm">
+        <div className="text-sm">
           <span className="mb-1 block text-slate-500 dark:text-slate-400">Aset</span>
-          <select
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900"
-          >
-            {assets.map((a) => (
-              <option key={a.symbol} value={a.symbol}>
-                {a.short} — {a.name}
-              </option>
-            ))}
-          </select>
-        </label>
+          <div className="flex items-center justify-between gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900">
+            <span className="flex min-w-0 items-center gap-2">
+              <span>{resolve(symbol).icon ?? "•"}</span>
+              <span className="min-w-0">
+                <span className="block truncate font-medium text-slate-800 dark:text-slate-100">{resolve(symbol).short}</span>
+                <span className="block truncate text-xs text-slate-400 dark:text-slate-500">{resolve(symbol).name}</span>
+              </span>
+            </span>
+            <AssetPicker
+              inWatchlist={[]}
+              onAdd={setSymbol}
+              disableExisting={false}
+              buttonLabel="🔎 Cari / ganti"
+            />
+          </div>
+        </div>
         <label className="text-sm">
           <span className="mb-1 block text-slate-500 dark:text-slate-400">Jumlah investasi</span>
           <div className="flex gap-2">
