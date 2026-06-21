@@ -132,6 +132,12 @@ export default function PortfolioPage() {
     [rows],
   );
 
+  // Holdings table ordered by weight (desc); positions without a price last.
+  const sortedRows = useMemo(
+    () => [...rows].sort((a, b) => (b.valueBase ?? -1) - (a.valueBase ?? -1)),
+    [rows],
+  );
+
   const submitAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!pending) return;
@@ -263,7 +269,7 @@ export default function PortfolioPage() {
               </tr>
             </thead>
             <tbody className="tabular-nums">
-              {rows.map((r) => {
+              {sortedRows.map((r) => {
                 const weight = totals.value > 0 && r.valueBase != null ? (r.valueBase / totals.value) * 100 : undefined;
                 const lots = isIdx(r.h.symbol) ? r.h.shares / LOT_SIZE : null;
                 return (
@@ -287,7 +293,7 @@ export default function PortfolioPage() {
                         "—"
                       )}
                     </td>
-                    <td className="px-3 py-2 text-right">{weight != null ? `${weight.toFixed(0)}%` : "—"}</td>
+                    <td className="px-3 py-2 text-right">{weight != null ? `${weight.toFixed(3)}%` : "—"}</td>
                     <td className="px-3 py-2 text-right">
                       <button onClick={() => remove(r.h.symbol)} className="text-slate-400 hover:text-down" title="Hapus">✕</button>
                     </td>
@@ -316,7 +322,7 @@ export default function PortfolioPage() {
                 <span key={r.h.symbol} className="flex items-center gap-1.5">
                   <span className="inline-block h-2.5 w-3 rounded" style={{ backgroundColor: colorAt(i) }} />
                   <span className="text-slate-600 dark:text-slate-300">{r.asset.short}</span>
-                  <span className="text-slate-400 dark:text-slate-500">{w.toFixed(0)}%</span>
+                  <span className="text-slate-400 dark:text-slate-500">{w.toFixed(3)}%</span>
                 </span>
               );
             })}
