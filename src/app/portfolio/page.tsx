@@ -55,6 +55,8 @@ export default function PortfolioPage() {
   const [pending, setPending] = useState<string | null>(null);
   const [qty, setQty] = useState("");
   const [price, setPrice] = useState("");
+  /** Currency the user types the buy price in (convertible for non-IDX assets). */
+  const [priceCur, setPriceCur] = useState<"IDR" | "USD">("IDR");
 
   // AI review state
   const [provider, setProvider] = useState("claude");
@@ -138,6 +140,21 @@ export default function PortfolioPage() {
     [rows],
   );
 
+  const selectPending = (s: string) => {
+    setPending(s);
+    setQty("");
+    setPrice("");
+    setPriceCur((resolve(s).currency as "IDR" | "USD") ?? "IDR");
+  };
+
+  // Convert an entered price into the asset's native currency for storage.
+  const toNativePrice = (value: number, from: "IDR" | "USD", native: string) => {
+    if (from === native) return value;
+    if (from === "IDR" && native === "USD") return value / rate;
+    if (from === "USD" && native === "IDR") return value * rate;
+    return value;
+  };
+
   const submitAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!pending) return;
@@ -146,7 +163,8 @@ export default function PortfolioPage() {
     const p = Number(price.replace(/,/g, ""));
     const shares = idx ? q * LOT_SIZE : q;
     if (!(shares > 0) || !(p > 0)) return;
-    add(pending, shares, p);
+    const native = resolve(pending).currency;
+    add(pending, shares, toNativePrice(p, priceCur, native));
     setPending(null);
     setQty("");
     setPrice("");
@@ -232,16 +250,36 @@ export default function PortfolioPage() {
               <span className="text-xs text-slate-500 dark:text-slate-400">{isIdx(pending) ? "Jumlah (lot)" : "Jumlah (saham)"}</span>
               <input value={qty} onChange={(e) => setQty(e.target.value)} inputMode="decimal" placeholder={isIdx(pending) ? "mis. 10 lot" : "mis. 100"} className="mt-1 w-32 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
             </label>
-            <label className="block">
-              <span className="text-xs text-slate-500 dark:text-slate-400">Harga beli rata-rata ({resolve(pending).currency})</span>
-              <input value={price} onChange={(e) => setPrice(e.target.value)} inputMode="decimal" placeholder="mis. 4500" className="mt-1 w-36 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
-            </label>
+            <div>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Harga beli rata-rata</span>
+              <div className="mt-1 flex items-center gap-2">
+                <input value={price} onChange={(e) => setPrice(e.target.value)} inputMode="decimal" placeholder="mis. 4500" className="w-36 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
+                {isIdx(pending) ? (
+                  <span className="text-sm text-slate-500 dark:text-slate-400">IDR</span>
+                ) : (
+                  <select
+                    value={priceCur}
+                    onChange={(e) => setPriceCur(e.target.value as "IDR" | "USD")}
+                    className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900"
+                    title="Mata uang harga beli"
+                  >
+                    <option value="USD">USD</option>
+                    <option value="IDR">IDR (Rp)</option>
+                  </select>
+                )}
+              </div>
+              {!isIdx(pending) && price.trim() !== "" && priceCur !== resolve(pending).currency && (
+                <div className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
+                  ≈ {formatPrice(toNativePrice(Number(price.replace(/,/g, "")) || 0, priceCur, resolve(pending).currency), resolve(pending).currency)} (disimpan dalam {resolve(pending).currency})
+                </div>
+              )}
+            </div>
             <button type="submit" className="btn-primary">Tambah</button>
           </form>
         ) : (
           <AssetPicker
             inWatchlist={symbols}
-            onAdd={(s) => setPending(s)}
+            onAdd={selectPending}
             disableExisting={false}
             existingLabel="+ tambah lot"
           />
