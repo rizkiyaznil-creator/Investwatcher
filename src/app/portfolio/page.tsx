@@ -8,6 +8,7 @@ import { useCatalog } from "@/components/CatalogContext";
 import { useCurrency } from "@/components/CurrencyContext";
 import CurrencyToggle from "@/components/CurrencyToggle";
 import AssetPicker from "@/components/AssetPicker";
+import PortfolioTransfer from "@/components/PortfolioTransfer";
 import { formatPrice, formatPercent } from "@/lib/format";
 import { isIdx, LOT_SIZE } from "@/lib/idx";
 import { colorAt } from "@/lib/colors";
@@ -42,7 +43,7 @@ function marketOf(type: string): string {
 }
 
 export default function PortfolioPage() {
-  const { holdings, loaded, add, remove } = usePortfolio();
+  const { holdings, loaded, add, remove, replaceAll } = usePortfolio();
   const { resolve } = useCatalog();
   const { mode, rate } = useCurrency();
   const base = mode === "USD" ? "USD" : "IDR";
@@ -353,6 +354,12 @@ export default function PortfolioPage() {
           )}
         </div>
       )}
+
+      <PortfolioTransfer
+        holdings={holdings}
+        onMerge={(list) => list.forEach((h) => add(h.symbol, h.shares, h.avgPrice))}
+        onReplace={(list) => replaceAll(list)}
+      />
 
       <p className="text-xs text-slate-400 dark:text-slate-500">
         Nilai gabungan dikonversi ke {base} (kurs USD/IDR ~{Math.round(rate).toLocaleString("id-ID")}). Data harga dari Yahoo

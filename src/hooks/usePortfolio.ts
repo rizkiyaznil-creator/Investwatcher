@@ -82,5 +82,22 @@ export function usePortfolio() {
     [update],
   );
 
-  return { holdings, loaded, add, remove, set };
+  /** Replace the entire portfolio (used by import). Sanitizes input. */
+  const replaceAll = useCallback(
+    (list: Holding[]) => {
+      const clean = (Array.isArray(list) ? list : [])
+        .filter(
+          (h) =>
+            h &&
+            typeof h.symbol === "string" &&
+            Number(h.shares) > 0 &&
+            Number(h.avgPrice) > 0,
+        )
+        .map((h) => ({ symbol: h.symbol, shares: Number(h.shares), avgPrice: Number(h.avgPrice) }));
+      update(clean);
+    },
+    [update],
+  );
+
+  return { holdings, loaded, add, remove, set, replaceAll };
 }
