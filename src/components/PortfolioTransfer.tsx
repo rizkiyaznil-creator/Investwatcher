@@ -1,31 +1,48 @@
 "use client";
 
 import { useRef, useState } from "react";
-import type { Holding } from "@/hooks/usePortfolio";
+import type { Holding, Transaction } from "@/hooks/usePortfolio";
+
+interface PortfolioData {
+  holdings: Holding[];
+  transactions: Transaction[];
+}
 
 interface Props {
   holdings: Holding[];
-  /** Add imported holdings on top of existing ones (averages duplicates). */
-  onMerge: (list: Holding[]) => void;
-  /** Replace the whole portfolio with the imported list. */
-  onReplace: (list: Holding[]) => void;
+  transactions: Transaction[];
+  /** Import data (holdings + transactions), merging into or replacing current. */
+  onImport: (data: PortfolioData, mode: "merge" | "replace") => void;
 }
 
-function parseHoldings(text: string): Holding[] | null {
+function parsePayload(text: string): PortfolioData | null {
   try {
     const obj = JSON.parse(text);
-    const arr = Array.isArray(obj) ? obj : obj?.holdings;
-    if (!Array.isArray(arr)) return null;
-    const list = arr
+    // Accept v1 (array of holdings or {holdings}) and v2 ({holdings, transactions}).
+    const holdingsRaw = Array.isArray(obj) ? obj : obj?.holdings;
+    const holdings: Holding[] = (Array.isArray(holdingsRaw) ? holdingsRaw : [])
       .filter((h) => h && typeof h.symbol === "string" && Number(h.shares) > 0 && Number(h.avgPrice) > 0)
       .map((h) => ({ symbol: h.symbol, shares: Number(h.shares), avgPrice: Number(h.avgPrice) }));
-    return list.length ? list : null;
+    const txRaw = obj?.transactions;
+    const transactions: Transaction[] = (Array.isArray(txRaw) ? txRaw : [])
+      .filter((t) => t && typeof t.symbol === "string" && Number(t.shares) > 0 && (t.type === "buy" || t.type === "sell"))
+      .map((t) => ({
+        id: typeof t.id === "string" ? t.id : Math.random().toString(36).slice(2),
+        symbol: t.symbol,
+        type: t.type,
+        shares: Number(t.shares),
+        price: Number(t.price) || 0,
+        date: typeof t.date === "string" ? t.date : new Date().toISOString().slice(0, 10),
+        createdAt: Number(t.createdAt) || Date.now(),
+      }));
+    if (holdings.length === 0 && transactions.length === 0) return null;
+    return { holdings, transactions };
   } catch {
     return null;
   }
 }
 
-export default function PortfolioTransfer({ holdings, onMerge, onReplace }: Props) {
+export default function PortfolioTransfer({ holdings, transactions, onImport }: Props) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
@@ -33,7 +50,14 @@ export default function PortfolioTransfer({ holdings, onMerge, onReplace }: Prop
 
   const exportPayload = () =>
     JSON.stringify(
-      { app: "investwatcher", type: "portfolio", version: 1, exportedAt: new Date().toISOString(), holdings },
+      {
+        app: "investwatcher",
+        type: "portfolio",
+        version: 2,
+        exportedAt: new Date().toISOString(),
+        holdings,
+        transactions,
+      },
       null,
       2,
     );
@@ -65,14 +89,16 @@ export default function PortfolioTransfer({ holdings, onMerge, onReplace }: Prop
   };
 
   const doImport = (replace: boolean) => {
-    const list = parseHoldings(text);
-    if (!list) {
+    const data = parsePayload(text);
+    if (!data) {
       setMsg({ kind: "err", text: "Teks tidak valid. Pastikan menempel JSON hasil ekspor." });
       return;
     }
-    if (replace) onReplace(list);
-    else onMerge(list);
-    setMsg({ kind: "ok", text: `${replace ? "Mengganti" : "Menggabung"} ${list.length} posisi berhasil.` });
+    onImport(data, replace ? "replace" : "merge");
+    setMsg({
+      kind: "ok",
+      text: `${replace ? "Mengganti" : "Menggabung"} ${data.holdings.length} posisi & ${data.transactions.length} transaksi berhasil.`,
+    });
     setText("");
   };
 
@@ -89,22 +115,24 @@ export default function PortfolioTransfer({ holdings, onMerge, onReplace }: Prop
       {open && (
         <div className="mt-3 space-y-4">
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Portofolio tersimpan lokal di tiap perangkat. Untuk memindahkannya: <strong>Ekspor</strong> di perangkat ini,
-            lalu <strong>Impor</strong> di perangkat lain. Data tetap di perangkat Anda (tidak ke server).
+            Portofolio &amp; riwayat tersimpan lokal di tiap perangkat. Untuk memindahkannya: <strong>Ekspor</strong> di
+            perangkat ini, lalu <strong>Impor</strong> di perangkat lain. Data tetap di perangkat Anda (tidak ke server).
           </p>
 
           {/* Export */}
           <div>
-            <div className="text-xs font-medium text-slate-500 dark:text-slate-400">Ekspor ({holdings.length} posisi)</div>
+            <div className="text-xs font-medium text-slate-500 dark:text-slate-400">
+              Ekspor ({holdings.length} posisi · {transactions.length} transaksi)
+            </div>
             <div className="mt-1 flex flex-wrap gap-2">
-              <button onClick={download} disabled={holdings.length === 0} className="btn-ghost text-sm">⬇️ Unduh file</button>
-              <button onClick={copy} disabled={holdings.length === 0} className="btn-ghost text-sm">📋 Salin JSON</button>
+              <button onClick={download} disabled={holdings.length === 0 && transactions.length === 0} className="btn-ghost text-sm">⬇️ Unduh file</button>
+              <button onClick={copy} disabled={holdings.length === 0 && transactions.length === 0} className="btn-ghost text-sm">📋 Salin JSON</button>
             </div>
           </div>
 
           {/* Import */}
           <div>
-            <div className="text-xs font-medium text-slate-500 dark:text-slate-400">Impor</div>
+            <div className="text-xs font-medium text-slate-500 dark:text-slate-400">Impor (posisi + riwayat)</div>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
