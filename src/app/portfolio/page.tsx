@@ -43,7 +43,7 @@ function marketOf(type: string): string {
 }
 
 export default function PortfolioPage() {
-  const { holdings, transactions, loaded, add, reduce, remove, removeTx, replaceAll } = usePortfolio();
+  const { holdings, transactions, loaded, add, reduce, remove, removeTx, importData } = usePortfolio();
   const { resolve } = useCatalog();
   const { mode, rate } = useCurrency();
   const base = mode === "USD" ? "USD" : "IDR";
@@ -512,8 +512,8 @@ export default function PortfolioPage() {
 
       <PortfolioTransfer
         holdings={holdings}
-        onMerge={(list) => list.forEach((h) => add(h.symbol, h.shares, h.avgPrice))}
-        onReplace={(list) => replaceAll(list)}
+        transactions={transactions}
+        onImport={(data, mode) => importData(data, mode)}
       />
 
       <p className="text-xs text-slate-400 dark:text-slate-500">

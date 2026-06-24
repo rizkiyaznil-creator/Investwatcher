@@ -168,5 +168,57 @@ export function usePortfolio() {
     [update],
   );
 
-  return { holdings, transactions, loaded, add, reduce, remove, removeTx, set, replaceAll };
+  /** Import holdings + transactions together (merge or replace), no spurious logging. */
+  const importData = useCallback(
+    (
+      data: { holdings?: Holding[]; transactions?: Transaction[] },
+      mode: "merge" | "replace",
+    ) => {
+      const inH: Holding[] = (Array.isArray(data.holdings) ? data.holdings : [])
+        .filter((h) => h && typeof h.symbol === "string" && Number(h.shares) > 0 && Number(h.avgPrice) > 0)
+        .map((h) => ({ symbol: h.symbol, shares: Number(h.shares), avgPrice: Number(h.avgPrice) }));
+      const inT: Transaction[] = (Array.isArray(data.transactions) ? data.transactions : [])
+        .filter((t) => t && typeof t.symbol === "string" && Number(t.shares) > 0 && (t.type === "buy" || t.type === "sell"))
+        .map((t) => ({
+          id: typeof t.id === "string" ? t.id : newId(),
+          symbol: t.symbol,
+          type: t.type,
+          shares: Number(t.shares),
+          price: Number(t.price) || 0,
+          date: typeof t.date === "string" ? t.date : new Date().toISOString().slice(0, 10),
+          createdAt: Number(t.createdAt) || Date.now(),
+        }));
+
+      if (mode === "replace") {
+        update(inH);
+        setTransactions(inT);
+        saveTx(inT);
+        return;
+      }
+
+      // Merge holdings (average) without logging.
+      const map = new Map(load().map((h) => [h.symbol, { ...h }]));
+      for (const h of inH) {
+        const old = map.get(h.symbol);
+        if (old) {
+          const total = old.shares + h.shares;
+          old.avgPrice = (old.shares * old.avgPrice + h.shares * h.avgPrice) / total;
+          old.shares = total;
+        } else {
+          map.set(h.symbol, { ...h });
+        }
+      }
+      update([...map.values()]);
+
+      // Merge transactions, dedupe by id.
+      const curT = loadTx();
+      const seen = new Set(curT.map((t) => t.id));
+      const mergedT = [...curT, ...inT.filter((t) => !seen.has(t.id))];
+      setTransactions(mergedT);
+      saveTx(mergedT);
+    },
+    [update],
+  );
+
+  return { holdings, transactions, loaded, add, reduce, remove, removeTx, set, replaceAll, importData };
 }
