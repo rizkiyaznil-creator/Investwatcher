@@ -43,7 +43,7 @@ function marketOf(type: string): string {
 }
 
 export default function PortfolioPage() {
-  const { holdings, loaded, add, remove, replaceAll } = usePortfolio();
+  const { holdings, transactions, loaded, add, reduce, remove, removeTx, replaceAll } = usePortfolio();
   const { resolve } = useCatalog();
   const { mode, rate } = useCurrency();
   const base = mode === "USD" ? "USD" : "IDR";
@@ -51,8 +51,10 @@ export default function PortfolioPage() {
   const [quotes, setQuotes] = useState<Record<string, Quote>>({});
   const [loading, setLoading] = useState(false);
 
-  // Add-holding form state
+  // Add/transact form state
   const [pending, setPending] = useState<string | null>(null);
+  const [txType, setTxType] = useState<"buy" | "sell">("buy");
+  const [txDate, setTxDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [qty, setQty] = useState("");
   const [price, setPrice] = useState("");
   /** Currency the user types the buy price in (convertible for non-IDX assets). */
@@ -162,9 +164,15 @@ export default function PortfolioPage() {
     const q = Number(qty.replace(/,/g, ""));
     const p = Number(price.replace(/,/g, ""));
     const shares = idx ? q * LOT_SIZE : q;
-    if (!(shares > 0) || !(p > 0)) return;
+    if (!(shares > 0)) return;
     const native = resolve(pending).currency;
-    add(pending, shares, toNativePrice(p, priceCur, native));
+    const nativePrice = p > 0 ? toNativePrice(p, priceCur, native) : 0;
+    if (txType === "buy") {
+      if (!(nativePrice > 0)) return;
+      add(pending, shares, nativePrice, txDate);
+    } else {
+      reduce(pending, shares, nativePrice, txDate);
+    }
     setPending(null);
     setQty("");
     setPrice("");
@@ -224,9 +232,9 @@ export default function PortfolioPage() {
         </div>
       )}
 
-      {/* Add holding */}
+      {/* Add / transact */}
       <div className="card p-4">
-        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Tambah kepemilikan</h3>
+        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Catat transaksi</h3>
         {pending ? (
           <form onSubmit={submitAdd} className="flex flex-wrap items-end gap-3">
             <div>
@@ -237,21 +245,49 @@ export default function PortfolioPage() {
               </div>
               {(() => {
                 const ex = holdings.find((h) => h.symbol === pending);
-                if (!ex) return null;
+                if (!ex) {
+                  return txType === "sell" ? (
+                    <div className="mt-1 text-[11px] text-down">Aset belum ada di portofolio — tidak bisa dijual.</div>
+                  ) : null;
+                }
                 const lots = isIdx(pending) ? `${ex.shares / LOT_SIZE} lot` : `${ex.shares} saham`;
                 return (
                   <div className="mt-1 text-[11px] text-amber-700 dark:text-amber-300">
-                    Sudah dimiliki: {lots} @ {formatPrice(ex.avgPrice, resolve(pending).currency)} — pembelian ini akan dirata-ratakan.
+                    Dimiliki: {lots} @ {formatPrice(ex.avgPrice, resolve(pending).currency)}
+                    {txType === "buy" ? " — akan dirata-ratakan." : " — akan dikurangi."}
                   </div>
                 );
               })()}
             </div>
+            <div>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Jenis</span>
+              <div className="mt-1 flex rounded-lg border border-slate-300 p-0.5 dark:border-slate-700">
+                {(["buy", "sell"] as const).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setTxType(t)}
+                    className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                      txType === t
+                        ? t === "buy" ? "bg-up/15 text-up" : "bg-down/15 text-down"
+                        : "text-slate-500 dark:text-slate-400"
+                    }`}
+                  >
+                    {t === "buy" ? "Beli" : "Jual"}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <label className="block">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Tanggal</span>
+              <input type="date" value={txDate} onChange={(e) => setTxDate(e.target.value)} className="mt-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
+            </label>
             <label className="block">
               <span className="text-xs text-slate-500 dark:text-slate-400">{isIdx(pending) ? "Jumlah (lot)" : "Jumlah (saham)"}</span>
               <input value={qty} onChange={(e) => setQty(e.target.value)} inputMode="decimal" placeholder={isIdx(pending) ? "mis. 10 lot" : "mis. 100"} className="mt-1 w-32 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
             </label>
             <div>
-              <span className="text-xs text-slate-500 dark:text-slate-400">Harga beli rata-rata</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">{txType === "buy" ? "Harga beli" : "Harga jual"}</span>
               <div className="mt-1 flex items-center gap-2">
                 <input value={price} onChange={(e) => setPrice(e.target.value)} inputMode="decimal" placeholder="mis. 4500" className="w-36 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand dark:border-slate-700 dark:bg-slate-900" />
                 {isIdx(pending) ? (
@@ -274,7 +310,9 @@ export default function PortfolioPage() {
                 </div>
               )}
             </div>
-            <button type="submit" className="btn-primary">Tambah</button>
+            <button type="submit" className={txType === "buy" ? "btn-primary" : "btn-primary !bg-down"}>
+              {txType === "buy" ? "Catat Beli" : "Catat Jual"}
+            </button>
           </form>
         ) : (
           <AssetPicker
@@ -365,6 +403,64 @@ export default function PortfolioPage() {
               );
             })}
           </div>
+        </div>
+      )}
+
+      {/* Transaction history */}
+      {transactions.length > 0 && (
+        <div className="card p-4">
+          <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">
+            🧾 Riwayat Transaksi ({transactions.length})
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-500 dark:border-slate-800 dark:text-slate-400">
+                  <th className="px-3 py-2 font-medium">Tanggal</th>
+                  <th className="px-3 py-2 font-medium">Jenis</th>
+                  <th className="px-3 py-2 font-medium">Aset</th>
+                  <th className="px-3 py-2 text-right font-medium">Jumlah</th>
+                  <th className="px-3 py-2 text-right font-medium">Harga</th>
+                  <th className="px-3 py-2 text-right font-medium">Nilai</th>
+                  <th className="px-3 py-2"></th>
+                </tr>
+              </thead>
+              <tbody className="tabular-nums">
+                {[...transactions]
+                  .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : b.createdAt - a.createdAt))
+                  .map((t) => {
+                    const a = resolve(t.symbol);
+                    const lots = isIdx(t.symbol) ? `${t.shares / LOT_SIZE} lot` : `${t.shares} saham`;
+                    return (
+                      <tr key={t.id} className="border-b border-slate-100 last:border-0 dark:border-slate-800/60">
+                        <td className="px-3 py-2 whitespace-nowrap">
+                          {new Date(t.date).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}
+                        </td>
+                        <td className="px-3 py-2">
+                          <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${t.type === "buy" ? "bg-up/15 text-up" : "bg-down/15 text-down"}`}>
+                            {t.type === "buy" ? "Beli" : "Jual"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2">
+                          <Link href={`/asset/${encodeURIComponent(t.symbol)}`} className="font-medium hover:text-brand">
+                            {a.icon} {a.short}
+                          </Link>
+                        </td>
+                        <td className="px-3 py-2 text-right">{lots}</td>
+                        <td className="px-3 py-2 text-right">{formatPrice(t.price, a.currency)}</td>
+                        <td className="px-3 py-2 text-right">{formatPrice(t.price * t.shares, a.currency)}</td>
+                        <td className="px-3 py-2 text-right">
+                          <button onClick={() => removeTx(t.id)} className="text-slate-400 hover:text-down" title="Hapus catatan (tidak mengubah posisi)">✕</button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-[11px] text-slate-400 dark:text-slate-500">
+            Catatan untuk pelacakan. Menghapus baris hanya menghapus catatan riwayat, tidak mengubah posisi saat ini.
+          </p>
         </div>
       )}
 
